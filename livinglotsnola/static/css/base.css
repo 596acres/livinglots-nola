@@ -1,0 +1,11 @@
+
+body {
+    background-color: #03310a;
+    font-family: sans-serif, Helvetica, Arial;
+    margin: 0;
+}
+
+#page-wrapper {
+    background-color: white;
+    min-height: 500px;
+}
