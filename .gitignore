@@ -1,0 +1,4 @@
+.*.swp
+*.pyc
+bower_components
+logs/*
