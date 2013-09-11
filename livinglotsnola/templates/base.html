@@ -28,7 +28,20 @@
                     </div>
 
                     <nav class="navbar navbar-default" role="navigation">
-                        <div class="collapse navbar-collapse navbar-ex1-collapse">
+
+                        <div class="navbar-header">
+                            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-main-collapse">
+                                <span class="sr-only">Toggle navigation</span>
+                                <span class="icon-bar"></span>
+                                <span class="icon-bar"></span>
+                                <span class="icon-bar"></span>
+                            </button>
+                            <a class="navbar-brand">
+                                {% trans "Living Lots NOLA" %}
+                            </a>
+                        </div>
+
+                        <div class="collapse navbar-collapse navbar-main-collapse">
                             <ul class="nav navbar-nav">
                                 {% feincms_nav feincms_page level=1 depth=1 as mainmenu %}
                                 {% for page in mainmenu %}
