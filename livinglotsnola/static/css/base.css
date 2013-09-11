@@ -13,6 +13,9 @@ body {
     min-height: 500px;
 }
 
+#page-header {
+    margin-bottom: 25px;
+}
 
 /*
  * Modules
