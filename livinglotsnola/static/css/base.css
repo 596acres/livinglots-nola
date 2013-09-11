@@ -17,6 +17,11 @@ body {
     margin-bottom: 25px;
 }
 
+article {
+    padding: 25px;
+}
+
+
 /*
  * Modules
  */
