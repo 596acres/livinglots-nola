@@ -1,3 +1,6 @@
+/*
+ * Global properties
+ */
 
 body {
     background-color: #03310a;
@@ -9,3 +12,8 @@ body {
     background-color: white;
     min-height: 500px;
 }
+
+
+/*
+ * Modules
+ */
