@@ -1,17 +1,26 @@
+import contextlib
+
 from fabric.api import *
 
 
-# TODO set hosts
-env.hosts = ['',]
+env.hosts = ['ftn',]
 env.use_ssh_config = True
 
-# TODO set
-server_project_dir = ''
+server_project_dirs = {
+    'dev': '~/webapps/dev_llnola_django/livinglots-nola',
+    'prod': '~/webapps/llnola_django/livinglots-nola',
+}
+
+
+@contextlib.contextmanager
+def cdversion(version):
+    with cd(server_project_dirs[version]):
+        yield
 
 
 @task
-def pull():
-    with cd(server_project_dir):
+def pull(version='prod'):
+    with cdversion(version):
         run('git pull')
 
 
