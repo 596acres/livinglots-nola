@@ -16,6 +16,12 @@ server_virtualenvs = {
     'prod': 'llnola',
 }
 
+supervisord_programs = {
+    'dev': 'devllnola',
+    'prod': 'llnola',
+}
+
+supervisord_conf = '~/var/supervisor/supervisord.conf'
 
 @contextlib.contextmanager
 def cdversion(version, subdir=''):
@@ -69,19 +75,38 @@ def migrate(version='prod'):
 @task
 def restart_django():
     with workon('dev'):
-        run('supervisorctl -c ~/var/supervisor/supervisord.conf restart django')
+        run('supervisorctl -c %s restart django' % supervisord_conf)
 
 
 @task
 def restart_memcached():
     with workon('dev'):
-        run('supervisorctl -c ~/var/supervisor/supervisord.conf restart memcached')
+        run('supervisorctl -c %s restart memcached' % supervisord_conf)
 
 
 @task
 def status():
     with workon('dev'):
-        run('supervisorctl -c ~/var/supervisor/supervisord.conf status')
+        run('supervisorctl -c %s status' % supervisord_conf)
+
+
+@task
+def start(version='prod'):
+    pull(version=version)
+    install_requirements(version=version)
+    syncdb(version=version)
+    migrate(version=version)
+    build_static(version=version)
+    with workon(version):
+        run('supervisorctl -c %s start %s' % (supervisord_conf,
+                                              supervisord_programs[version]))
+
+
+@task
+def stop(version='prod'):
+    with workon(version):
+        run('supervisorctl -c %s stop %s' % (supervisord_conf,
+                                             supervisord_programs[version]))
 
 
 @task
