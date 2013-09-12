@@ -55,13 +55,15 @@ def build_static(version='prod'):
 
 
 @task
-def syncdb():
-    run('django-admin.py syncdb')
+def syncdb(version='prod'):
+    with workon(version):
+        run('django-admin.py syncdb')
 
 
 @task
-def migrate():
-    run('django-admin.py migrate')
+def migrate(version='prod'):
+    with workon(version):
+        run('django-admin.py migrate')
 
 
 @task
