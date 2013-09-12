@@ -18,9 +18,9 @@ server_virtualenvs = {
 
 
 @contextlib.contextmanager
-def cdversion(version):
+def cdversion(version, subdir=''):
     """cd to the version of livinglots-nola indicated"""
-    with prefix('cd %s' % server_project_dirs[version]):
+    with prefix('cd %s' % '/'.join([server_project_dirs[version], subdir])):
         yield
 
 
@@ -47,9 +47,11 @@ def install_requirements(version='prod'):
 
 @task
 def build_static(version='prod'):
-    run('django-admin.py collectstatic --noinput')
-    with cd(server_project_dir + '/livinglotsnola/collected_static/js/'):
-        run('r.js -o app.build.js')
+    with workon(version):
+        run('django-admin.py collectstatic --noinput')
+        with cdversion(version, 'livinglotsnola/collected_static/js/'):
+            run('bower install')
+            run('r.js -o app.build.js')
 
 
 @task
