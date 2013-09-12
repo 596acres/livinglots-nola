@@ -1,6 +1,6 @@
 # General requirements
-gunicorn==0.17.4
-python-memcached==1.48
+gunicorn==18.0
+python-memcached==1.53
 supervisor==3.0b1
 
 # Django requirements
