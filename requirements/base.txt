@@ -40,7 +40,6 @@ django-monitor==0.2.1a
 django-mptt==0.5.5
 django-reversion==1.6.6
 django-reversion-compare==0.3.5
-django-staticbuilder==0.4.0
 django.js==0.7.4
 feincms-cleanse==2
 git+git://github.com/feincms/feincms-elephantblog/@465b30bf727bc456f44e7f64a0738efadd845618

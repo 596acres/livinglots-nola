@@ -55,18 +55,6 @@ SERVER_EMAIL = get_env_variable('SERVER_EMAIL')
 
 
 #
-# building
-#
-STATICBUILDER_BUILD_ROOT = os.path.join(PROJECT_ROOT, 'built_static')
-STATICBUILDER_BUILD_COMMANDS = [
-    'r.js -o ' + os.path.join(STATIC_ROOT, 'js/app.build.js'),
-]
-STATICFILES_FINDERS = (
-    'staticbuilder.finders.BuiltFileFinder',
-) + STATICFILES_FINDERS
-
-
-#
 # logging
 #
 LOGGING = {
