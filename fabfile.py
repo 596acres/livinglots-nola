@@ -11,10 +11,23 @@ server_project_dirs = {
     'prod': '~/webapps/llnola_django/livinglots-nola',
 }
 
+server_virtualenvs = {
+    'dev': 'devllnola',
+    'prod': 'llnola',
+}
+
 
 @contextlib.contextmanager
 def cdversion(version):
-    with cd(server_project_dirs[version]):
+    """cd to the version of livinglots-nola indicated"""
+    with prefix('cd %s' % server_project_dirs[version]):
+        yield
+
+
+@contextlib.contextmanager
+def workon(version):
+    """workon the version of livinglots-nola indicated"""
+    with prefix('workon %s' % server_virtualenvs[version]):
         yield
 
 
@@ -25,17 +38,18 @@ def pull(version='prod'):
 
 
 @task
-def build_static():
-    run('django-admin.py collectstatic --noinput')
-    with cd(server_project_dir + '/livinglotsnola/collected_static/js/'):
-        run('r.js -o app.build.js')
+def install_requirements(version='prod'):
+    with workon(version):
+        with cdversion(version):
+            run('pip install -r requirements/base.txt')
+            run('pip install -r requirements/production.txt')
 
 
 @task
-def install_requirements():
-    with cd(server_project_dir):
-        run('pip install -r requirements/base.txt')
-        run('pip install -r requirements/production.txt')
+def build_static(version='prod'):
+    run('django-admin.py collectstatic --noinput')
+    with cd(server_project_dir + '/livinglotsnola/collected_static/js/'):
+        run('r.js -o app.build.js')
 
 
 @task
