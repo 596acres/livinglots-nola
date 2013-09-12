@@ -68,17 +68,20 @@ def migrate(version='prod'):
 
 @task
 def restart_django():
-    run('supervisorctl -c ~/supervisor/supervisord.conf restart django')
+    with workon('dev'):
+        run('supervisorctl -c ~/var/supervisor/supervisord.conf restart django')
 
 
 @task
 def restart_memcached():
-    run('supervisorctl -c ~/supervisor/supervisord.conf restart memcached')
+    with workon('dev'):
+        run('supervisorctl -c ~/var/supervisor/supervisord.conf restart memcached')
 
 
 @task
 def status():
-    run('supervisorctl -c ~/supervisor/supervisord.conf status')
+    with workon('dev'):
+        run('supervisorctl -c ~/var/supervisor/supervisord.conf status')
 
 
 @task
