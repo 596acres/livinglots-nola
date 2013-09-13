@@ -55,8 +55,9 @@ def install_requirements(version='prod'):
 def build_static(version='prod'):
     with workon(version):
         run('django-admin.py collectstatic --noinput')
-        with cdversion(version, 'livinglotsnola/collected_static/js/'):
+        with cdversion(version, 'livinglotsnola/collected_static/'):
             run('bower install')
+        with cdversion(version, 'livinglotsnola/collected_static/js/'):
             run('r.js -o app.build.js')
 
 
@@ -74,20 +75,17 @@ def migrate(version='prod'):
 
 @task
 def restart_django():
-    with workon('dev'):
-        run('supervisorctl -c %s restart django' % supervisord_conf)
+    run('supervisorctl -c %s restart llnola' % supervisord_conf)
 
 
 @task
 def restart_memcached():
-    with workon('dev'):
-        run('supervisorctl -c %s restart memcached' % supervisord_conf)
+    run('supervisorctl -c %s restart memcached' % supervisord_conf)
 
 
 @task
 def status():
-    with workon('dev'):
-        run('supervisorctl -c %s status' % supervisord_conf)
+    run('supervisorctl -c %s status' % supervisord_conf)
 
 
 @task
