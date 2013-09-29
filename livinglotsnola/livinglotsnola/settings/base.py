@@ -156,6 +156,10 @@ INSTALLED_APPS = (
     # first-party, project-generic
     #
     'inplace_activity_stream',
+
+    # Living Lots
+    'livinglots_lots',
+    'livinglots_owners',
     'livinglots_usercontent.files',
     'livinglots_usercontent.notes',
     'livinglots_usercontent.photos',
@@ -168,6 +172,7 @@ INSTALLED_APPS = (
     'cms',
     'contact',
     'lots',
+    'owners',
 )
 
 LOGGING = {
@@ -264,3 +269,11 @@ ORGANIZE = {
 }
 
 ADMIN_TOOLS_INDEX_DASHBOARD = 'livinglotsnola.admindashboard.LivingLotsDashboard'
+
+LIVING_LOTS = {
+    'MODELS': {
+        'lot': 'lots.Lot',
+        'lotgroup': 'lots.LotGroup',
+        'owner': 'owners.Owner',
+    },
+}
