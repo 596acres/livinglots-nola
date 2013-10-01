@@ -4,7 +4,7 @@ from django.utils.translation import ugettext_lazy as _
 from livinglots_lots.models import BaseLot, BaseLotGroup
 
 
-class Lot(BaseLot):
+class LotGroupLotMixin(models.Model):
 
     group = models.ForeignKey('LotGroup',
         blank=True,
@@ -14,5 +14,9 @@ class Lot(BaseLot):
     )
 
 
-class LotGroup(BaseLotGroup):
+class Lot(LotGroupLotMixin, BaseLot):
+    pass
+
+
+class LotGroup(LotGroupLotMixin, BaseLotGroup):
     pass
