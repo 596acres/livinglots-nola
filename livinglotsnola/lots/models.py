@@ -13,6 +13,9 @@ class LotGroupLotMixin(models.Model):
         verbose_name=_('group'),
     )
 
+    class Meta:
+        abstract = True
+
 
 class Lot(LotGroupLotMixin, BaseLot):
     pass
