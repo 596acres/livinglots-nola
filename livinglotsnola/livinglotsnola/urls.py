@@ -4,6 +4,9 @@ from django.conf.urls.static import static
 from django.contrib import admin
 from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 
+import autocomplete_light
+
+autocomplete_light.autodiscover()
 admin.autodiscover()
 
 urlpatterns = static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT,
@@ -23,6 +26,9 @@ urlpatterns += patterns('',
     url(r'^admin/doc/', include('django.contrib.admindocs.urls')),
     url(r'^admin/', include(admin.site.urls)),
     url(r'^admin_tools/', include('admin_tools.urls')),
+
+    # Autocomplete
+    url(r'^autocomplete/', include('autocomplete_light.urls')),
 
     # FeinCMS
     url(r'', include('feincms.urls')),
