@@ -16,7 +16,7 @@ wsgiref==0.1.2
 geojson==1.0.1
 
 # Django-specific requirements
-Django==1.5.1
+Django==1.5.4
 FeinCMS==1.7.4
 South==0.7.6
 django-activity-stream==0.4.4
