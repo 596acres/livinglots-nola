@@ -5,7 +5,9 @@ requirejs.config({
         'django': 'djangojs/django',
         "fancybox": "../bower_components/fancybox/source/jquery.fancybox",
         "jquery": "../bower_components/jquery/jquery",
-        "leaflet.usermarker": "../bower_components/leaflet.usermarker",
+        "leaflet": "../bower_components/leaflet/leaflet-src",
+        "leaflet.dataoptions": "../bower_components/leaflet.dataoptions/src/leaflet.dataoptions",
+        "leaflet.usermarker": "../bower_components/leaflet.usermarker/src/leaflet.usermarker",
         "requirejs": "../bower_components/requirejs"
     },
     shim: {
@@ -13,7 +15,8 @@ requirejs.config({
         'django': {
             'deps': ['jquery'],
             'exports': 'Django'
-        }
+        },
+        'leaflet.usermarker': ['leaflet'],
     },
 });
 

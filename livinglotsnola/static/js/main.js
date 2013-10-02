@@ -50,5 +50,8 @@ define(
         /*
          * Page-specific modules
          */
+        if ($('.map-page').length !== 0) {
+            require(['mappage']);
+        }
 
 });
