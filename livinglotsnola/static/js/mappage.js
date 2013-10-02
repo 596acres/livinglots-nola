@@ -32,4 +32,5 @@ define(
             addLotsLayer(map);
         });
 
-});
+    }
+);
