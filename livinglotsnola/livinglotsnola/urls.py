@@ -15,6 +15,9 @@ urlpatterns = static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT,
 urlpatterns += staticfiles_urlpatterns()
 
 urlpatterns += patterns('',
+    # Living Lots
+    url(r'^lots/', include('lots.urls', 'lots')),
+
     # Activity stream urls
     url('^activity/', include('actstream.urls')),
     url('^activity-stream/', include('inplace_activity_stream.urls')),

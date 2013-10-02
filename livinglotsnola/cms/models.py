@@ -71,7 +71,7 @@ Page.create_content_type(MediaFileContent, TYPE_CHOICES=(
 ))
 
 Page.create_content_type(ApplicationContent, APPLICATIONS=(
-    ('lots.map_urls', _('Lots map')),
+    ('livinglots_lots.map_urls', _('Lots map')),
     ('elephantblog.urls', _('Blog')),
     ('extraadmin.cms_urls', _('Extra admin functions')),
     ('contact_form', _('Contact form'), {

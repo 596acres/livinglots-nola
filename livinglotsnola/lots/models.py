@@ -17,7 +17,15 @@ class LotGroupLotMixin(models.Model):
         abstract = True
 
 
-class Lot(LotGroupLotMixin, BaseLot):
+class LotMixin(object):
+
+    @classmethod
+    def get_filter(cls):
+        from .filters import LotFilter
+        return LotFilter
+
+
+class Lot(LotMixin, LotGroupLotMixin, BaseLot):
     pass
 
 

@@ -28,6 +28,7 @@ django-braces==1.0.0
 django-compressor==1.3
 django-contact-form-gv==0.4.1
 django-extensions==1.1.1
+django-filter==0.7
 django-honeypot==0.3.0
 git+git://github.com/matthewwithanm/django-imagekit/@261f16412763c69fba64f130c521192ad726d2c1
 git+git://github.com/ebrelsford/django-inplace/@1e7eb79fa186e65920df4a02a9e5cbba38eb83f6
@@ -47,7 +48,7 @@ git+git://github.com/jmoiron/johnny-cache/@37e75019625979487f17b47050da7f0af3fea
 git+git://github.com/596acres/django-livinglots/@62e59e2
 git+git://github.com/596acres/django-livinglots-forms/@17c25851b
 django-livinglots-generictags==1.0
-git+git://github.com/596acres/django-livinglots-genericviews/@572990a38
-git+git://github.com/596acres/django-livinglots-lots/@19b6c3a73
+git+git://github.com/596acres/django-livinglots-genericviews/@07f78f2f
+git+git://github.com/596acres/django-livinglots-lots/@6364bbf
 git+git://github.com/596acres/django-livinglots-owners/@2eaf5e9
 git+git://github.com/596acres/django-livinglots-usercontent/@0.1.1
