@@ -61,7 +61,7 @@
                 </header>
 
                 <div class="content-wrapper clearfix">
-                    <section id="main" class="{% block mainclasses %}grid grid-3-4{% endblock %}">
+                    <section id="main" class="{% block mainclasses %}col-sm-9{% endblock %}">
 
                         {% block submenu %}
                             <nav id="submenu" class="clearfix">
@@ -123,7 +123,7 @@
                     </section>
 
                     {% block sidebar %}
-                    <aside id="aside-right" class="grid grid-1-4">
+                    <aside id="aside-right" class="col-sm-3">
                         {% feincms_render_region feincms_page "sidebar" request %}
                     </aside>
                     {% endblock %}
