@@ -1,5 +1,15 @@
 {% load blog_widgets i18n inplace_tags static %}
 
+<script id="popup-template" type="text/x-handlebars-template">
+    {% verbatim %}
+        <div>
+            <a href="{{detailUrl}}">
+                {{feature.properties.address_line1}}
+            </a>
+        </div>
+    {% endverbatim %}
+</script>
+
 <div id="map" style="width: 100%; height: 400px;"
     data-l-zoom="10"
     data-l-center="[29.951066, -90.071532]"

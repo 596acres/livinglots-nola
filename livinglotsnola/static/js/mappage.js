@@ -6,12 +6,15 @@
 
 define(
     [
+        'django',
         'jquery',
+        'handlebars',
         'leaflet',
 
         'leaflet.dataoptions',
+        'leaflet.handlebars',
         'leaflet.usermarker'
-    ], function ($, L) {
+    ], function (Django, $, Handlebars, L) {
 
         function addBaseLayer(map) {
             var baseLayer = L.tileLayer('http://{s}.tile.cloudmade.com/{key}/{styleId}/256/{z}/{x}/{y}.png', {
@@ -22,7 +25,18 @@ define(
 
         function addLotsLayer(map) {
             $.getJSON(map.options.lotsurl, function (data) {
-                var lotsLayer = L.geoJson(data).addTo(map);
+                var lotsLayer = L.geoJson(data, {
+                    handlebarsTemplateSelector: '#popup-template',
+                    getTemplateContext: function (layer) {
+                        return {
+                            detailUrl: Django.url('lots:lot_detail', {
+                                pk: layer.feature.id
+                            }),
+                            feature: layer.feature
+                        };
+                    }
+                });
+                lotsLayer.addTo(map);
             });
         }
 

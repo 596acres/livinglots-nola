@@ -5,8 +5,10 @@ requirejs.config({
         'django': 'djangojs/django',
         "fancybox": "../bower_components/fancybox/source/jquery.fancybox",
         "jquery": "../bower_components/jquery/jquery",
+        "handlebars": "../bower_components/handlebars/handlebars",
         "leaflet": "../bower_components/leaflet/leaflet-src",
         "leaflet.dataoptions": "../bower_components/leaflet.dataoptions/src/leaflet.dataoptions",
+        "leaflet.handlebars": "../bower_components/leaflet.handlebars/src/leaflet.handlebars",
         "leaflet.usermarker": "../bower_components/leaflet.usermarker/src/leaflet.usermarker",
         "requirejs": "../bower_components/requirejs"
     },
@@ -16,7 +18,10 @@ requirejs.config({
             'deps': ['jquery'],
             'exports': 'Django'
         },
-        'leaflet.usermarker': ['leaflet'],
+        'handlebars': {
+            'exports': 'Handlebars'
+        },
+        'leaflet.usermarker': ['leaflet']
     },
 });
 
