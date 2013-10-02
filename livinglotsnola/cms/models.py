@@ -52,8 +52,8 @@ Page.register_templates({
 })
 
 Page.register_templates({
-    'title': _('Home map template'),
-    'path': 'home_map.html',
+    'title': _('Map template'),
+    'path': 'map.html',
     'regions': (
         ('main', _('Main content area')),
         ('sidebar', _('Sidebar'), 'inherited'),
