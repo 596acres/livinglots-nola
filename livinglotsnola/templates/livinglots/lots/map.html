@@ -1,7 +1,14 @@
-{% load blog_widgets i18n static %}
+{% load blog_widgets i18n inplace_tags static %}
 
 <div id="map-left" class="grid grid-3-4">
-    {% include "livinglots/lots/map/_mainmap.html" %}
+    <div id="map" style="width: 100%; height: 400px;"
+        data-countsbaseurl="{% url "lots:lot_count" %}?"
+        data-choroplethbaseurl="{% url "lots:lot_count_by_boundary" %}" 
+        data-polygonbaseurl="{% url "lots:lot_geojson_polygon" %}"
+        data-centroidbaseurl="{% url "lots:lot_geojson_centroid" %}"
+
+        data-cloudmadekey="{% inplace_setting PLACES_CLOUDMADE_KEY %}"
+        data-cloudmadestyle="{% inplace_setting PLACES_CLOUDMADE_STYLE %}"></div>
 
     <div id="streetview-container" style="padding: 25px; display: none;">
         <div id="streetview" style="height: 300px; width: 100%;">
