@@ -49,6 +49,6 @@ git+git://github.com/596acres/django-livinglots/@62e59e2
 git+git://github.com/596acres/django-livinglots-forms/@17c25851b
 django-livinglots-generictags==1.0
 git+git://github.com/596acres/django-livinglots-genericviews/@07f78f2f
-git+git://github.com/596acres/django-livinglots-lots/@e44d41638
+git+git://github.com/596acres/django-livinglots-lots/@91b24a0
 git+git://github.com/596acres/django-livinglots-owners/@2eaf5e9
 git+git://github.com/596acres/django-livinglots-usercontent/@0.1.1
