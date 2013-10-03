@@ -159,6 +159,7 @@ INSTALLED_APPS = (
 
     # Living Lots
     'livinglots_lots',
+    'livinglots_organize',
     'livinglots_owners',
     'livinglots_usercontent.files',
     'livinglots_usercontent.notes',
@@ -172,6 +173,7 @@ INSTALLED_APPS = (
     'cms',
     'contact',
     'lots',
+    'organize',
     'owners',
 )
 
@@ -264,16 +266,13 @@ ABSOLUTE_URL_OVERRIDES = {
 HONEYPOT_FIELD_NAME = 'homepage'
 HONEYPOT_VALUE = 'http://example.com/'
 
-ORGANIZE = {
-    'ORGANIZER_MODEL': '', # TODO set
-}
-
 ADMIN_TOOLS_INDEX_DASHBOARD = 'livinglotsnola.admindashboard.LivingLotsDashboard'
 
 LIVING_LOTS = {
     'MODELS': {
         'lot': 'lots.Lot',
         'lotgroup': 'lots.LotGroup',
+        'organizer': 'organize.Organizer',
         'owner': 'owners.Owner',
     },
 }
