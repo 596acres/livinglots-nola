@@ -17,8 +17,8 @@ urlpatterns += staticfiles_urlpatterns()
 urlpatterns += patterns('',
     # Living Lots
     url(r'^lots/(?P<pk>\d+)/content/', include('usercontent.urls', 'usercontent')),
+    url(r'^lots/(?P<pk>\d+)/grow-community/', include('organize.urls', 'organize')),
     url(r'^lots/', include('lots.urls', 'lots')),
-    url(r'^grow-community/(?P<pk>\d+)/', include('organize.urls', 'organize')),
 
     # Activity stream urls
     url('^activity/', include('actstream.urls')),
