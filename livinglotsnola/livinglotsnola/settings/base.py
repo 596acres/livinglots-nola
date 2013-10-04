@@ -151,6 +151,7 @@ INSTALLED_APPS = (
     'reversion',
     'reversion_compare',
     'south',
+    'widget_tweaks',
 
     #
     # first-party, project-generic
@@ -175,6 +176,7 @@ INSTALLED_APPS = (
     'lots',
     'organize',
     'owners',
+    'usercontent',
 )
 
 LOGGING = {
