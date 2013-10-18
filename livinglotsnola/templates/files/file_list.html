@@ -1,0 +1,38 @@
+{% load i18n imagekit %}
+
+{% for file in files %}
+    <div>
+        <div class="title">
+            <a href="{{ file.document.url }}">
+                {{ file.title }}
+            </a>
+        </div>
+        <div class="description">
+            {{ file.description }}
+        </div>
+        <div class="meta">
+            <div class="added-by-name">
+                {% trans "Added by" %}
+                {{ file.added_by_name }}
+            </div>
+            <div class="added">
+                {% trans "Added at" %}
+                {{ file.added }}
+            </div>
+        </div>
+
+        {% if "files" in perms %}
+            <div class="admin-only">
+
+                {% if "files.change_file" in perms %}
+                    <a href="{% url "admin:files_file_change" file.pk %}">{% trans "Edit this file" %}</a>
+                {% endif %}
+
+                {% if "files.delete_file" in perms %}
+                    <a href="{% url "admin:files_file_delete" file.pk %}">{% trans "Delete this file" %}</a>
+                {% endif %}
+
+            </div>
+        {% endif %}
+    </div>
+{% endfor %}
