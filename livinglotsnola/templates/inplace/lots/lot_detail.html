@@ -9,7 +9,6 @@
 {% endblock %}
 
 {% block content %}
-    {{ block.super }}
     <h1>{{ lot.display_name|default:"unknown" }}</h1>
 
     {% if "lots.change_lot" in perms %}
