@@ -219,6 +219,7 @@ ACTSTREAM_SETTINGS = {
     'MODELS': (
         'auth.user',
         'files.file',
+        'lots.lot',
         'notes.note',
         'photos.photo',
     ),
