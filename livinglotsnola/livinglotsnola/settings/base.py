@@ -167,6 +167,12 @@ INSTALLED_APPS = (
     'livinglots_usercontent.notes',
     'livinglots_usercontent.photos',
 
+    'noladata',
+    'noladata.addresses',
+    'noladata.buildings',
+    'noladata.nora',
+    'noladata.parcels',
+
     #
     # first-party, project-specific
     #
