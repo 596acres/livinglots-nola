@@ -29,9 +29,52 @@ article {
 
 .map-page #page-wrapper {
     margin: 0;
+    padding-right: 0;
     width: 100%;
 }
 
 .map-page article {
     padding: 0;
+}
+
+#map-header {
+    z-index: 5000;
+    background: #58595b;
+    width: 100%;
+    position: relative;
+    height: 75px;
+}
+
+.map-header-content {
+    margin-left: 75px;
+    padding: 20px;
+}
+
+
+/*
+ * Bootstrap overrides
+ */
+
+.btn {
+    border: none;
+    border-radius: 0;
+}
+
+.btn.btn-default {
+    background-color: #2593c6;
+    color: white;
+}
+
+
+/*
+ * Leaflet overrides
+ */
+
+.leaflet-control-container,
+.leaflet-top {
+    z-index: 5001;
+}
+
+.leaflet-control-container .leaflet-left .leaflet-control-zoom {
+    margin-left: 35px;
 }

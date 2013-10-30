@@ -1,5 +1,9 @@
 {% load compress js static %}
 
+<link rel="stylesheet" href="//cdn.leafletjs.com/leaflet-0.6.4/leaflet.css" />
+<!--[if lte IE 8]>
+    <link rel="stylesheet" href="//cdn.leafletjs.com/leaflet-0.6.4/leaflet.ie.css" /> <![endif]-->
+
 {% compress css %}
     <link rel="stylesheet" href="{% static "bower_components/normalize-css/normalize.css" %}">
     <link rel="stylesheet" href="{% static "bower_components/bootstrap/dist/css/bootstrap.css" %}">
@@ -7,11 +11,6 @@
     <link rel="stylesheet" href="{% static "bower_components/leaflet.usermarker/src/leaflet.usermarker.css" %}" />
     <link rel="stylesheet" href="{% static "css/base.css" %}">
 {% endcompress %}
-
-<link rel="stylesheet" href="//cdn.leafletjs.com/leaflet-0.6.4/leaflet.css" />
-<!--[if lte IE 8]>
-    <link rel="stylesheet" href="//cdn.leafletjs.com/leaflet-0.6.4/leaflet.ie.css" />
-<![endif]-->
 
 {% django_js_init jquery=false i18n=false csrf=false %}
 

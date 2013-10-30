@@ -10,6 +10,13 @@
     {% endverbatim %}
 </script>
 
+<div id="map-overlay">
+    {% blocktrans %}
+        Welcome. Hi.
+    {% endblocktrans %}
+    <a class="map-overlay-close-button">×</a>
+</div>
+
 <div id="map" style="width: 100%; height: 400px;"
     data-l-zoom="11"
     data-l-center="[30.01, -90.07]"
@@ -17,17 +24,33 @@
     data-l-apikey="{% inplace_setting PLACES_CLOUDMADE_KEY %}"
     data-l-styleid="{% inplace_setting PLACES_CLOUDMADE_STYLE %}"
     data-l-lotsurl="{% url "lots:lot_geojson_centroid" %}"
-></div>
-
-<div id="map-left">
-
-    <div id="streetview-container" style="padding: 25px; display: none;">
-        <div id="streetview" style="height: 300px; width: 100%;">
-        </div>
-        <div id="streetview-error" class="streetview">
-            {% trans "Sorry, we couldn't find streetview imagery for this lot." %}
+>
+    <div id="map-header">
+        <div class="row map-header-content">
+            <div class="col-md-3">
+                You are currently viewing<br />
+                etc
+            </div>
+            <div class="col-md-3">
+                <a class="btn btn-default" href="#">
+                    download
+                </a>
+            </div>
+            <div class="col-md-3">
+                <a class="btn btn-default" href="#">
+                    filter
+                </a>
+            </div>
+            <div class="col-md-3">
+                <a class="btn btn-default" href="#">
+                    news
+                </a>
+            </div>
         </div>
     </div>
+</div>
+
+<div id="map-left">
 
     <div class="map-find-a-lot-container searchbar">
         <div class="map-find-a-lot">
@@ -41,41 +64,7 @@
     </div>
 
     <div>
-        <a class="map-filters-toggle">
-            {% trans "Advanced Search Tools" %}
-        </a>
-    </div>
-
-    <div class="map-filters grid">
-
-        <div class="filters">
-            <form>
-                {% for hidden_field in filters.hidden_fields %}
-                {{ hidden_field }}
-                {% endfor %}
-            </form>
-        </div>
-
         <div>
-            <h2>Filters</h2>
-            {{ filters.form.as_p }}
-        </div>
-
-    </div>
-
-    <div class="map-tally-container grid">
-        <h2>{% trans "You are currently looking at" %}</h2>
-        <div class="map-tally">
-            <div class="grid grid-1-4">
-                <span class="count lots-count">...</span> {% trans "lots" %}
-            </div>
-            <div class="grid grid-1-4">
-                <span class="count no-known-use-count">...</span> {% trans "lots with no known use" %}
-            </div>
-            <div class="grid grid-1-4">
-                <span class="count in-use-count">...</span> {% trans "lots being used as community spaces" %}
-            </div>
-
             <div class="grid grid-1-4">
                 <a href="#" class="export-link">{% trans "Link to this view" %}</a>. 
                 {% trans "Or download current lots as" %}
@@ -91,14 +80,6 @@
 </div>
 
 <div id="map-right" class="grid grid-1-4 clearfix">
-
-    <div class="social-media clearfix">
-        <ul>
-            <li class="social-media-icon">
-                <a href="https://twitter.com/Grounded215" class="social-twitter" target="_blank"></a>
-            </li>
-        </ul>
-    </div>
 
     <div class="map-sidebar-section">
         <h2>{% trans "Recent News" %}</h2>
@@ -122,13 +103,4 @@
         </div>
     </div>
 
-</div>
-
-<div id="map-overlay">
-    <a class="map-overlay-close-button">×</a>
-    {% blocktrans %}
-    {% endblocktrans %}
-    <button class="map-overlay-button right-arrow-button" type="button">
-        {% trans "Find the lot in your life!" %}
-    </button>
 </div>
