@@ -2,6 +2,12 @@ from django.conf.urls.defaults import patterns, url
 
 import livinglots_lots.urls as llurls
 
+from .views import LotsGeoJSONCentroid
 
-urlpatterns = llurls.urlpatterns + patterns('',
-)
+
+urlpatterns = patterns('',
+
+    url(r'^geojson-centroid/', LotsGeoJSONCentroid.as_view(),
+        name='nola_lot_geojson_centroid'),
+
+) + llurls.urlpatterns
