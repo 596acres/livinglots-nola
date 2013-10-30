@@ -21,43 +21,45 @@
 
                 <header>
 
-                    <div id="page-header">
-                        <a id="logo" href="/">
-                            <img src="{% static "img/logo.jpg" %}" />
-                            <h1 style="display: none;">{% trans "Living Lots NOLA" %}</h1>
-                        </a>
-                    </div>
-
-                    <nav class="navbar navbar-default" role="navigation">
-
-                        <div class="navbar-header">
-                            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-main-collapse">
-                                <span class="sr-only">Toggle navigation</span>
-                                <span class="icon-bar"></span>
-                                <span class="icon-bar"></span>
-                                <span class="icon-bar"></span>
-                            </button>
-                            <a class="navbar-brand">
-                                {% trans "Living Lots NOLA" %}
+                    <div id="page-header" class="row">
+                        <div class="col-md-3">
+                            <a id="logo" href="/">
+                                <img src="{% static "img/logo.jpg" %}" />
+                                <h1 style="display: none;">{% trans "Living Lots NOLA" %}</h1>
                             </a>
                         </div>
 
-                        <div class="collapse navbar-collapse navbar-main-collapse">
-                            <ul class="nav navbar-nav">
-                                {% feincms_nav feincms_page level=1 depth=1 as mainmenu %}
-                                {% for page in mainmenu %}
-                                <li {% ifequal page feincms_page %}class="active"{% endifequal %}>
-                                        <a href="{{ page.get_absolute_url }}">{{ page.title }}</a>
-                                    </li>
-                                {% endfor %}
-                                {% if user.is_superuser %}
-                                    <li>
-                                        <a href="/extra-admin/">Admin</a>
-                                    </li>
-                                {% endif %}
-                            </ul>
-                        </div>
-                    </nav>
+                        <nav class="navbar navbar-default col-md-8" role="navigation">
+
+                            <div class="navbar-header">
+                                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-main-collapse">
+                                    <span class="sr-only">Toggle navigation</span>
+                                    <span class="icon-bar"></span>
+                                    <span class="icon-bar"></span>
+                                    <span class="icon-bar"></span>
+                                </button>
+                                <a class="navbar-brand">
+                                    {% trans "Living Lots NOLA" %}
+                                </a>
+                            </div>
+
+                            <div class="collapse navbar-collapse navbar-main-collapse">
+                                <ul class="nav navbar-nav">
+                                    {% feincms_nav feincms_page level=1 depth=1 as mainmenu %}
+                                    {% for page in mainmenu %}
+                                    <li {% ifequal page feincms_page %}class="active"{% endifequal %}>
+                                            <a href="{{ page.get_absolute_url }}">{{ page.title }}</a>
+                                        </li>
+                                    {% endfor %}
+                                    {% if user.is_superuser %}
+                                        <li>
+                                            <a href="/extra-admin/">Admin</a>
+                                        </li>
+                                    {% endif %}
+                                </ul>
+                            </div>
+                        </nav>
+                    </div>
 
                 </header>
 
