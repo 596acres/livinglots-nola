@@ -25,3 +25,13 @@ article {
 /*
  * Modules
  */
+
+
+.map-page #page-wrapper {
+    margin: 0;
+    width: 100%;
+}
+
+.map-page article {
+    padding: 0;
+}
