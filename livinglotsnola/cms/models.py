@@ -38,7 +38,9 @@ class RecentActivitiesContent(models.Model):
 
 Page.register_extensions(
     'feincms.module.extensions.datepublisher',
-    'feincms.module.extensions.translations'
+    'feincms.module.extensions.translations',
+
+    'pagepermissions.extension',
 )
 
 Page.register_templates({

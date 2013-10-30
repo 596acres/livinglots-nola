@@ -157,6 +157,7 @@ INSTALLED_APPS = (
     # first-party, project-generic
     #
     'inplace_activity_stream',
+    'pagepermissions',
 
     # Living Lots
     'livinglots_lots',
