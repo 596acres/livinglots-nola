@@ -26,6 +26,18 @@ define(
         function addLotsLayer(map) {
             $.getJSON(map.options.lotsurl, function (data) {
                 var lotsLayer = L.geoJson(data, {
+                    pointToLayer: function (feature, latlng) {
+                        return L.circleMarker(latlng);
+                    },
+                    style: function (feature) {
+                        return {
+                            color: '#404586',
+                            fillColor: '#404586',
+                            fillOpacity: 1,
+                            opacity: 1,
+                            radius: 3
+                        };
+                    },
                     handlebarsTemplateSelector: '#popup-template',
                     getTemplateContext: function (layer) {
                         return {
