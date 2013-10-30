@@ -59,6 +59,41 @@ nav.navbar {
     padding: 20px;
 }
 
+.lotpopup {
+    color: #2593c6;
+    font-family: 'Oswald', sans-serif;
+    font-size: 16px;
+    font-weight: 400;
+}
+
+.lotpopup header {
+    border-bottom: 1px solid #58595b;
+    font-size: 22px;
+    font-weight: 300;
+    margin-bottom: 10px;
+}
+
+.popup-lot-details {
+    padding-left: 0;
+}
+
+.popup-lot-details .lot-count {
+    margin-bottom: 5px;
+}
+
+.popup-lot-details .size {
+    margin-bottom: 5px;
+}
+
+.popup-lot-details .owner {
+    margin-bottom: 5px;
+}
+
+.popup-lot-details .recent-activity {
+    font-weight: 700;
+    margin-bottom: 10px;
+}
+
 
 /*
  * Bootstrap overrides
@@ -79,6 +114,8 @@ nav.navbar {
  * Leaflet overrides
  */
 
+
+/* Keep zoom control on top of map bar */
 .leaflet-control-container,
 .leaflet-top {
     z-index: 5001;
@@ -86,4 +123,29 @@ nav.navbar {
 
 .leaflet-control-container .leaflet-left .leaflet-control-zoom {
     margin-left: 35px;
+}
+
+/* Style the popup */
+.leaflet-popup-content-wrapper {
+    border: 2px solid #58595b;
+    -webkit-border-radius: 0;
+    border-radius: 0;
+    box-shadow: none;
+    margin-bottom: 1px;
+}
+
+.leaflet-popup-tip-container {
+    overflow: visible;
+}
+
+.leaflet-popup-tip {
+    border: 2px solid #58595b;
+    border-left: 0;
+    border-top: 0;
+    box-shadow: none;
+}
+
+.leaflet-popup-content {
+    margin: 5px 15px;
+    margin-bottom: 8px;
 }

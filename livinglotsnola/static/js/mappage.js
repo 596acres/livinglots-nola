@@ -38,6 +38,10 @@ define(
                             radius: 3
                         };
                     },
+                    popupOptions: {
+                        minWidth: 250,
+                        offset: [0, 0]
+                    },
                     handlebarsTemplateSelector: '#popup-template',
                     getTemplateContext: function (layer) {
                         return {

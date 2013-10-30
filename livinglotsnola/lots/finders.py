@@ -48,5 +48,6 @@ class NoraUncommittedPropertiesFinder(object):
                 state_province=uncommitted_property.state,
                 country='USA',
                 known_use_certainty=7,
+                # TODO set owner to HANO
             )
             lot.save()

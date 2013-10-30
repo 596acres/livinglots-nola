@@ -30,7 +30,9 @@ class LotGeoJSONMixin(object):
             properties={
                 'address_line1': lot.address_line1,
                 'layer': layer,
+                'owner': lot.owner or 'unknown',
                 'pk': lot.pk,
+                'size': getattr(lot, 'area', 'unknown'),
             },
         )
 
