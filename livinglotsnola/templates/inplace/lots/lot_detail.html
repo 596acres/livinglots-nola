@@ -3,15 +3,32 @@
 
 {% block body_class %}lot-detail-page{% endblock %}
 
-{% block breadcrumbs %}
-    <li>
-        <a href="/">{% trans "Home" %}</a>
-    </li>
-    <li>{{ lot.display_name|default:lot.pk }}</li>
+{% block breadcrumbs_wrapper %}
+{% endblock %}
+
+{% block pre_content %}
+    <div class="lot-detail-header-image">
+        (header image)
+    </div>
 {% endblock %}
 
 {% block content %}
-    <h1>{{ lot.display_name|default:"unknown" }}</h1>
+
+    <div class="lot-detail-map-container row">
+        <div class="col-md-3">
+            <div id="lot-detail-map"
+                data-l-zoom="14" 
+                data-l-center="[{{ lot.centroid.y }}, {{ lot.centroid.x }}]"
+                data-l-apikey="{% inplace_setting PLACES_CLOUDMADE_KEY %}"
+                data-l-styleid="{% inplace_setting PLACES_CLOUDMADE_STYLE %}"
+            ></div>
+        </div>
+
+        <div class="col-md-9">
+            <h1>{{ lot.display_name|default:"unknown" }}</h1>
+        </div>
+    </div>
+
 
     {% if "lots.change_lot" in perms %}
     <div class="lot-detail-admin admin-only">
@@ -44,28 +61,6 @@
     </div>
 
     <div class="clearfix"></div>
-
-    <div class="lot-detail-map-container row">
-
-        <div class="col-md-8">
-            <div id="streetview-container">
-                <div id="streetview" style="height: 200px; width: 100%;"></div>
-            </div>
-            <div id="streetview-error" class="streetview">
-                {% trans "Sorry, we couldn't find streetview imagery for this lot." %}
-            </div>
-        </div>
-
-        <div class="lot-detail-map-right col-md-4">
-            <div id="lot-detail-map" style="width: 100%; height: 200px;" 
-                data-l-zoom="10" 
-                data-l-center="[{{ lot.centroid.y }}, {{ lot.centroid.x }}]"
-                data-l-apikey="{% inplace_setting PLACES_CLOUDMADE_KEY %}"
-                data-l-styleid="{% inplace_setting PLACES_CLOUDMADE_STYLE %}"
-            ></div>
-        </div>
-
-    </div>
 
     <div class="lot-detail-main">
 
