@@ -137,6 +137,27 @@ nav.navbar {
     margin-bottom: 10px;
 }
 
+.lot-detail-page h1 {
+    font-family: 'Oswald', sans-serif;
+    font-size: 28px;
+    font-weight: 300;
+    margin-top: 15px;
+}
+
+.lot-detail-page h2 {
+    font-family: 'Oswald', sans-serif;
+    font-size: 22px;
+    font-weight: 300;
+    margin-top: 15px;
+}
+
+.lot-detail-organizers h2 {
+    background: #58595b;
+    color: white;
+    padding-bottom: 10px;
+    padding-top: 10px;
+}
+
 .lot-detail-page article {
     padding-top: 0;
 }
@@ -154,6 +175,12 @@ nav.navbar {
     width: 100%;
 }
 
+.lot-detail-info-box {
+    background-color: rgba(151, 176, 61, 0.1); /* #97b03d in RGB */
+    margin-top: 15px;
+    padding: 10px;
+}
+
 
 /*
  * Bootstrap overrides
@@ -162,10 +189,6 @@ nav.navbar {
 .btn {
     border: none;
     border-radius: 0;
-}
-
-.btn.btn-default {
-    background-color: #2593c6;
     color: white;
     font-family: 'Oswald', sans-serif;
     font-size: 17px;
@@ -174,11 +197,15 @@ nav.navbar {
     padding-right: 15px;
     text-transform: uppercase;
 }
-.btn.btn-default:hover {
+.btn:hover {
     color: #f2ce1e;
 }
-.btn.btn-default:active {
+.btn:active {
     color: white;
+}
+
+.btn.btn-default {
+    background-color: #2593c6;
 }
 
 
