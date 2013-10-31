@@ -136,6 +136,18 @@ nav.navbar {
 .btn.btn-default {
     background-color: #2593c6;
     color: white;
+    font-family: 'Oswald', sans-serif;
+    font-size: 17px;
+    font-weight: 300;
+    padding-left: 15px;
+    padding-right: 15px;
+    text-transform: uppercase;
+}
+.btn.btn-default:hover {
+    color: #f2ce1e;
+}
+.btn.btn-default:active {
+    color: white;
 }
 
 
