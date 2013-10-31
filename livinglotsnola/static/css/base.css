@@ -28,7 +28,22 @@ article {
  */
 
 nav.navbar {
+    background-color: transparent;
+    border: none;
+    font-family: 'Oswald', sans-serif;
+    font-size: 28px;
+    font-weight: 300;
     margin-top: 50px;
+}
+
+.navbar-default .navbar-nav > li > a {
+    color: black;
+}
+
+.navbar-default .navbar-nav > .active > a,
+.navbar-default .navbar-nav > .active > a:hover,
+.navbar-default .navbar-nav > li > a:hover {
+    background-color: transparent;
 }
 
 
