@@ -102,6 +102,49 @@ nav.navbar {
     padding: 20px;
 }
 
+#map-legend {
+    background: rgba(256, 256, 256, 0.5);
+    border: 3px solid #2593c6;
+    bottom: 10px;
+    left: 25px;
+    padding: 5px;
+    position: absolute;
+    width: 50%;
+    z-index: 5000;
+}
+
+.legend-label {
+    display: inline;
+    font-family: 'Oswald', sans-serif;
+    font-weight: 300;
+    line-height: 14px;
+    text-transform: uppercase;
+}
+
+.legend-marker {
+    background: black;
+    border-radius: 10px;
+    display: inline-block;
+    height: 10px;
+    width: 10px;
+}
+
+.legend-public .legend-marker {
+    background: #404586;
+}
+
+.legend-private .legend-marker {
+    background: #ea292e;
+}
+
+.legend-private-lien .legend-marker {
+    background: #faa43e;
+}
+
+.legend-project .legend-marker {
+    background: #97b03d;
+}
+
 .lotpopup {
     color: #2593c6;
     font-family: 'Oswald', sans-serif;
