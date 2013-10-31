@@ -30,13 +30,19 @@ define(
                         return L.circleMarker(latlng);
                     },
                     style: function (feature) {
-                        return {
-                            color: '#404586',
-                            fillColor: '#404586',
+                        var style = {
+                            fillColor: '#000000',
                             fillOpacity: 1,
-                            opacity: 1,
-                            radius: 3
+                            radius: 3,
+                            stroke: 0
                         };
+                        if (feature.properties.layer === 'private') {
+                            style.fillColor = '#ea292e';
+                        }
+                        else if (feature.properties.layer === 'public') {
+                            style.fillColor = '#404586';
+                        }
+                        return style;
                     },
                     popupOptions: {
                         minWidth: 250,
