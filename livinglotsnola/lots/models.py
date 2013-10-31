@@ -17,12 +17,21 @@ class LotGroupLotMixin(models.Model):
         abstract = True
 
 
-class LotMixin(object):
+class LotMixin(models.Model):
+
+    parcel = models.ForeignKey('parcels.Parcel',
+        blank=True,
+        null=True,
+        on_delete=models.SET_NULL,
+    )
 
     @classmethod
     def get_filter(cls):
         from .filters import LotFilter
         return LotFilter
+
+    class Meta:
+        abstract = True
 
 
 class Lot(LotMixin, LotGroupLotMixin, BaseLot):

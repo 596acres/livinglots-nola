@@ -1,7 +1,9 @@
 from noladata.buildings.models import Building
+from noladata.habitat.load import lots_available_for_gardening
 from noladata.nora.models import UncommittedProperty
 from noladata.parcels.models import Parcel
 
+from owners.models import Owner
 from .models import Lot
 
 
@@ -49,5 +51,54 @@ class NoraUncommittedPropertiesFinder(object):
                 country='USA',
                 known_use_certainty=7,
                 # TODO set owner to HANO
+                # TODO refer back to parcel?
+            )
+            lot.save()
+
+
+class HabitatLotsAvailableForGardeningFinder(object):
+
+    def find_parcel(self, lot_available):
+        # Search by GEOPIN
+        parcels = Parcel.objects.filter(geopin=lot_available['properties']['GEOPIN'])
+        if not parcels.count():
+            # Search by address
+            filters = {}
+            address_properties = ('SITUS_DIR', 'SITUS_STRE', 'SITUS_TYPE',
+                                  'SITUS_NUMB',)
+            for p in address_properties:
+                if lot_available['properties'][p]:
+                    filters[p.lower() + '__iexact'] = lot_available['properties'][p]
+            parcels = Parcel.objects.filter(**filters)
+        if parcels.count() > 1:
+            print 'Found too many parcels for %s' % lot_available
+            return None
+        if parcels.count() == 0:
+            print 'Found zero parcels for %s' % lot_available
+            return None
+        return parcels[0]
+
+    def get_owner(self):
+        owner, created = Owner.objects.get_or_create('Habitat for Humanity', defaults={
+            'owner_type': 'private',
+        })
+        return owner
+
+    def find_lots(self):
+        owner = self.get_owner()
+        for lot_available in lots_available_for_gardening():
+            parcel = self.find_parcel(lot_available)
+            if not parcel:
+                continue
+            lot = Lot(
+                parcel=parcel,
+                polygon=parcel.geom,
+                centroid=parcel.geom.centroid,
+                address_line1=parcel.address,
+                city='New Orleans',
+                state_province='LA',
+                country='USA',
+                known_use_certainty=7,
+                owner=owner,
             )
             lot.save()
