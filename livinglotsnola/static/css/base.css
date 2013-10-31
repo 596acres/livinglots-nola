@@ -186,7 +186,8 @@ nav.navbar {
  * Bootstrap overrides
  */
 
-.btn {
+.btn,
+.leaflet-container .btn {
     border: none;
     border-radius: 0;
     color: white;
@@ -247,4 +248,30 @@ nav.navbar {
 .leaflet-popup-content {
     margin: 5px 15px;
     margin-bottom: 8px;
+}
+
+.leaflet-control-zoom {
+    border: 3px solid #2593c6;
+    -webkit-border-radius: 6px;
+    border-radius: 6px;
+}
+
+.leaflet-control-zoom a,
+.leaflet-control-zoom a:hover,
+.leaflet-control-zoom a:active {
+    background: #58595b;
+    color: white;
+}
+.leaflet-control-zoom a:hover {
+    color: #f2ce1e;
+}
+.leaflet-control-zoom a:active {
+    color: white;
+}
+
+.leaflet-control-zoom .leaflet-control-zoom-in {
+    border-bottom: 1px solid #2593c6;
+}
+.leaflet-control-zoom .leaflet-control-zoom-in:hover {
+    border-bottom: 1px solid #2593c6;
 }
