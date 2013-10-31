@@ -56,12 +56,15 @@ nav.navbar {
     text-transform: uppercase;
 }
 
-.map-welcome-close-button {
+.map-welcome-close-button,
+.map-welcome-close-button:active,
+.map-welcome-close-button:hover {
     color: white;
     float: right;
     font-size: 16px;
     margin-right: 50px;
     margin-top: 10px;
+    text-decoration: none;
 }
 
 .map-welcome-body {

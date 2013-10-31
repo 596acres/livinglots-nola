@@ -60,6 +60,12 @@ define(
             var map = L.map('map');
             addBaseLayer(map);
             addLotsLayer(map);
+
+            $('.map-welcome-close-button').click(function (e) {
+                $('#map-welcome').slideUp();
+                e.preventDefault();
+                return false;
+            });
         });
 
     }
