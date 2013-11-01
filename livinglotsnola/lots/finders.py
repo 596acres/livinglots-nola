@@ -9,6 +9,12 @@ from .models import Lot
 
 class NoraUncommittedPropertiesFinder(object):
 
+    def get_owner(self):
+        owner, created = Owner.objects.get_or_create('New Orleans Redevelopment Authority', defaults={
+            'owner_type': 'public',
+        })
+        return owner
+
     def find_parcel(self, uncommitted_property):
         # Get Parcels using the uncommitted_property's address
         parcels = Parcel.objects.filter_by_address(
@@ -38,11 +44,13 @@ class NoraUncommittedPropertiesFinder(object):
         return None
 
     def find_lots(self):
+        owner = self.get_owner()
         for uncommitted_property in UncommittedProperty.objects.all():
             parcel = self.find_parcel(uncommitted_property)
             if not parcel:
                 continue
             lot = Lot(
+                parcel=parcel,
                 polygon=parcel.geom,
                 centroid=parcel.geom.centroid,
                 address_line1=uncommitted_property.property_address,
@@ -50,8 +58,7 @@ class NoraUncommittedPropertiesFinder(object):
                 state_province=uncommitted_property.state,
                 country='USA',
                 known_use_certainty=7,
-                # TODO set owner to HANO
-                # TODO refer back to parcel?
+                owner=owner,
             )
             lot.save()
 
