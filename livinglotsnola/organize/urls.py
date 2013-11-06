@@ -1,4 +1,4 @@
-from django.conf.urls.defaults import patterns, url
+from django.conf.urls import patterns, url
 
 from livinglots import get_organizer_model
 from livinglots_organize.forms import OrganizerForm
