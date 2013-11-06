@@ -136,7 +136,6 @@ INSTALLED_APPS = (
     'admin_enhancer',
     'compressor',
     'contact_form',
-    'django_monitor',
     'djangojs',
     'elephantblog',
     'feincms',
