@@ -33,6 +33,12 @@ body {
     left: 75px;
 }
 
+.header-content {
+    left: 100px;
+    margin-top: 60px;
+    position: relative;
+}
+
 article {
     padding: 25px;
 }
@@ -45,18 +51,19 @@ article {
 nav.navbar {
     background-color: transparent;
     border: none;
+    display: inline-block;
     font-family: 'Oswald', sans-serif;
     font-size: 28px;
     font-weight: 300;
-    margin-top: 60px;
-    left: 100px;
 }
 
 @media (max-width: 768px) {
 
     /* On collapse, ensure that the button stays on the page */
+    .header-content,
     nav.navbar {
         left: 0;
+        padding: 0;
         position: absolute;
         width: 100%;
     }
@@ -82,6 +89,10 @@ nav.navbar {
 /*
  * Modules
  */
+
+#social {
+    display: inline-block;
+}
 
 
 .map-page #page-wrapper {
