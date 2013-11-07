@@ -16,8 +16,8 @@ wsgiref==0.1.2
 geojson==1.0.1
 
 # Django-specific requirements
-Django==1.5.5
-FeinCMS==1.7.6
+Django==1.6
+git+git://github.com/feincms/feincms@next
 South==0.8.2
 git+git://github.com/justquick/django-activity-stream.git@6db2bec6
 django-admin-enhancer==0.1.2
