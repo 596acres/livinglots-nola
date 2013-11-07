@@ -15,7 +15,6 @@ body {
 
 #page-wrapper {
     background: #f6f8f8;
-    min-height: 500px;
 }
 
 #page-header {
@@ -39,8 +38,19 @@ body {
     position: relative;
 }
 
+.content-wrapper {
+    min-height: 500px;
+}
+
 article {
     padding: 25px;
+}
+
+footer {
+    background-color: #2593c6;
+    color: white;
+    padding: 25px;
+    text-align: center;
 }
 
 
