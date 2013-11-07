@@ -15,7 +15,18 @@ body {
 }
 
 #page-header {
-    background: white;
+    background: url(/static/img/header-bg.png) white no-repeat;
+    height: 180px;
+}
+
+.header-home-link {
+    display: inline-block;
+    float: left;
+    position: relative;
+    height: 70px;
+    width: 215px;
+    top: 65px;
+    left: 75px;
 }
 
 article {
@@ -33,7 +44,8 @@ nav.navbar {
     font-family: 'Oswald', sans-serif;
     font-size: 28px;
     font-weight: 300;
-    margin-top: 50px;
+    margin-top: 60px;
+    left: 100px;
 }
 
 .navbar-default .navbar-nav > li > a {
