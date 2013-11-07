@@ -9,6 +9,10 @@ body {
     margin: 0;
 }
 
+#page-wrapper-row {
+    margin: 0;
+}
+
 #page-wrapper {
     background: #f6f8f8;
     min-height: 500px;
