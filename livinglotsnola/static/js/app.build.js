@@ -15,6 +15,7 @@
 
         // require()d dependencies
         'fancybox',
+        'mappage',
     ],
     insertRequire: ['main'],
 
