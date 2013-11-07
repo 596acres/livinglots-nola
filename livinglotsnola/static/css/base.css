@@ -52,6 +52,22 @@ nav.navbar {
     left: 100px;
 }
 
+@media (max-width: 768px) {
+
+    /* On collapse, ensure that the button stays on the page */
+    nav.navbar {
+        left: 0;
+        position: absolute;
+        width: 100%;
+    }
+
+    .navbar-collapse {
+        background-color: rgba(256, 256, 256, 0.8);
+        border: 0;
+    }
+
+}
+
 .navbar-default .navbar-nav > li > a {
     color: black;
 }
