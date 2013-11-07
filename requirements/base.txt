@@ -43,7 +43,7 @@ django.js==0.8.1
 feincms-cleanse==2
 git+git://github.com/feincms/feincms-elephantblog/@465b30bf727bc456f44e7f64a0738efadd845618
 git+git://github.com/ebrelsford/feincms-pagepermissions@master
-git+git://github.com/jmoiron/johnny-cache/@37e75019625979487f17b47050da7f0af3fea42c
+git+git://github.com/ebrelsford/johnny-cache/@master
 
 # Living Lots
 git+git://github.com/596acres/django-livinglots/@master
