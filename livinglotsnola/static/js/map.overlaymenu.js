@@ -20,7 +20,7 @@ define(
                 .show()
                 .offset({
                     left: offset.left + (outerWidth / 2.0) - menuWidth,
-                    top: offset.top + outerHeight + 15
+                    top: offset.top + outerHeight + 13
                 });
         }
 
