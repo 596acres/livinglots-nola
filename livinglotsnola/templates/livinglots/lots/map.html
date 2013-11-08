@@ -68,27 +68,14 @@
             </div>
 
             <div class="col-md-2">
-                <a class="btn btn-default" href="#">
+                <a class="btn btn-default overlay-filter-button" href="#">
                     filter
                 </a>
             </div>
             <div class="col-md-2">
-                <a class="btn btn-default" href="#">
+                <a class="btn btn-default overlay-news-button" href="#">
                     news
                 </a>
-
-                {% comment %}
-                <div class="activity-stream-section map-sidebar-section">
-                    <h2>{% trans "Recent Activities" %}</h2>
-                    <div class="activity-stream">
-                        <div class="activity-stream-container"></div>
-                        <div class="activity-stream-nav" style="display: none;">
-                            <a href="/activity-stream/">next page</a>
-                        </div>
-                    </div>
-                </div>
-                {% endcomment %}
-
             </div>
         </div>
     </div>
@@ -133,4 +120,21 @@
     <a href="#" class="export-csv" data-baseurl="{% url "lots:csv" %}?">{% trans "a spreadsheet" %}</a>,
     <a href="#" class="export-geojson" data-baseurl="{% url "lots:geojson" %}?download=yes&">{% trans "GeoJSON" %}</a>, or
     <a href="#" class="export-kml" data-baseurl="{% url "lots:kml" %}?">{% trans "KML" %}</a>.
+</div>
+
+<div class="overlaymenu overlaymenu-filter">
+    (filters will go here)
+</div>
+
+<div class="overlaymenu overlaymenu-news">
+    <div class="activity-stream-section map-sidebar-section">
+        <h2>{% trans "Recent Activities" %}</h2>
+        (recent activities will go here)
+        <div class="activity-stream">
+            <div class="activity-stream-container"></div>
+            <div class="activity-stream-nav" style="display: none;">
+                <a href="/activity-stream/">next page</a>
+            </div>
+        </div>
+    </div>
 </div>

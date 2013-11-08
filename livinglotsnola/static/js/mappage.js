@@ -78,6 +78,14 @@ define(
             $('.overlay-download-button').mapoverlaymenu({
                 menu: '.overlaymenu-download'
             });
+
+            $('.overlay-news-button').mapoverlaymenu({
+                menu: '.overlaymenu-news'
+            });
+
+            $('.overlay-filter-button').mapoverlaymenu({
+                menu: '.overlaymenu-filter'
+            });
         });
 
     }

@@ -165,8 +165,16 @@ nav.navbar {
     display: none;
     padding: 15px;
     position: absolute;
-    width: 200px;
+    width: 250px;
     z-index: 5005;
+}
+
+.overlaymenu h2 {
+    font-family: 'Oswald', sans-serif;
+    font-size: 28px;
+    font-weight: 400;
+    margin-top: 15px;
+    text-transform: uppercase;
 }
 
 #map-legend {
