@@ -159,6 +159,16 @@ nav.navbar {
     padding: 20px;
 }
 
+.overlaymenu {
+    background: rgba(256, 256, 256, 0.85);
+    border: 3px solid #2593c6;
+    display: none;
+    padding: 15px;
+    position: absolute;
+    width: 200px;
+    z-index: 5005;
+}
+
 #map-legend {
     background: rgba(256, 256, 256, 0.85);
     border: 3px solid #2593c6;

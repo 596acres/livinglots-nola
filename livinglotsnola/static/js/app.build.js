@@ -16,6 +16,7 @@
         // require()d dependencies
         'fancybox',
         'mappage',
+        'map.overlaymenu',
     ],
     insertRequire: ['main'],
 

@@ -13,7 +13,9 @@ define(
 
         'leaflet.dataoptions',
         'leaflet.handlebars',
-        'leaflet.usermarker'
+        'leaflet.usermarker',
+
+        'map.overlaymenu'
     ], function (Django, $, Handlebars, L) {
 
         function addBaseLayer(map) {
@@ -71,6 +73,10 @@ define(
                 $('#map-welcome').slideUp();
                 e.preventDefault();
                 return false;
+            });
+
+            $('.overlay-download-button').mapoverlaymenu({
+                menu: '.overlaymenu-download'
             });
         });
 
