@@ -113,6 +113,10 @@ nav.navbar {
     padding: 0;
 }
 
+.map-page footer {
+    margin: 0;
+}
+
 #map-welcome h1 {
     background: black;
     color: white;
