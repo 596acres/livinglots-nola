@@ -160,7 +160,7 @@ nav.navbar {
 }
 
 .overlaymenu {
-    background: rgba(256, 256, 256, 0.85);
+    background: rgba(256, 256, 256, 0.95);
     border: 3px solid #2593c6;
     display: none;
     padding: 15px;
@@ -190,7 +190,7 @@ nav.navbar {
 }
 
 .overlaymenu-tip {
-    background: rgba(256, 256, 256, 0.85);
+    background: rgba(256, 256, 256, 0.95);
     border: 3px solid #2593c6;
     border-bottom: 0;
     border-right: 0;
