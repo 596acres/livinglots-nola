@@ -239,36 +239,6 @@
                 </tr>
                 {% endif %}
 
-                <tr>
-                    <th>
-                        {% trans "parcel" %}:
-                        <div class="help-text">
-                            {% blocktrans %}
-                            The parcel we're using for this lot.
-                            {% endblocktrans %}
-                        </div>
-                    </th>
-                    <td>
-                        {% if lot.parcel %}
-                            {{ lot.parcel }}
-                            <div>
-                                {% blocktrans with area=lot.parcel.area|floatformat %}
-                                area: {{ area }} square feet
-                                {% endblocktrans %}
-                            </div>
-                            {% if "parcels.change_parcel" in perms %}
-                            <div class="admin-link admin-only">
-                                <a class="btn btn-small btn-warning" href="{% url "admin:parcels_parcel_change" lot.parcel.pk %}" target="_blank">
-                                    {% trans "view/change" %}
-                                </a>
-                            </div>
-                            {% endif %}
-                        {% else %}
-                            {% trans "not found" %}
-                        {% endif %}
-                    </td>
-                </tr>
-
             </table>
         </div>
         {% endif %}
