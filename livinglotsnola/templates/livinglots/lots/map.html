@@ -42,9 +42,9 @@
     data-l-styleid="{% inplace_setting PLACES_CLOUDMADE_STYLE %}"
     data-l-lotsurl="{% url "lots:lot_geojson_centroid" %}"
 >
-    <div id="map-header">
+    <div id="map-header" class="hidden-xs">
         <div class="row map-header-content">
-            <div class="map-header-currently-viewing col-md-4">
+            <div class="map-header-currently-viewing col-sm-4">
                 <h2>You are currently viewing</h2>
                 <ul>
                     <li>XYZ acres of opportunity on ABC lots</li>
@@ -52,13 +52,13 @@
                 </ul>
             </div>
 
-            <div class="col-md-2">
+            <div class="col-sm-2">
                 <a class="btn btn-default overlay-download-button" href="#">
                     download
                 </a>
             </div>
 
-            <div class="col-md-2">
+            <div class="col-sm-2">
                 <div class="map-find-a-lot-container searchbar">
                     <div class="map-find-a-lot">
                         <form class="map-find-a-lot-form">
@@ -70,12 +70,12 @@
                 </div>
             </div>
 
-            <div class="col-md-2">
+            <div class="col-sm-2">
                 <a class="btn btn-default overlay-filter-button" href="#">
                     filter
                 </a>
             </div>
-            <div class="col-md-2">
+            <div class="col-sm-2">
                 <a class="btn btn-default overlay-news-button" href="#">
                     news
                 </a>
