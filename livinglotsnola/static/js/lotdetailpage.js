@@ -9,9 +9,10 @@ define(
         'jquery',
         'handlebars',
         'leaflet',
+        'map.styles',
 
         'leaflet.dataoptions'
-    ], function ($, Handlebars, L) {
+    ], function ($, Handlebars, L, mapstyles) {
 
         function addBaseLayer(map) {
             var baseLayer = L.tileLayer('http://{s}.tile.cloudmade.com/{key}/{styleId}/256/{z}/{x}/{y}.png', {
@@ -25,9 +26,10 @@ define(
                 var lotsLayer = L.geoJson(data, {
                     style: function (feature) {
                         return {
-                            color: '#0f0',
-                            fillColor: '#0f0',
-                            opacity: 0.2
+                            color: mapstyles[feature.properties.layer],
+                            fillColor: mapstyles[feature.properties.layer],
+                            fillOpacity: 0.5,
+                            opacity: 0.5
                         };
                     }
                 });

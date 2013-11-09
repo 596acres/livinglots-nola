@@ -10,13 +10,14 @@ define(
         'jquery',
         'handlebars',
         'leaflet',
+        'map.styles',
 
         'leaflet.dataoptions',
         'leaflet.handlebars',
         'leaflet.usermarker',
 
         'map.overlaymenu'
-    ], function (Django, $, Handlebars, L) {
+    ], function (Django, $, Handlebars, L, mapstyles) {
 
         function addBaseLayer(map) {
             var baseLayer = L.tileLayer('http://{s}.tile.cloudmade.com/{key}/{styleId}/256/{z}/{x}/{y}.png', {
@@ -38,11 +39,9 @@ define(
                             radius: 3,
                             stroke: 0
                         };
-                        if (feature.properties.layer === 'private') {
-                            style.fillColor = '#ea292e';
-                        }
-                        else if (feature.properties.layer === 'public') {
-                            style.fillColor = '#404586';
+                        style.fillColor = mapstyles[feature.properties.layer];
+                        if (!style.fillColor) {
+                            style.fillColor = '#000000';
                         }
                         return style;
                     },
