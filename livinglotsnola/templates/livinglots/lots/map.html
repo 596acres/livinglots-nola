@@ -1,4 +1,4 @@
-{% load blog_widgets i18n inplace_tags static %}
+{% load blog_widgets feincms_tags i18n inplace_tags static %}
 
 <script id="popup-template" type="text/x-handlebars-template">
     {% verbatim %}
@@ -30,7 +30,7 @@
         <a href="#" class="map-welcome-close-button">close</a>
     </h1>
     <div class="map-welcome-body">
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec id mauris lorem. Nullam eros eros, ullamcorper ac augue vel, scelerisque scelerisque mi. Nullam commodo diam et tortor pretium luctus. Duis ligula augue, tincidunt in consequat quis, tristique a nibh. Etiam risus nisi, dictum id orci non, cursus ultrices tellus. Duis placerat pulvinar consequat. Curabitur convallis ipsum eget neque condimentum scelerisque. Aliquam vulputate at lectus eu mollis. Fusce in dolor ac urna suscipit ultrices id eu libero. Vestibulum malesuada nec mi nec dignissim. Etiam sed adipiscing ante, nec imperdiet ligula. Nunc interdum in tortor nec tincidunt. Sed nec tellus scelerisque, volutpat odio sit amet, pharetra justo. Nulla quis suscipit elit. Vivamus et auctor enim, pellentesque egestas mi.
+        {% feincms_render_region feincms_page "welcome" request %}
     </div>
 </section>
 

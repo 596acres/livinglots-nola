@@ -58,6 +58,7 @@ Page.register_templates({
     'path': 'map.html',
     'regions': (
         ('main', _('Main content area')),
+        ('welcome', _('Welcome text')),
         ('sidebar', _('Sidebar'), 'inherited'),
         ('footer', _('Footer'), 'inherited'),
     ),
