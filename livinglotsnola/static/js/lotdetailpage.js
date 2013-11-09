@@ -10,9 +10,10 @@ define(
         'handlebars',
         'leaflet',
         'map.styles',
+        'streetview',
 
         'leaflet.dataoptions'
-    ], function ($, Handlebars, L, mapstyles) {
+    ], function ($, Handlebars, L, mapstyles, StreetView) {
 
         function addBaseLayer(map) {
             var baseLayer = L.tileLayer('http://{s}.tile.cloudmade.com/{key}/{styleId}/256/{z}/{x}/{y}.png', {
@@ -41,6 +42,12 @@ define(
             var map = L.map('lot-detail-map');
             addBaseLayer(map);
             addLotsLayer(map);
+            StreetView.load_streetview(
+                $('.lot-detail-header-image').data('lon'),
+                $('.lot-detail-header-image').data('lat'),
+                $('.lot-detail-header-image'),
+                $('.lot-detail-header-streetview-error')
+            );
         });
 
     }

@@ -7,8 +7,13 @@
 {% endblock %}
 
 {% block pre_content %}
-    <div class="lot-detail-header-image">
-        (header image)
+    <div class="lot-detail-header-image" 
+        data-lat="{{ lot.centroid.y }}"
+        data-lon="{{ lot.centroid.x }}"
+    >
+        <div class="lot-detail-header-streetview-error alert alert-warning">
+            {% trans "Sorry, we could not load streetview imagery for this lot." %}
+        </div>
     </div>
 {% endblock %}
 
