@@ -6,15 +6,12 @@
 
 define(
     [
-        'django',
         'jquery',
         'handlebars',
         'leaflet',
 
-        'leaflet.dataoptions',
-        'leaflet.handlebars',
-        'leaflet.usermarker'
-    ], function (Django, $, Handlebars, L) {
+        'leaflet.dataoptions'
+    ], function ($, Handlebars, L) {
 
         function addBaseLayer(map) {
             var baseLayer = L.tileLayer('http://{s}.tile.cloudmade.com/{key}/{styleId}/256/{z}/{x}/{y}.png', {
@@ -26,13 +23,11 @@ define(
         function addLotsLayer(map) {
             $.getJSON(map.options.lotsurl, function (data) {
                 var lotsLayer = L.geoJson(data, {
-                    handlebarsTemplateSelector: '#popup-template',
-                    getTemplateContext: function (layer) {
+                    style: function (feature) {
                         return {
-                            detailUrl: Django.url('lots:lot_detail', {
-                                pk: layer.feature.id
-                            }),
-                            feature: layer.feature
+                            color: '#0f0',
+                            fillColor: '#0f0',
+                            opacity: 0.2
                         };
                     }
                 });
@@ -43,7 +38,7 @@ define(
         $(document).ready(function () {
             var map = L.map('lot-detail-map');
             addBaseLayer(map);
-            //addLotsLayer(map);
+            addLotsLayer(map);
         });
 
     }
