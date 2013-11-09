@@ -151,12 +151,36 @@ nav.navbar {
     background: #58595b;
     width: 100%;
     position: relative;
-    height: 75px;
+    min-height: 75px;
 }
 
 .map-header-content {
+    color: white;
+    font-family: 'Oswald', sans-serif;
     margin-left: 75px;
     padding: 20px;
+}
+
+.map-header-currently-viewing {
+    font-family: 'Oswald', sans-serif;
+    font-size: 22px;
+    font-weight: 300;
+}
+
+.map-header-currently-viewing h2 {
+    font-family: 'Oswald', sans-serif;
+    font-size: 22px;
+    font-weight: 300;
+    text-transform: uppercase;
+    margin: 0;
+}
+
+.map-header-currently-viewing ul {
+    font-family: 'Oswald', sans-serif;
+    line-height: 24px;
+    list-style: none;
+    margin: 0;
+    padding: 0;
 }
 
 .overlaymenu {
