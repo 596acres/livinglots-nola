@@ -393,6 +393,26 @@ nav.navbar {
     background-color: #2593c6;
 }
 
+.form-horizontal .control-label {
+    text-align: left;
+}
+
+label {
+    font-weight: normal;
+}
+
+.form-group.required label {
+    font-weight: bold;
+}
+
+input[type=email],
+input[type=text],
+input[type=url],
+textarea {
+    border: 2px solid black;
+    border-radius: 0;
+}
+
 
 /*
  * Leaflet overrides
