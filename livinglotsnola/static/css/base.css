@@ -357,6 +357,14 @@ nav.navbar {
     padding: 10px;
 }
 
+.lot-add-page h1 {
+    font-family: 'Oswald', sans-serif;
+    font-size: 86px;
+    font-weight: 300;
+    margin: 0;
+    text-transform: uppercase;
+}
+
 
 /*
  * Bootstrap overrides
