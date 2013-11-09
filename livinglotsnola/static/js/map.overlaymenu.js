@@ -6,9 +6,9 @@
 
 define(
     [
-        'jquery'
-
-    ], function ($) {
+        'jquery',
+        'underscore'
+    ], function ($, _) {
 
         function show(button, menu) {
             var offset = button.offset(),
@@ -32,25 +32,35 @@ define(
             return menu.is(':visible');
         }
 
+        function isInMenu(target, menu) {
+            return (target[0] === menu[0] ||
+                    _.find(target.parents(), function (ele) { return ele === menu[0]; }));
+        }
+
         $.fn.mapoverlaymenu = function (options) {
             var button = this,
                 menu = $(options.menu);
 
-            $(document.body).click(function (e) {
-                if (!($(e.target).is('.overlaymenu') ||
-                      $(e.target).parents('.overlaymenu').length > 0)) {
-                    hide(menu);
-                }
-            });
+            $('html').click(function (e) {
+                var target = $(e.target);
 
-            this.click(function () {
-                if (isVisible(menu)) {
-                    hide(menu);
+                // If user not clicking in menu, consider hiding or showing it
+                if (!isInMenu(target, menu)) {
+                    if (target[0] === button[0]) {
+                        // If button clicked, show or hide the menu appropriately
+                        if (isVisible(menu)) {
+                            hide(menu);
+                        }
+                        else {
+                            show(button, menu);
+                        }
+                        return false;
+                    }
+                    else {
+                        // Something else was clicked--hide the menu
+                        hide(menu);
+                    }
                 }
-                else {
-                    show(button, menu);
-                }
-                return false;
             });
             return this;
         };

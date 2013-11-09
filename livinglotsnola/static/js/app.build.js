@@ -17,6 +17,7 @@
         'fancybox',
         'mappage',
         'map.overlaymenu',
+        'underscore'
     ],
     insertRequire: ['main'],
 

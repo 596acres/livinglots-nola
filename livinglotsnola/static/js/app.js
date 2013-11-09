@@ -10,7 +10,8 @@ requirejs.config({
         "leaflet.dataoptions": "../bower_components/leaflet.dataoptions/src/leaflet.dataoptions",
         "leaflet.handlebars": "../bower_components/leaflet.handlebars/src/leaflet.handlebars",
         "leaflet.usermarker": "../bower_components/leaflet.usermarker/src/leaflet.usermarker",
-        "requirejs": "../bower_components/requirejs"
+        "requirejs": "../bower_components/requirejs",
+        "underscore": "../bower_components/underscore/underscore"
     },
     shim: {
         'bootstrap': ['jquery'],
@@ -21,8 +22,11 @@ requirejs.config({
         'handlebars': {
             'exports': 'Handlebars'
         },
-        'leaflet.usermarker': ['leaflet']
-    },
+        'leaflet.usermarker': ['leaflet'],
+        'underscore': {
+            'exports': '_'
+        }
+    }
 });
 
 // Load the main app module to start the app
