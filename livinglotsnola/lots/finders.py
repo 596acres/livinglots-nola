@@ -59,6 +59,7 @@ class NoraUncommittedPropertiesFinder(object):
                 country='USA',
                 known_use_certainty=7,
                 owner=owner,
+                added_reason="in NORA's uncommitted properties list",
             )
             lot.save()
 
@@ -107,5 +108,6 @@ class HabitatLotsAvailableForGardeningFinder(object):
                 country='USA',
                 known_use_certainty=7,
                 owner=owner,
+                added_reason="in Habitat for Humanity's potential gardens list",
             )
             lot.save()
