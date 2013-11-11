@@ -46,7 +46,8 @@ define(
                         return style;
                     },
                     popupOptions: {
-                        width: 250,
+                        maxWidth: 250,
+                        minWidth: 250,
                         offset: [0, 0]
                     },
                     handlebarsTemplateSelector: '#popup-template',
