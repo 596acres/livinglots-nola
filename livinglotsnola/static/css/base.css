@@ -9,6 +9,13 @@ body {
     margin: 0;
 }
 
+a,
+a:hover,
+a:active,
+a:focus {
+    color: #2593c6;
+}
+
 #page-wrapper-row {
     margin: 0;
 }
@@ -369,6 +376,10 @@ nav.navbar {
 /*
  * Bootstrap overrides
  */
+
+.breadcrumb {
+    background-color: transparent;
+}
 
 .btn,
 .leaflet-container .btn {
