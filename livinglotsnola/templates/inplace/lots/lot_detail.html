@@ -1,6 +1,11 @@
 {% extends "base.html" %}
 {% load files_tags flatblock_tags i18n inplace_tags notes_tags organize_tags photos_tags %}
 
+{% block title %}
+    {{ lot.display_name|title|default:"unknown" }} |
+    {% trans "Living Lots NOLA" %}
+{% endblock %}
+
 {% block body_class %}lot-detail-page{% endblock %}
 
 {% block breadcrumbs_wrapper %}
