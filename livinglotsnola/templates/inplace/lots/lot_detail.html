@@ -1,5 +1,5 @@
 {% extends "base.html" %}
-{% load files_tags i18n inplace_tags notes_tags organize_tags photos_tags %}
+{% load files_tags flatblock_tags i18n inplace_tags notes_tags organize_tags photos_tags %}
 
 {% block body_class %}lot-detail-page{% endblock %}
 
@@ -298,6 +298,11 @@
             {% get_organizer_count for lot as organizer_count %}
             <h2>Number of organizers: {{ organizer_count }}</h2>
             <div>
+                <section class="lot-detail-organizer-intro">
+                    <h3>Hey organizers!</h3>
+                    {% flatblock "lot-detail-organizer-intro" %}
+                    {% flatblock "lot-detail-organizer-contact" %}
+                </section>
                 {% render_organizer_list for lot %}
             </div>
         </section>

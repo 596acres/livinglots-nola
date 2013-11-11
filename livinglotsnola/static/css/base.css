@@ -372,6 +372,17 @@ nav.navbar {
     text-transform: uppercase;
 }
 
+.lot-detail-organizer-intro h3 {
+    color: #2593c6;
+    font-family: 'Oswald', sans-serif;
+    margin: 0;
+    text-transform: uppercase;
+}
+
+.lot-detail-organizers .block-lot-detail-organizer-intro {
+    font-size: 14px;
+}
+
 
 /*
  * Bootstrap overrides
