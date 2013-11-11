@@ -384,6 +384,24 @@ nav.navbar {
     font-size: 14px;
 }
 
+ul.organizer-list {
+    list-style: none;
+    padding: 0;
+}
+
+.organizer-list-item {
+    margin-top: 25px;
+    margin-bottom: 25px;
+}
+
+.organizer-list .organizer-name {
+    color: #58595b;
+    font-family: 'Oswald', sans-serif;
+    font-size: 26px;
+    font-weight: bold;
+    line-height: 26px;
+}
+
 
 /*
  * Bootstrap overrides
