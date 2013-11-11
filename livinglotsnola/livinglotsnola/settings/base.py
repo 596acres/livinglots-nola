@@ -141,6 +141,7 @@ INSTALLED_APPS = (
     'feincms',
     'feincms.module.medialibrary',
     'feincms.module.page',
+    'flatblocks',
     'honeypot',
     'imagekit',
     'inplace',

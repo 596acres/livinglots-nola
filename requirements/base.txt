@@ -30,6 +30,7 @@ django-compressor==1.3
 django-contact-form-gv==0.4.1
 django-extensions==1.1.1
 django-filter==0.7
+django-flatblocks==0.8
 django-honeypot==0.3.0
 git+git://github.com/matthewwithanm/django-imagekit/@261f16412763c69fba64f130c521192ad726d2c1
 git+git://github.com/ebrelsford/django-inplace/@1e7eb79fa186e65920df4a02a9e5cbba38eb83f6
