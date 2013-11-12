@@ -29,6 +29,17 @@ define(
         function addLotsLayer(map) {
             $.getJSON(map.options.lotsurl, function (data) {
                 var lotsLayer = L.geoJson(data, {
+                    onEachFeature: function (feature, layer) {
+                        layer.on('click', function (layer) {
+                            // Change offset to make room for the bar on top of
+                            // the map
+                            var latlng = layer.latlng;
+                            var x = map.latLngToContainerPoint(latlng).x;
+                            var y = map.latLngToContainerPoint(latlng).y - 100;
+                            var point = map.containerPointToLatLng([x, y]);
+                            return map.setView(point, map._zoom);
+                        });
+                    },
                     pointToLayer: function (feature, latlng) {
                         return L.circleMarker(latlng);
                     },
@@ -46,6 +57,7 @@ define(
                         return style;
                     },
                     popupOptions: {
+                        autoPan: false,
                         maxWidth: 250,
                         minWidth: 250,
                         offset: [0, 0]
