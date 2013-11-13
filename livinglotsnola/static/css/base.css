@@ -388,22 +388,29 @@ nav.navbar {
     font-size: 14px;
 }
 
-ul.organizer-list {
+ul.organizer-list,
+ul.note-list {
     list-style: none;
     padding: 0;
 }
 
-.organizer-list-item {
+.organizer-list-item,
+.note-list-item {
     margin-top: 25px;
     margin-bottom: 25px;
 }
 
-.organizer-list .organizer-name {
+.organizer-list .organizer-name,
+.note-list .note-added-by-name {
     color: #58595b;
     font-family: 'Oswald', sans-serif;
     font-size: 26px;
     font-weight: bold;
     line-height: 26px;
+}
+
+.note-added {
+    font-size: 12px;
 }
 
 
