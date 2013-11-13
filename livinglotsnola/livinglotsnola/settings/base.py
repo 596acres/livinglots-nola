@@ -277,7 +277,7 @@ ABSOLUTE_URL_OVERRIDES = {
     'elephantblog.categorytranslation': elephantblog_categorytranslation_url_app,
 }
 
-HONEYPOT_FIELD_NAME = 'homepage'
+HONEYPOT_FIELD_NAME = 'url'
 HONEYPOT_VALUE = 'http://example.com/'
 
 ADMIN_TOOLS_INDEX_DASHBOARD = 'livinglotsnola.admindashboard.LivingLotsDashboard'
