@@ -417,16 +417,15 @@ ul.note-list {
     font-size: 12px;
 }
 
-.notes h2,
-.files h2 {
-    border-bottom: 1px solid #2593c6;
-    color: #2593c6;
-    text-transform: uppercase;
-}
-
 .lot-detail-main-section {
     margin-top: 50px;
     margin-bottom: 50px;
+}
+
+.lot-detail-main-section h2 {
+    border-bottom: 1px solid #2593c6;
+    color: #2593c6;
+    text-transform: uppercase;
 }
 
 
