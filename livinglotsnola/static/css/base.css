@@ -473,10 +473,11 @@ label {
 }
 
 input[type=email],
+input[type=file],
 input[type=text],
 input[type=url],
-textarea {
-    border: 2px solid black;
+textarea.form-control {
+    border: 1px solid black;
     border-radius: 0;
 }
 
