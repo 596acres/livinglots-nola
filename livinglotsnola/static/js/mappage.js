@@ -15,6 +15,7 @@ define(
 
         'leaflet.dataoptions',
         'leaflet.handlebars',
+        'leaflet.hash',
         'leaflet.usermarker',
 
         'map.overlaymenu',
@@ -98,6 +99,8 @@ define(
             var map = L.map('map');
             addBaseLayer(map);
             addLotsLayer(map);
+
+            var hash = new L.Hash(map);
 
             $('.map-welcome-close-button').click(function (e) {
                 $('#map-welcome').slideUp();

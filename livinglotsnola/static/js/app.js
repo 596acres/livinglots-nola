@@ -9,6 +9,7 @@ requirejs.config({
         "leaflet": "../bower_components/leaflet/leaflet-src",
         "leaflet.dataoptions": "../bower_components/leaflet.dataoptions/src/leaflet.dataoptions",
         "leaflet.handlebars": "../bower_components/leaflet.handlebars/src/leaflet.handlebars",
+        "leaflet.hash": "../bower_components/leaflet-hash/leaflet-hash",
         "leaflet.usermarker": "../bower_components/leaflet.usermarker/src/leaflet.usermarker",
         "requirejs": "../bower_components/requirejs",
         "underscore": "../bower_components/underscore/underscore"
@@ -22,6 +23,7 @@ requirejs.config({
         'handlebars': {
             'exports': 'Handlebars'
         },
+        'leaflet.hash': ['leaflet'],
         'leaflet.usermarker': ['leaflet'],
         'underscore': {
             'exports': '_'
