@@ -330,6 +330,10 @@ nav.navbar {
     margin-top: 15px;
 }
 
+.lot-detail-page .alert {
+    margin-top: 20px;
+}
+
 .lot-detail-organizers h2 {
     background: #58595b;
     color: white;

@@ -11,6 +11,9 @@
 {% block breadcrumbs_wrapper %}
 {% endblock %}
 
+{% block messages %}
+{% endblock %}
+
 {% block pre_content %}
     <div class="lot-detail-header-image" 
         data-lat="{{ lot.centroid.y }}"
@@ -80,6 +83,8 @@
     <div class="clearfix"></div>
 
     <div class="lot-detail-main">
+
+        {% include "_messages.html" %}
 
         <div class="lot-detail-info-box">
 

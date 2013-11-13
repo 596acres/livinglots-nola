@@ -72,7 +72,9 @@
                             </ul>
                         {% endblock %}
 
-                        {% include "_messages.html" %}
+                        {% block messages %}
+                            {% include "_messages.html" %}
+                        {% endblock %}
 
                         <article>
                             {% block content %}
