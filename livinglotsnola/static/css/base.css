@@ -389,18 +389,21 @@ nav.navbar {
 }
 
 ul.organizer-list,
+ul.file-list,
 ul.note-list {
     list-style: none;
     padding: 0;
 }
 
 .organizer-list-item,
+.file-list-item,
 .note-list-item {
     margin-top: 25px;
     margin-bottom: 25px;
 }
 
 .organizer-list .organizer-name,
+.file-list .file-added-by-name,
 .note-list .note-added-by-name {
     color: #58595b;
     font-family: 'Oswald', sans-serif;
@@ -409,7 +412,8 @@ ul.note-list {
     line-height: 26px;
 }
 
-.note-added {
+.note-added,
+.file-added {
     font-size: 12px;
 }
 
