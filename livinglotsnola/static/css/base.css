@@ -238,6 +238,13 @@ nav.navbar {
     z-index: 5010;
 }
 
+.map-search input#search {
+    border: 2px solid #2593c6;
+    font-size: 18px;
+    height: 36px;
+    width: 80%;
+}
+
 #map-legend {
     background: rgba(256, 256, 256, 0.85);
     border: 3px solid #2593c6;

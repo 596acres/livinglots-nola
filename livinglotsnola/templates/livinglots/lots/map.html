@@ -70,24 +70,22 @@
                 </a>
             </div>
 
-            <div class="col-sm-2">
-                <div class="map-find-a-lot-container searchbar">
-                    <div class="map-find-a-lot">
-                        <form class="map-find-a-lot-form">
-                            <input id="search" name="search" placeholder="{% trans "Search by address, zip code, or neighborhood" %}" type="text" />
-                            <button class="map-find-a-lot-submit" type="submit">{% trans "GO" %}</button>
-                            <div class="warning" style="display: none;"></div>
-                        </form>
-                    </div>
+            <div class="col-sm-4">
+                <div class="map-search">
+                    <form class="map-search-form row">
+                        <input class="col-sm-6" id="search" name="search" placeholder="{% trans "Search by address, zip code" %}" type="text" />
+                        <button class="map-search-submit col-sm-2 btn btn-default" type="submit">{% trans "GO" %}</button>
+                        <div class="warning" style="display: none;"></div>
+                    </form>
                 </div>
             </div>
 
-            <div class="col-sm-2">
+            <div class="col-sm-1">
                 <a class="btn btn-default overlay-filter-button" href="#">
                     filter
                 </a>
             </div>
-            <div class="col-sm-2">
+            <div class="col-sm-1">
                 <a class="btn btn-default overlay-news-button" href="#">
                     news
                 </a>
