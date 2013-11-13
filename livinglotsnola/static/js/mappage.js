@@ -78,6 +78,22 @@ define(
             });
         }
 
+        function buildLotFilterParams(map) {
+            return {
+                bbox: map.getBounds().toBBoxString(),
+            };
+        }
+
+        function updateLotCount(map) {
+            var url = Django.url('lots:lot_count') + '?' +
+                $.param(buildLotFilterParams(map));
+            $.getJSON(url, function (data) {
+                _.each(data, function (value, key) {
+                    $('#' + key).text(value);
+                });
+            });
+        }
+
         $(document).ready(function () {
             var map = L.map('map');
             addBaseLayer(map);
@@ -110,10 +126,12 @@ define(
                     map.setView(latlng, 15);
                 });
 
-            $.getJSON(Django.url('lots:lot_count'), function (data) {
-                _.each(data, function (value, key) {
-                    $('#' + key).text(value);
-                });
+            updateLotCount(map);
+            map.on('moveend', function () {
+                updateLotCount(map);
+            });
+            map.on('zoomend', function () {
+                updateLotCount(map);
             });
         });
 
