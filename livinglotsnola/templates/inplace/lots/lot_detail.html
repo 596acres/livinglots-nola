@@ -263,13 +263,9 @@
         <div id="notes" class="notes lot-detail-main-section">
             <h2>
                 {% trans "Notes" %}
-                {% get_note_count for lot as note_count %}
-                {% if note_count > 0 %}
-                    <span class="badge">{{ note_count }}</span>
-                {% endif %}
             </h2>
             <a class="btn btn-default" href="{% url "usercontent:add_note" pk=lot.pk %}">
-                {% trans "Add a note" %}
+                {% trans "Add your note" %}
             </a>
             {% render_note_list for lot %}
         </div>
@@ -277,10 +273,6 @@
         <div id="files" class="files lot-detail-main-section">
             <h2>
                 {% trans "Files" %}
-                {% get_file_count for lot as file_count %}
-                {% if file_count > 0 %}
-                    <span class="badge">{{ file_count }}</span>
-                {% endif %}
             </h2>
             <a class="btn btn-default" href="{% url "usercontent:add_file" pk=lot.pk %}">
                 {% trans "Add a file" %}
