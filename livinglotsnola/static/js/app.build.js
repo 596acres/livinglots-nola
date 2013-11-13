@@ -15,6 +15,7 @@
 
         // require()d dependencies
         'fancybox',
+        'lotdetailpage',
         'mappage',
         'map.overlaymenu',
         'underscore'
