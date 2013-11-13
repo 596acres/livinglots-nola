@@ -14,6 +14,8 @@ class LotGeoJSONMixin(object):
             layer = 'public'
         elif lot.owner and lot.owner.owner_type == 'private':
             layer = 'private'
+            if lot.has_blight_liens:
+                layer = 'private_blight_liens'
         else:
             layer = ''
 

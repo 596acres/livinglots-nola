@@ -170,7 +170,9 @@ INSTALLED_APPS = (
 
     'noladata',
     'noladata.addresses',
+    'noladata.assessor',
     'noladata.buildings',
+    'noladata.codeenforcement',
     'noladata.habitat',
     'noladata.nora',
     'noladata.parcels',
