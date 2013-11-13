@@ -24,11 +24,15 @@
                 <div class="admin-only">
 
                     {% if "files.change_file" in perms %}
-                        <a href="{% url "admin:files_file_change" file.pk %}">{% trans "Edit this file" %}</a>
+                        <a href="{% url "admin:files_file_change" file.pk %}" class="btn btn-small btn-warning">
+                            {% trans "Edit this file" %}
+                        </a>
                     {% endif %}
 
                     {% if "files.delete_file" in perms %}
-                        <a href="{% url "admin:files_file_delete" file.pk %}">{% trans "Delete this file" %}</a>
+                        <a href="{% url "admin:files_file_delete" file.pk %}" class="btn btn-small btn-warning">
+                            {% trans "Delete this file" %}
+                        </a>
                     {% endif %}
 
                 </div>
