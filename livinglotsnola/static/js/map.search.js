@@ -69,13 +69,5 @@ define(
 
             return this;
         };
-
-        var SearchBar = {
-
-            options: {
-                bounds: null,
-            },
-
-        };
     }
 );
