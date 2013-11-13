@@ -135,7 +135,7 @@
                         <tr>
                             <th>{% trans "area" %}:</th>
                             <td>
-                                {{ lot.polygon_area|floatformat:"-1"|default:"unknown" }} square feet
+                                {{ lot.area_acres|floatformat:"2"|default:"unknown" }} acres
                             </td>
                         </tr>
 
