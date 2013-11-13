@@ -127,10 +127,12 @@
                             </td>
                         </tr>
 
-                        <tr>
-                            <th>{% trans "known use" %}:</th>
-                            <td>{{ lot.known_use|default:"none" }}</td>
-                        </tr>
+                        {% if lot.known_use %}
+                            <tr>
+                                <th>{% trans "known use" %}:</th>
+                                <td>{{ lot.known_use }}</td>
+                            </tr>
+                        {% endif %}
 
                         <tr>
                             <th>{% trans "area" %}:</th>
