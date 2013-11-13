@@ -9,6 +9,7 @@ define(
         'django',
         'jquery',
         'handlebars',
+        'underscore',
         'leaflet',
         'map.styles',
 
@@ -17,7 +18,7 @@ define(
         'leaflet.usermarker',
 
         'map.overlaymenu'
-    ], function (Django, $, Handlebars, L, mapstyles) {
+    ], function (Django, $, Handlebars, _, L, mapstyles) {
 
         function addBaseLayer(map) {
             var baseLayer = L.tileLayer('http://{s}.tile.cloudmade.com/{key}/{styleId}/256/{z}/{x}/{y}.png', {
@@ -97,6 +98,12 @@ define(
 
             $('.overlay-filter-button').mapoverlaymenu({
                 menu: '.overlaymenu-filter'
+            });
+
+            $.getJSON(Django.url('lots:lot_count'), function (data) {
+                _.each(data, function (value, key) {
+                    $('#' + key).text(value);
+                });
             });
         });
 
