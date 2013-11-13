@@ -17,7 +17,8 @@ define(
         'leaflet.handlebars',
         'leaflet.usermarker',
 
-        'map.overlaymenu'
+        'map.overlaymenu',
+        'map.search'
     ], function (Django, $, Handlebars, _, L, mapstyles) {
 
         function addBaseLayer(map) {
@@ -99,6 +100,15 @@ define(
             $('.overlay-filter-button').mapoverlaymenu({
                 menu: '.overlaymenu-filter'
             });
+
+            $('form.map-search-form').mapsearch()
+                .on('searchresultfound', function (e, result) {
+                    var latlng = [result.latitude, result.longitude];
+                    L.userMarker(latlng, {
+                        smallIcon: true,
+                    }).addTo(map);
+                    map.setView(latlng, 15);
+                });
 
             $.getJSON(Django.url('lots:lot_count'), function (data) {
                 _.each(data, function (value, key) {
