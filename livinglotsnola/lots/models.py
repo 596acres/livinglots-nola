@@ -1,7 +1,12 @@
+from pint import UnitRegistry
+
 from django.db import models
 from django.utils.translation import ugettext_lazy as _
 
 from livinglots_lots.models import BaseLot, BaseLotGroup
+
+
+ureg = UnitRegistry()
 
 
 class LotGroupLotMixin(models.Model):
@@ -39,6 +44,26 @@ class LotMixin(models.Model):
     def get_filter(cls):
         from .filters import LotFilter
         return LotFilter
+
+    def calculate_polygon_area(self):
+        try:
+            return self.polygon.transform(3452, clone=True).area
+        except Exception:
+            return None
+
+    def _area(self):
+        if not self.polygon_area:
+            self.polygon_area = self.calculate_polygon_area()
+            self.save()
+        return self.polygon_area
+
+    area = property(_area)
+
+    def _area_acres(self):
+        area = self.area * (ureg.feet ** 2)
+        return area.to(ureg.acre).magnitude
+
+    area_acres = property(_area_acres)
 
     class Meta:
         abstract = True

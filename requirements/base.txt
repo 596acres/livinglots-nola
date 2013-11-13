@@ -3,6 +3,7 @@ Fabric==1.6.1
 IMAPClient==0.10.1
 ModestMaps==1.4.1
 Pillow==1.7.8
+Pint==0.3.2
 argparse==1.2.1
 ipython==1.1.0
 lxml==3.1.0
