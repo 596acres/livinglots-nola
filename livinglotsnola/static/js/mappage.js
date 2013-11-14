@@ -141,6 +141,10 @@ define(
                     updateOwnershipOverview(map);
                 });
             $('.details-print').click(function () {
+                // TODO This is not a good solution since the map size changes
+                // on print. Look into taking screenshots like:
+                //   https://github.com/tegansnyder/Leaflet-Save-Map-to-PNG
+                //   http://html2canvas.hertzen.com
                 window.print();
             });
 
