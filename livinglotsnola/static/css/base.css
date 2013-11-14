@@ -163,6 +163,7 @@ nav.navbar {
 
 .map-header-content {
     color: white;
+    cursor: auto;
     font-family: 'Oswald', sans-serif;
     margin-left: 75px;
     padding: 20px;
