@@ -247,6 +247,18 @@ nav.navbar {
     left: 140px;
 }
 
+.details-buttons .details-button {
+    margin-bottom: 5px;
+}
+.details-buttons .details-button:last-child {
+    margin-bottom: 0;
+}
+
+.details-overview > ul {
+    list-style: none;
+    padding: 0;
+}
+
 .map-search input#search {
     border: 2px solid #2593c6;
     font-size: 18px;

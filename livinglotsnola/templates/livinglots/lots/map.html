@@ -28,6 +28,26 @@
     {% endverbatim %}
 </script>
 
+<script id="details-template" type="text/x-handlebars-template">
+    {% verbatim %}
+        <ul>
+            {{#each lottypes}}
+                <li>
+                    <span class="legend-marker legend-marker-{{type}}"></span>
+                    {{type}}
+                    <ul>
+                        {{#each owners}}
+                            <li>
+                                {{count}} lots owned by {{name}}
+                            </li>
+                        {{/each}}
+                    </ul>
+                </li>
+            {{/each}}
+        </ul>
+    {% endverbatim %}
+</script>
+
 <section id="map-welcome">
     <h1>
         {% trans "Welcome!" %}
@@ -67,6 +87,9 @@
             </div>
 
             <div class="col-sm-2">
+                <a class="btn btn-default overlay-details-button" href="#" style="margin-bottom: 5px;">
+                    details
+                </a>
                 <a class="btn btn-default overlay-download-button" href="#">
                     download
                 </a>
@@ -129,12 +152,31 @@
     </div>
 </div>
 
+<div class="overlaymenu overlaymenu-details">
+    <div class="overlaymenu-tip-container">
+        <div class="overlaymenu-tip"></div>
+    </div>
+
+    <section class="details-overview"></section>
+
+    <section class="details-buttons">
+        <a class="details-button details-link btn btn-default btn-block" href="#">
+            {% trans "Link to this view" %}
+        </a>
+        <a class="details-button details-print btn btn-default btn-block" href="#">
+            {% trans "Print" %}
+        </a>
+        <a class="details-button details-email btn btn-default btn-block" href="#">
+            {% trans "Email" %}
+        </a>
+    </section>
+</div>
+
 <div class="overlaymenu overlaymenu-download">
     <div class="overlaymenu-tip-container">
         <div class="overlaymenu-tip"></div>
     </div>
-    <a href="#" class="export-link">{% trans "Link to this view" %}</a>. 
-    {% trans "Or download current lots as" %}
+    {% trans "Download current lots as" %}
     <a href="#" class="export-csv" data-baseurl="{% url "lots:csv" %}?">{% trans "a spreadsheet" %}</a>,
     <a href="#" class="export-geojson" data-baseurl="{% url "lots:geojson" %}?download=yes&">{% trans "GeoJSON" %}</a>, or
     <a href="#" class="export-kml" data-baseurl="{% url "lots:kml" %}?">{% trans "KML" %}</a>.

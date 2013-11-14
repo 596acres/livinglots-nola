@@ -109,6 +109,18 @@ define(
             addLotsLayer(map, params);
         }
 
+        function updateOwnershipOverview(map) {
+            var url = Django.url('lots:lot_ownership_overview'),
+                params = buildLotFilterParams(map);
+            $.getJSON(url + '?' + $.param(params), function (data) {
+                var template = Handlebars.compile($('#details-template').html());
+                var content = template({
+                    lottypes: data
+                });
+                $('.details-overview').html(content);
+            });
+        }
+
         $(document).ready(function () {
             var map = L.map('map');
             addBaseLayer(map);
@@ -120,6 +132,14 @@ define(
                 e.preventDefault();
                 return false;
             });
+
+            $('.overlay-details-button')
+                .mapoverlaymenu({
+                    menu: '.overlaymenu-details'
+                })
+                .on('overlaymenuopen', function () {
+                    updateOwnershipOverview(map);
+                });
 
             $('.overlay-download-button').mapoverlaymenu({
                 menu: '.overlaymenu-download'
