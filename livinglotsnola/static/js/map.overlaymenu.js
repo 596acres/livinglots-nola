@@ -16,6 +16,8 @@ define(
                 outerHeight = button.outerHeight(),
                 menuWidth = menu.outerWidth();
 
+            button.trigger('overlaymenuopen');
+
             menu
                 .show()
                 .offset({
@@ -24,7 +26,8 @@ define(
                 });
         }
 
-        function hide(menu) {
+        function hide(button, menu) {
+            button.trigger('overlaymenuclose');
             menu.hide();
         }
 
@@ -49,7 +52,7 @@ define(
                     if (target[0] === button[0]) {
                         // If button clicked, show or hide the menu appropriately
                         if (isVisible(menu)) {
-                            hide(menu);
+                            hide(button, menu);
                         }
                         else {
                             show(button, menu);
@@ -58,7 +61,7 @@ define(
                     }
                     else {
                         // Something else was clicked--hide the menu
-                        hide(menu);
+                        hide(button, menu);
                     }
                 }
             });
