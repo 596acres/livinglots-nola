@@ -22,6 +22,8 @@ define(
         'map.search'
     ], function (Django, $, Handlebars, _, L, mapstyles) {
 
+        var lotsLayer;
+
         function addBaseLayer(map) {
             var baseLayer = L.tileLayer('http://{s}.tile.cloudmade.com/{key}/{styleId}/256/{z}/{x}/{y}.png', {
                 key: map.options.apikey,
@@ -29,9 +31,10 @@ define(
             }).addTo(map);
         }
 
-        function addLotsLayer(map) {
-            $.getJSON(map.options.lotsurl, function (data) {
-                var lotsLayer = L.geoJson(data, {
+        function addLotsLayer(map, params) {
+            var url = map.options.lotsurl + '?' + $.param(params);
+            $.getJSON(url, function (data) {
+                lotsLayer = L.geoJson(data, {
                     onEachFeature: function (feature, layer) {
                         layer.on('click', function (layer) {
                             // Change offset to make room for the bar on top of
@@ -95,11 +98,21 @@ define(
             });
         }
 
+        function updateDisplayedLots(map, lotsLayer) {
+            map.removeLayer(lotsLayer);
+            var filters = _.map($('.filter:checked'), function (filter) {
+                return $(filter).attr('name'); 
+            });
+            var params = {
+                layers: filters.join(',')
+            };
+            addLotsLayer(map, params);
+        }
+
         $(document).ready(function () {
             var map = L.map('map');
             addBaseLayer(map);
-            addLotsLayer(map);
-
+            addLotsLayer(map, {});
             var hash = new L.Hash(map);
 
             $('.map-welcome-close-button').click(function (e) {
@@ -142,6 +155,10 @@ define(
                 scroll: function (e) {
                     e.stopPropagation();
                 }
+            });
+
+            $('.filter').change(function () {
+                updateDisplayedLots(map, lotsLayer);
             });
 
             updateLotCount(map);
