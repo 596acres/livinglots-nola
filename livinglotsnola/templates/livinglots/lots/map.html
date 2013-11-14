@@ -58,6 +58,58 @@
     </div>
 </section>
 
+<div id="map-header" class="hidden-xs hidden-print">
+    <div class="row map-header-content">
+        <div class="map-header-currently-viewing col-sm-4">
+            <h2>You are currently viewing</h2>
+            <ul>
+                <li>
+                    <span id="no-known-use-acres"></span>
+                    acres of opportunity on
+                    <span id="no-known-use-count"></span>
+                    lots
+                </li>
+                <li>
+                    <span id="in-use-acres"></span>
+                    acres of community projects on 
+                    <span id="in-use-count"></span>
+                    lots
+                </li>
+            </ul>
+        </div>
+
+        <div class="col-sm-2">
+            <a class="btn btn-default overlay-details-button btn-block" href="#" style="margin-bottom: 5px;">
+                details
+            </a>
+            <a class="btn btn-default overlay-download-button btn-block" href="#">
+                download
+            </a>
+        </div>
+
+        <div class="col-sm-4">
+            <div class="map-search">
+                <form class="map-search-form row" data-bounds="[-89.4747,29.7387,-90.4628,30.2158]" data-city="New Orleans" data-state="LA" data-error-message="Could not find your location. Try again?" data-warning-selector="map-search.warning">
+                    <input class="col-sm-6" id="search" name="search" placeholder="{% trans "Search by address, zip code" %}" type="text" />
+                    <button class="map-search-submit col-sm-2 btn btn-default" type="submit">{% trans "GO" %}</button>
+                    <div class="warning" style="display: none;"></div>
+                </form>
+            </div>
+        </div>
+
+        <div class="col-sm-1">
+            <a class="btn btn-default overlay-filter-button" href="#">
+                filter
+            </a>
+        </div>
+        <div class="col-sm-1">
+            <a class="btn btn-default overlay-news-button" href="#">
+                news
+            </a>
+        </div>
+    </div>
+</div>
+
 <div id="map"
     data-l-zoom="11"
     data-l-center="[30.01, -90.07]"
@@ -66,58 +118,6 @@
     data-l-styleid="{% inplace_setting PLACES_CLOUDMADE_STYLE %}"
     data-l-lotsurl="{% url "lots:lot_geojson_centroid" %}"
 >
-    <div id="map-header" class="hidden-xs hidden-print">
-        <div class="row map-header-content">
-            <div class="map-header-currently-viewing col-sm-4">
-                <h2>You are currently viewing</h2>
-                <ul>
-                    <li>
-                        <span id="no-known-use-acres"></span>
-                        acres of opportunity on
-                        <span id="no-known-use-count"></span>
-                        lots
-                    </li>
-                    <li>
-                        <span id="in-use-acres"></span>
-                        acres of community projects on 
-                        <span id="in-use-count"></span>
-                        lots
-                    </li>
-                </ul>
-            </div>
-
-            <div class="col-sm-2">
-                <a class="btn btn-default overlay-details-button btn-block" href="#" style="margin-bottom: 5px;">
-                    details
-                </a>
-                <a class="btn btn-default overlay-download-button btn-block" href="#">
-                    download
-                </a>
-            </div>
-
-            <div class="col-sm-4">
-                <div class="map-search">
-                    <form class="map-search-form row" data-bounds="[-89.4747,29.7387,-90.4628,30.2158]" data-city="New Orleans" data-state="LA" data-error-message="Could not find your location. Try again?" data-warning-selector="map-search.warning">
-                        <input class="col-sm-6" id="search" name="search" placeholder="{% trans "Search by address, zip code" %}" type="text" />
-                        <button class="map-search-submit col-sm-2 btn btn-default" type="submit">{% trans "GO" %}</button>
-                        <div class="warning" style="display: none;"></div>
-                    </form>
-                </div>
-            </div>
-
-            <div class="col-sm-1">
-                <a class="btn btn-default overlay-filter-button" href="#">
-                    filter
-                </a>
-            </div>
-            <div class="col-sm-1">
-                <a class="btn btn-default overlay-news-button" href="#">
-                    news
-                </a>
-            </div>
-        </div>
-    </div>
-
     <div id="map-legend" class="row hidden-print">
         <div class="col-sm-2">
             <span class="legend-marker legend-marker-public"></span>

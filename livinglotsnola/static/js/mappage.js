@@ -165,21 +165,6 @@ define(
                     map.setView(latlng, 15);
                 });
 
-            $('.map-header-content').on({
-                dblclick: function (e) {
-                    e.stopPropagation();
-                },
-                mousedown: function (e) {
-                    e.stopPropagation();
-                },
-                mousewheel: function (e) {
-                    e.stopPropagation();
-                },
-                scroll: function (e) {
-                    e.stopPropagation();
-                }
-            });
-
             $('.filter').change(function () {
                 updateDisplayedLots(map, lotsLayer);
             });
