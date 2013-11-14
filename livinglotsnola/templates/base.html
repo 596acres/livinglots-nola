@@ -20,11 +20,16 @@
             <div id="page-wrapper" class="col-sm-10 col-sm-offset-1">
 
                 <header id="page-header" class="row">
-                    <a href="/" class="header-home-link">
+                    <a href="/" class="header-home-link hidden-print">
                         <h1 style="display: none;">{% trans "Living Lots NOLA" %}</h1>
                     </a>
 
-                    <div class="header-content" class="row">
+                    <div class="visible-print" style="margin-left: 30px; margin-top: 15px; font-size: 30px; line-height: 30px;">
+                        Living Lots NOLA<br />
+                        livinglotsnola.org
+                    </div>
+
+                    <div class="header-content hidden-print" class="row">
                         <nav class="navbar navbar-default col-md-6" role="navigation">
                             <div class="navbar-header">
                                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-main-collapse">

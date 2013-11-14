@@ -140,6 +140,9 @@ define(
                 .on('overlaymenuopen', function () {
                     updateOwnershipOverview(map);
                 });
+            $('.details-print').click(function () {
+                window.print();
+            });
 
             $('.overlay-download-button').mapoverlaymenu({
                 menu: '.overlaymenu-download'
