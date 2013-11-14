@@ -96,26 +96,26 @@
     </div>
 
     <div id="map-legend" class="row">
-        <div class="col-sm-2 legend-public">
-            <span class="legend-marker"></span>
+        <div class="col-sm-2">
+            <span class="legend-marker legend-marker-public"></span>
             <label class="legend-label">
                 {% trans "public land" %}
             </label>
         </div>
-        <div class="col-sm-4 legend-private">
-            <span class="legend-marker"></span>
+        <div class="col-sm-4">
+            <span class="legend-marker legend-marker-private"></span>
             <label class="legend-label">
                 {% trans "private land belonging to an owner who wants to see it used" %}
             </label>
         </div>
-        <div class="col-sm-2 legend-private-lien">
-            <span class="legend-marker"></span>
+        <div class="col-sm-2">
+            <span class="legend-marker legend-marker-private-lien"></span>
             <label class="legend-label">
                 {% trans "private land with a blight lien" %}
             </label>
         </div>
-        <div class="col-sm-2 legend-project">
-            <span class="legend-marker"></span>
+        <div class="col-sm-2">
+            <span class="legend-marker legend-marker-project"></span>
             <label class="legend-label">
                 {% trans "project" %}
             </label>
@@ -144,7 +144,28 @@
     <div class="overlaymenu-tip-container">
         <div class="overlaymenu-tip"></div>
     </div>
-    (filters will go here)
+    <ul class="filters-list">
+        <li>
+            <input type="checkbox" name="filters-public" checked />
+            <span class="legend-marker legend-marker-public"></span>
+            {% trans "public land" %}
+        </li>
+        <li>
+            <input type="checkbox" name="filters-private" checked />
+            <span class="legend-marker legend-marker-private"></span>
+            {% trans "private land belonging to an owner who wants to see it used" %}
+        </li>
+        <li>
+            <input type="checkbox" name="filters-private-lien" checked />
+            <span class="legend-marker legend-marker-private-lien"></span>
+            {% trans "private land with a blight lien" %}
+        </li>
+        <li>
+            <input type="checkbox" name="filters-project" checked />
+            <span class="legend-marker legend-marker-project"></span>
+            {% trans "project" %}
+        </li>
+    </ul>
 </div>
 
 <div class="overlaymenu overlaymenu-news">

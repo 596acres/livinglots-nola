@@ -239,11 +239,24 @@ nav.navbar {
     z-index: 5010;
 }
 
+.overlaymenu-filter {
+    width: 350px;
+}
+
+.overlaymenu-filter .overlaymenu-tip-container {
+    left: 140px;
+}
+
 .map-search input#search {
     border: 2px solid #2593c6;
     font-size: 18px;
     height: 36px;
     width: 80%;
+}
+
+.filters-list {
+    list-style: none;
+    padding: 0;
 }
 
 #map-legend {
@@ -273,19 +286,19 @@ nav.navbar {
     width: 10px;
 }
 
-.legend-public .legend-marker {
+.legend-marker-public {
     background: #404586;
 }
 
-.legend-private .legend-marker {
+.legend-marker-private {
     background: #ea292e;
 }
 
-.legend-private-lien .legend-marker {
+.legend-marker-private-lien {
     background: #faa43e;
 }
 
-.legend-project .legend-marker {
+.legend-marker-project {
     background: #97b03d;
 }
 
