@@ -6,6 +6,8 @@ from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 
 import autocomplete_light
 
+from registration.forms import AuthenticationForm
+
 autocomplete_light.autodiscover()
 admin.autodiscover()
 
@@ -34,6 +36,11 @@ urlpatterns += patterns('',
 
     # Autocomplete
     url(r'^autocomplete/', include('autocomplete_light.urls')),
+
+    # Auth
+    url(r'^login/', 'django.contrib.auth.views.login', {
+        'authentication_form': AuthenticationForm,
+    }),
 
     # FeinCMS
     url(r'', include('feincms.urls')),

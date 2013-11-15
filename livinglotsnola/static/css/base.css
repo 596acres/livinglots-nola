@@ -528,6 +528,7 @@ label {
 
 input[type=email],
 input[type=file],
+input[type=password],
 input[type=text],
 input[type=url],
 textarea.form-control {
