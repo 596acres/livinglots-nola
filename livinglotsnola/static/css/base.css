@@ -349,6 +349,12 @@ nav.navbar {
     margin-bottom: 10px;
 }
 
+.popup-streetview > div {
+    border: 3px solid black;
+    height: 116px;
+    width: 111px;
+}
+
 .popup-lot-details {
     padding-left: 0;
 }
