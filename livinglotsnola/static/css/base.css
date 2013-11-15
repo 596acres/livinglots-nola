@@ -136,19 +136,34 @@ nav.navbar {
     font-size: 56px;
     font-weight: 300;
     margin: 0;
-    padding-left: 35px;
+    padding-left: 20px;
     text-transform: uppercase;
 }
 
 .map-welcome-close-button,
 .map-welcome-close-button:active,
-.map-welcome-close-button:hover {
+.map-welcome-close-button:hover,
+.map-welcome-open-button,
+.map-welcome-open-button:active,
+.map-welcome-open-button:hover {
     color: white;
     float: right;
     font-size: 16px;
     margin-right: 50px;
     margin-top: 10px;
     text-decoration: none;
+}
+
+#map-welcome.closed .map-welcome-close-button {
+    display: none;
+}
+
+#map-welcome .map-welcome-open-button {
+    display: none;
+}
+
+#map-welcome.closed .map-welcome-open-button {
+    display: inline-block;
 }
 
 .map-welcome-body {
