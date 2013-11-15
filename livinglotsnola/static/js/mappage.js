@@ -31,9 +31,28 @@ define(
             }).addTo(map);
         }
 
+        // Scale radius by zoom level
+        function pickRadius(zoom) {
+            var radius = 4;   
+            if (zoom >= 13) {
+                radius = 6;
+            }
+            if (zoom >= 14) {
+                radius = 9;
+            }
+            if (zoom >= 15) {
+                radius = 12;
+            }
+            if (zoom >= 16) {
+                radius = 15;
+            }
+            return radius;
+        }
+
         function addLotsLayer(map, params) {
             var url = map.options.lotsurl + '?' + $.param(params);
             $.getJSON(url, function (data) {
+                var initialRadius = pickRadius(map.getZoom());
                 lotsLayer = L.geoJson(data, {
                     onEachFeature: function (feature, layer) {
                         layer.on('click', function (layer) {
@@ -53,7 +72,7 @@ define(
                         var style = {
                             fillColor: '#000000',
                             fillOpacity: 1,
-                            radius: 3,
+                            radius: initialRadius,
                             stroke: 0
                         };
                         style.fillColor = mapstyles[feature.properties.layer];
@@ -79,6 +98,14 @@ define(
                     }
                 });
                 lotsLayer.addTo(map);
+
+                map.on('zoomend', function () {
+                    var radius = pickRadius(map.getZoom());
+                    lotsLayer.eachLayer(function (l) {
+                        l.setRadius(radius);
+                    });
+                });
+
             });
         }
 
