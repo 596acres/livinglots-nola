@@ -1,5 +1,16 @@
 {% load feincms_tags %}
 
 <footer class="row">
-    {% feincms_render_region feincms_page "footer" request %}
+
+    <div class="footer-main">
+        {% feincms_render_region feincms_page "footer_main" request %}
+    </div>
+
+    <div class="footer-left col-md-4 col-md-offset-2">
+        {% feincms_render_region feincms_page "footer_left" request %}
+    </div>
+    <div class="footer-right col-md-4">
+        {% feincms_render_region feincms_page "footer_right" request %}
+    </div>
+
 </footer>
