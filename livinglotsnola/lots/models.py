@@ -70,7 +70,11 @@ class LotMixin(models.Model):
 
 
 class Lot(LotMixin, LotGroupLotMixin, BaseLot):
-    pass
+
+    class Meta:
+        permissions = (
+            ('view_preview', 'Can view preview map'),
+        )
 
 
 class LotGroup(LotGroupLotMixin, BaseLotGroup):
