@@ -251,6 +251,11 @@ nav.navbar {
     left: 140px;
 }
 
+.activity-stream ul.action-list {
+    list-style: none;
+    padding: 0;
+}
+
 .details-buttons .details-button {
     margin-bottom: 5px;
 }

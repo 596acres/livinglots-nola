@@ -1,0 +1,22 @@
+<ul class="action-list">
+    {% for action in action_list %}
+        <li>
+            <span class="action-actor">
+                {{ action.actor }}
+            </span>
+            <span class="action-verb">
+                {{ action.verb }}
+            </span>
+            <span class="action-action-object">
+                {{ action.action_object }}
+            </span>
+            on
+            <span class="action-target">
+                {{ action.target }}
+            </span>
+            <span class="action-timesince">
+                {{ action.timesince }} ago
+            </span>
+        </li>
+    {% endfor %}
+</ul>

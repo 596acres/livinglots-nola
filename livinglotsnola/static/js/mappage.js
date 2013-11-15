@@ -152,9 +152,14 @@ define(
                 menu: '.overlaymenu-download'
             });
 
-            $('.overlay-news-button').mapoverlaymenu({
-                menu: '.overlaymenu-news'
-            });
+            $('.overlay-news-button')
+                .mapoverlaymenu({
+                    menu: '.overlaymenu-news'
+                })
+                .on('overlaymenuopen', function () {
+                    var url = Django.url('activitystream_activity_list');
+                    $('.activity-stream-container').load(url);
+                });
 
             $('.overlay-filter-button').mapoverlaymenu({
                 menu: '.overlaymenu-filter'
