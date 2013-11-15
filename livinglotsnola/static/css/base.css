@@ -573,6 +573,15 @@ textarea.form-control {
     margin-bottom: 8px;
 }
 
+.leaflet-container a.leaflet-popup-close-button {
+    color: #2593c6;
+    margin-right: 5px;
+    margin-top: 5px;
+}
+.leaflet-container a.leaflet-popup-close-button:hover {
+    color: #f2ce1e;
+}
+
 .leaflet-control-zoom {
     border: 3px solid #2593c6;
     -webkit-border-radius: 6px;
