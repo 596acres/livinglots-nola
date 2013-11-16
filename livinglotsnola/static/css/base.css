@@ -33,14 +33,14 @@ a:focus {
     display: inline-block;
     float: left;
     position: relative;
-    height: 70px;
-    width: 215px;
-    top: 65px;
-    left: 75px;
+    height: 75px;
+    width: 225px;
+    top: 55px;
+    left: 165px;
 }
 
 .header-content {
-    left: 100px;
+    left: 170px;
     margin-top: 60px;
     position: relative;
 }
