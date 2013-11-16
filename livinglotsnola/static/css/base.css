@@ -60,6 +60,16 @@ footer {
     text-align: center;
 }
 
+.footer-main {
+    border-bottom: 1px solid white;
+    font-family: 'Oswald', sans-serif;
+    font-size: 28px;
+    font-weight: 300;
+    margin-bottom: 15px;
+    padding-bottom: 5px;
+    text-transform: uppercase;
+}
+
 
 /*
  * Nav
