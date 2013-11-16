@@ -1,0 +1,46 @@
+{% load feincms_tags feincms_page_tags i18n static %}
+
+<header id="page-header" class="row">
+    <a href="/" class="header-home-link hidden-print">
+        <h1 style="display: none;">{% trans "Living Lots NOLA" %}</h1>
+    </a>
+
+    <div class="visible-print" style="margin-left: 30px; margin-top: 15px; font-size: 30px; line-height: 30px;">
+        Living Lots NOLA<br />
+        livinglotsnola.org
+    </div>
+
+    <div class="header-content hidden-print" class="row">
+        <nav class="navbar navbar-default col-md-6" role="navigation">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-main-collapse">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+            </div>
+
+            <div class="collapse navbar-collapse navbar-main-collapse">
+                <ul class="nav navbar-nav">
+                    {% feincms_nav feincms_page level=1 depth=1 as mainmenu %}
+                    {% for page in mainmenu %}
+                    <li {% ifequal page feincms_page %}class="active"{% endifequal %}>
+                            <a href="{{ page.get_absolute_url }}">{{ page.title }}</a>
+                        </li>
+                    {% endfor %}
+                    {% if user.is_superuser %}
+                        <li>
+                            <a href="/extra-admin/">Admin</a>
+                        </li>
+                    {% endif %}
+                </ul>
+            </div>
+        </nav>
+
+        <div id="social" class="col-md-2 hidden-xs hidden-sm">
+            <img src="{% static "img/facebook.png" %}" />
+            <img src="{% static "img/twitter.png" %}" />
+        </div>
+    </div>
+</header>

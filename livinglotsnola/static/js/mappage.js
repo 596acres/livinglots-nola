@@ -154,8 +154,21 @@ define(
             addLotsLayer(map, {});
             var hash = new L.Hash(map);
 
+            //
+            // Welcome header
+            //
             $('.map-welcome-close-button').click(function (e) {
-                $('#map-welcome').slideUp();
+                $('#map-welcome').addClass('closed');
+                $('#map-welcome h1').animate({ 'font-size': '28px' });
+                $('.map-welcome-body').slideUp();
+                e.preventDefault();
+                return false;
+            });
+
+            $('.map-welcome-open-button').click(function (e) {
+                $('#map-welcome').removeClass('closed');
+                $('#map-welcome h1').animate({ 'font-size': '56px' });
+                $('.map-welcome-body').slideDown();
                 e.preventDefault();
                 return false;
             });
