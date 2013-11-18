@@ -1,9 +1,7 @@
-from livinglots_usercontent.files.forms import FileForm
-from livinglots_usercontent.notes.forms import NoteForm
-from livinglots_usercontent.photos.forms import PhotoForm
 from livinglots_usercontent.views import AddContentView
 
 from lots.models import Lot
+from .forms import FileForm, NoteForm, PhotoForm
 
 
 class AddFileView(AddContentView):
