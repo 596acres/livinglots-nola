@@ -33,7 +33,7 @@ django-extensions==1.1.1
 django-filter==0.7
 git+git://github.com/funkybob/django-flatblocks/@4bd0e9fc95cae615600e29686168068cc5e4b2b5
 django-honeypot==0.3.0
-git+git://github.com/matthewwithanm/django-imagekit/@261f16412763c69fba64f130c521192ad726d2c1
+django-imagekit==3.0.4
 git+git://github.com/ebrelsford/django-inplace/@1e7eb79fa186e65920df4a02a9e5cbba38eb83f6
 git+git://github.com/ebrelsford/django-inplace-activity-stream/@master
 django-jsonfield==0.9.10
