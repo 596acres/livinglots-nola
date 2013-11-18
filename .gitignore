@@ -2,6 +2,7 @@
 *.pyc
 bower_components
 logs/*
+.project
 .ropeproject
 tags
 livinglotsnola/media/*
