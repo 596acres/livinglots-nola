@@ -81,6 +81,7 @@ nav.navbar {
     font-family: 'Oswald', sans-serif;
     font-size: 28px;
     font-weight: 300;
+    z-index: 5000;
 }
 
 @media (max-width: 768px) {
