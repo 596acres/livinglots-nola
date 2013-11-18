@@ -40,9 +40,8 @@ a:focus {
 }
 
 .header-content {
-    left: 170px;
     margin-top: 60px;
-    position: relative;
+    padding-left: 410px;
 }
 
 .content-wrapper {
