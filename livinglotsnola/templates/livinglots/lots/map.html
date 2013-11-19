@@ -120,18 +120,19 @@
     data-l-lotsurl="{% url "lots:lot_geojson_centroid" %}"
 >
     <div id="map-legend" class="row hidden-print">
-        <div class="col-sm-2">
+        <div class="col-sm-6">
             <span class="legend-marker legend-marker-public"></span>
             <label class="legend-label">
                 {% trans "public land" %}
             </label>
         </div>
-        <div class="col-sm-4">
+        <div class="col-sm-6">
             <span class="legend-marker legend-marker-private"></span>
             <label class="legend-label">
                 {% trans "private land belonging to an owner who wants to see it used" %}
             </label>
         </div>
+        {% comment %}
         <div class="col-sm-2">
             <span class="legend-marker legend-marker-private-lien"></span>
             <label class="legend-label">
@@ -150,6 +151,7 @@
                 {% trans "lot being organized" %}
             </label>
         </div>
+        {% endcomment %}
     </div>
 </div>
 
