@@ -160,19 +160,21 @@
         <div class="overlaymenu-tip"></div>
     </div>
 
-    <section class="details-overview"></section>
+    <div class="overlaymenu-menu-content">
+        <section class="details-overview"></section>
 
-    <section class="details-buttons hidden-print">
-        <a class="details-button details-link btn btn-default btn-block disabled" href="#">
-            {% trans "Link to this view" %}
-        </a>
-        <a class="details-button details-print btn btn-default btn-block" href="#">
-            {% trans "Print" %}
-        </a>
-        <a class="details-button details-email btn btn-default btn-block disabled" href="#">
-            {% trans "Email" %}
-        </a>
-    </section>
+        <section class="details-buttons hidden-print">
+            <a class="details-button details-link btn btn-default btn-block disabled" href="#">
+                {% trans "Link to this view" %}
+            </a>
+            <a class="details-button details-print btn btn-default btn-block" href="#">
+                {% trans "Print" %}
+            </a>
+            <a class="details-button details-email btn btn-default btn-block disabled" href="#">
+                {% trans "Email" %}
+            </a>
+        </section>
+    </div>
 </div>
 
 <div class="overlaymenu overlaymenu-download">
@@ -180,52 +182,56 @@
         <div class="overlaymenu-tip"></div>
     </div>
 
-    <section style="margin-bottom: 10px;">
-        {% blocktrans %}
-            Download currently viewed lots. GeoJSON and KML are mapping 
-            formats, so you can make your own maps!
-        {% endblocktrans %}
-    </section>
+    <div class="overlaymenu-menu-content">
+        <section style="margin-bottom: 10px;">
+            {% blocktrans %}
+                Download currently viewed lots. GeoJSON and KML are mapping 
+                formats, so you can make your own maps!
+            {% endblocktrans %}
+        </section>
 
-    <section class="details-buttons hidden-print">
-        <a href="#" class="btn btn-default btn-block disabled export-csv" data-baseurl="{% url "lots:csv" %}?">
-            {% trans "spreadsheet" %}
-        </a>
-        <a href="#" class="btn btn-default btn-block export-geojson disabled" data-baseurl="{% url "lots:geojson" %}?download=yes&">
-            {% trans "GeoJSON" %}
-        </a>
-        <a href="#" class="btn btn-default btn-block disabled export-kml" data-baseurl="{% url "lots:kml" %}?">
-            {% trans "KML" %}
-        </a>
-    </section>
+        <section class="details-buttons hidden-print">
+            <a href="#" class="btn btn-default btn-block disabled export-csv" data-baseurl="{% url "lots:csv" %}?">
+                {% trans "spreadsheet" %}
+            </a>
+            <a href="#" class="btn btn-default btn-block export-geojson disabled" data-baseurl="{% url "lots:geojson" %}?download=yes&">
+                {% trans "GeoJSON" %}
+            </a>
+            <a href="#" class="btn btn-default btn-block disabled export-kml" data-baseurl="{% url "lots:kml" %}?">
+                {% trans "KML" %}
+            </a>
+        </section>
+    </div>
 </div>
 
 <div class="overlaymenu overlaymenu-filter">
     <div class="overlaymenu-tip-container">
         <div class="overlaymenu-tip"></div>
     </div>
-    <ul class="filters-list">
-        <li>
-            <input type="checkbox" class="filter" name="public" checked />
-            <span class="legend-marker legend-marker-public"></span>
-            {% trans "public land" %}
-        </li>
-        <li>
-            <input type="checkbox" class="filter" name="private" checked />
-            <span class="legend-marker legend-marker-private"></span>
-            {% trans "private land belonging to an owner who wants to see it used" %}
-        </li>
-        <li>
-            <input type="checkbox" class="filter" name="private-lien" disabled />
-            <span class="legend-marker legend-marker-private-lien"></span>
-            {% trans "private land with a blight lien" %}
-        </li>
-        <li>
-            <input type="checkbox" class="filter" name="project" disabled />
-            <span class="legend-marker legend-marker-project"></span>
-            {% trans "project" %}
-        </li>
-    </ul>
+    <div class="overlaymenu-menu-content">
+        <ul class="filters-list">
+            <li>
+                <input type="checkbox" class="filter" name="public" checked />
+                <span class="legend-marker legend-marker-public"></span>
+                {% trans "public land" %}
+            </li>
+            <li>
+                <input type="checkbox" class="filter" name="private" checked />
+                <span class="legend-marker legend-marker-private"></span>
+                {% trans "private land belonging to an owner who wants to see it used" %}
+            </li>
+            <li>
+                <input type="checkbox" class="filter" name="private-lien" disabled />
+                <span class="legend-marker legend-marker-private-lien"></span>
+                {% trans "private land with a blight lien" %}
+            </li>
+            <li>
+                <input type="checkbox" class="filter" name="project" disabled />
+                <span class="legend-marker legend-marker-project"></span>
+                {% trans "project" %}
+            </li>
+        </ul>
+    </div>
 </div>
 
 <div class="overlaymenu overlaymenu-news">
