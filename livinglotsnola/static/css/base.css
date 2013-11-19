@@ -269,11 +269,18 @@ nav.navbar {
     z-index: 5010;
 }
 
-.overlaymenu-filter {
+.overlaymenu-menu-content {
+    max-height: 400px;
+    overflow-y: auto;
+}
+
+.overlaymenu-filter,
+.overlaymenu-news {
     width: 350px;
 }
 
-.overlaymenu-filter .overlaymenu-tip-container {
+.overlaymenu-filter .overlaymenu-tip-container,
+.overlaymenu-news .overlaymenu-tip-container {
     left: 140px;
 }
 
