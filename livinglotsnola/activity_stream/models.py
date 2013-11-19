@@ -6,6 +6,7 @@ from inplace_activity_stream.signals import action
 from livinglots_usercontent.files.models import File
 from livinglots_usercontent.notes.models import Note
 from livinglots_usercontent.photos.models import Photo
+from organize.models import Organizer
 
 
 def _add_action(sender, verb, created=False, instance=None, **kwargs):
@@ -38,3 +39,9 @@ def add_file_action(sender, instance=None, **kwargs):
     if not instance: return
     _add_action(instance.added_by, 'posted a file', instance=instance,
                 **kwargs)
+
+
+@receiver(post_save, sender=Organizer, dispatch_uid='activity_stream.organizer')
+def add_organizer_action(sender, instance=None, **kwargs):
+    if not instance: return
+    _add_action(instance, 'started organizing', instance=instance, **kwargs)

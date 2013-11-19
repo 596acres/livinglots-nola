@@ -231,6 +231,7 @@ ACTSTREAM_SETTINGS = {
         'files.file',
         'lots.lot',
         'notes.note',
+        'organize.organizer',
         'photos.photo',
     ),
     'USE_JSONFIELD': True,
