@@ -289,6 +289,21 @@ nav.navbar {
     padding: 0;
 }
 
+.action-list .action {
+    color: #2593c6;
+    font-family: 'Oswald', sans-serif;
+    font-size: 20px;
+    font-weight: 700;
+    line-height: 22px;
+    margin-top: 25px;
+    margin-bottom: 25px;
+}
+
+.action-timestamp {
+    font-size: 14px;
+    font-weight: 300;
+}
+
 .details-buttons .details-button {
     margin-bottom: 5px;
 }
