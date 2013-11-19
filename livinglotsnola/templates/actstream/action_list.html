@@ -1,0 +1,9 @@
+{% load activity_tags %}
+
+<ul class="action-list">
+    {% for action in action_list %}
+        <li>
+            {% display_action action %}
+        </li>
+    {% endfor %}
+</ul>
