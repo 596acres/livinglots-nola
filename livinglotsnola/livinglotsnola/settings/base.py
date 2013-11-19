@@ -238,7 +238,7 @@ ACTSTREAM_SETTINGS = {
 ACTIVITY_STREAM_DEFAULT_ACTOR_PK = get_env_variable('ACTSTREAM_DEFAULT_ACTOR_PK')
 
 FACILITATORS = {
-    'global': [],
+    'global': ['eric@596acres.org',],
 }
 
 EMAIL_SUBJECT_PREFIX = '[Living Lots NOLA] '
