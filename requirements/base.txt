@@ -7,7 +7,7 @@ Pint==0.3.2
 argparse==1.2.1
 ipython==1.1.0
 lxml==3.1.0
-pilkit==0.1.5
+pilkit==1.1.5
 psycopg2==2.4.6
 pyproj==1.9.3
 python-dateutil==2.1
@@ -33,7 +33,7 @@ django-extensions==1.1.1
 django-filter==0.7
 git+git://github.com/funkybob/django-flatblocks/@5c921d9ab4b2b08ad6d1b5995bdf190b65dc9f79
 django-honeypot==0.3.0
-git+git://github.com/matthewwithanm/django-imagekit/@261f16412763c69fba64f130c521192ad726d2c1
+django-imagekit==3.0.4
 git+git://github.com/ebrelsford/django-inplace/@1e7eb79fa186e65920df4a02a9e5cbba38eb83f6
 git+git://github.com/ebrelsford/django-inplace-activity-stream/@master
 django-jsonfield==0.9.10
