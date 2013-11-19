@@ -1,1 +1,2 @@
-Hey organizer, new note!!
+{% load flatblock_tags %}{% flatblock "organize.notifications.organizers.new_note" evaluated=True using="flatblocks/flatblock.txt" %}
+{% include "livinglots/organize/notifications/organizers/_footer.txt" %}
