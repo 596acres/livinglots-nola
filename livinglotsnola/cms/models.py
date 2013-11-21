@@ -8,6 +8,8 @@ from feincms.content.application.models import ApplicationContent
 from feincms.content.medialibrary.models import MediaFileContent
 from feincms.content.richtext.models import RichTextContent
 
+from pathways.models import Pathway
+
 
 class CollapsibleSectionContent(RichTextContent):
 
@@ -108,4 +110,19 @@ Page.create_content_type(ApplicationContent, APPLICATIONS=(
     ('contact_form', _('Contact form'), {
         'urls': 'contact.form_urls',
     }),
+))
+
+
+Pathway.register_extensions(
+    'feincms.module.extensions.translations',
+)
+
+Pathway.register_regions(
+    ('main', _('Main content area')),
+)
+
+Pathway.create_content_type(RichTextContent)
+
+Pathway.create_content_type(MediaFileContent, TYPE_CHOICES=(
+    ('default', _('default')),
 ))
