@@ -536,6 +536,29 @@ ul.note-list {
     text-transform: uppercase;
 }
 
+.blog-entry-archive h1,
+.blog-entry-detail h1 {
+    font-family: 'Oswald', sans-serif;
+    font-size: 56px;
+    font-weight: 300;
+    margin-top: 0;
+}
+
+.blog-entry-archive h2 {
+    font-family: 'Oswald', sans-serif;
+    font-size: 28px;
+    font-weight: 300;
+}
+
+.blog-entry-archive article,
+.blog-entry-detail article {
+    background: white;
+}
+
+.blog-entry-archive article.hentry {
+    padding-left: 0;
+}
+
 
 /*
  * Bootstrap overrides

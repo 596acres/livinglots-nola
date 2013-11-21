@@ -2,7 +2,23 @@
 
 {% load feincms_tags i18n %}
 
-{% block title %}{{ block.super }}{% endblock %}
+{% block page_title %}{{ entry }}{% endblock %}
+
+{% block body_class %} blog-entry-detail {{ block.super }}{% endblock %}
+
+{% block breadcrumbs_wrapper %}
+    <ul class="breadcrumb">
+        <li>
+            <a href="/">{% trans "Home" %}</a>
+        </li>
+        <li>
+            <a href="#">
+                News
+            </a>
+        </li>
+        <li>{{ entry }}</li>
+    </ul>
+{% endblock %}
 
 {% block content %}
     <!-- contains hAtom microformats proposed by http://www.readability.com/publishers/guidelines/ -->
