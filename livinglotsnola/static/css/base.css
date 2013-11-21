@@ -608,6 +608,7 @@ input[type=file],
 input[type=password],
 input[type=text],
 input[type=url],
+select.form-control,
 textarea.form-control {
     border: 1px solid black;
     border-radius: 0;
