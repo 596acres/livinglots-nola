@@ -1,3 +1,4 @@
+from collections import OrderedDict
 import os
 from os.path import abspath, dirname
 
@@ -290,3 +291,13 @@ LIVING_LOTS = {
         'owner': 'owners.Owner',
     },
 }
+
+CONTACT_FORM_REASONS = OrderedDict([
+    ('The lot I want permission to use is not on Living Lots NOLA.', ['info@livinglotsnola.org',]),
+    ('I want to share my NOLA land access story.', ['info@livinglotsnola.org',]),
+    ('I want to donate my land so that it can be protected open space.', ['Bridget.Kelly@LandTrustforLouisiana.org',]),
+    ('I want to loan or lease my land for a temporary project.', ['info@livinglotsnola.org',]),
+    ('I want to invite Living Lots admins to an event.', ['info@livinglotsnola.org',]),
+    ('I want to reach 596 Acres, the team that made this site.', ['paula@596acres.org',]),
+    ('I have a press inquiry.', ['info@livinglotsnola.org',]),
+])
