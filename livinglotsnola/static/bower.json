@@ -22,7 +22,7 @@
     "requirejs": "~2.1.8",
     "almond": "~0.2.6",
     "tinymce": "~4.0.6",
-    "leaflet": "http://leaflet-cdn.s3.amazonaws.com/build/leaflet-stable.zip",
+    "leaflet": "http://leaflet-cdn.s3.amazonaws.com/build/leaflet-0.7.zip",
     "leaflet.dataoptions": "https://github.com/ebrelsford/Leaflet.dataoptions.git#master",
     "handlebars": "~1.0.0",
     "leaflet.handlebars": "https://github.com/ebrelsford/Leaflet.handlebars.git#master",
