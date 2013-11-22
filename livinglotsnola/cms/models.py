@@ -110,6 +110,7 @@ Page.create_content_type(ApplicationContent, APPLICATIONS=(
     ('contact_form', _('Contact form'), {
         'urls': 'contact.form_urls',
     }),
+    ('pathways.urls', _('Pathways')),
 ))
 
 

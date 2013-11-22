@@ -1,3 +1,11 @@
-from django.shortcuts import render
+from livinglots_pathways.views import BasePathwaysDetailView, BasePathwaysListView
 
-# Create your views here.
+from .models import Pathway
+
+
+class PathwaysDetailView(BasePathwaysDetailView):
+    model = Pathway
+
+
+class PathwaysListView(BasePathwaysListView):
+    model = Pathway
