@@ -55,6 +55,8 @@ article {
 footer {
     background-color: #2593c6;
     color: white;
+    margin-left: -15px;
+    margin-right: -15px;
     padding: 25px;
     text-align: center;
 }
@@ -556,8 +558,7 @@ ul.pathway-list {
     font-weight: 300;
 }
 
-.blog-entry-archive article,
-.blog-entry-detail article {
+article {
     background: white;
 }
 
