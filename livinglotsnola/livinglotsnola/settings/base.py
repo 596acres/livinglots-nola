@@ -291,6 +291,7 @@ LIVING_LOTS = {
         'lotgroup': 'lots.LotGroup',
         'organizer': 'organize.Organizer',
         'owner': 'owners.Owner',
+        'pathway': 'pathways.Pathway',
     },
 }
 
