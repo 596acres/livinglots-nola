@@ -1,6 +1,5 @@
 {% extends feincms_page.template.path|default:"base.html" %}
-
-{% load feincms_tags i18n %}
+{% load applicationcontent_tags feincms_tags i18n %}
 
 {% block page_title %}{{ entry }}{% endblock %}
 
@@ -12,9 +11,7 @@
             <a href="/">{% trans "Home" %}</a>
         </li>
         <li>
-            <a href="#">
-                News
-            </a>
+            <a href="{% app_reverse "elephantblog_entry_archive" "elephantblog.urls" %}">News</a>
         </li>
         <li>{{ entry }}</li>
     </ul>
