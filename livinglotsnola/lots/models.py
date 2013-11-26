@@ -30,6 +30,11 @@ class LotMixin(models.Model):
         on_delete=models.SET_NULL,
     )
 
+    uncommitted_properties = models.ManyToManyField('nora.UncommittedProperty',
+        null=True,
+        blank=True
+    )
+
     has_blight_liens = models.BooleanField(_('has blight liens'),
         default=False,
     )

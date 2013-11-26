@@ -85,7 +85,11 @@ class NoraUncommittedPropertiesFinder(object):
                 geom=parcel.geom,
             )
             if existing_lots:
-                # TODO save uncommitted_property -> lot
+                if existing_lots.count() == 1:
+                    # Save uncommitted_property to lot
+                    existing_lot = existing_lots[0]
+                    existing_lot.uncommitted_properties.add(uncommitted_property)
+                    existing_lot.save()
                 print 'Lot already exists. Skipping.'
                 continue
 
