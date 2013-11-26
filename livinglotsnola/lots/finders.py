@@ -53,21 +53,22 @@ class NoraUncommittedPropertiesFinder(object):
     def find_existing_lot(self, parcel=None, address=None, geom=None):
         """
         Try to find existing lots, in order of least to most expensive. Returns
-        as soon as any of the conditions find lots.
+        as soon as any of the conditions filters the number of lots to 1.
         """
+        lots = Lot.objects.all()
         if parcel:
-            lots = Lot.objects.filter(parcel=parcel)
-            if lots.count():
+            lots = lots.filter(parcel=parcel)
+            if lots.count() == 1:
                 return lots
         if address:
-            lots = Lot.objects.filter(address_line1__iexact=address)
-            if lots.count():
+            lots = lots.filter(address_line1__iexact=address)
+            if lots.count() == 1:
                 return lots
         if geom:
-            lots = Lot.objects.filter(polygon__overlaps=geom)
-            if lots.count():
+            lots = lots.filter(polygon__overlaps=geom)
+            if lots.count() == 1:
                 return lots
-        return None
+        return lots
 
     def find_lots(self):
         owner = self.get_owner()
