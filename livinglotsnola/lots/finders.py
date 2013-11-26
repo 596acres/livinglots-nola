@@ -40,13 +40,13 @@ class NoraUncommittedPropertiesFinder(object):
             print 'Found parcel by point:', parcels
 
         for parcel in parcels:
-            buildings = Building.objects.filter_by_parcel(parcel)
-            if buildings.count():
-                print ('Found a building on one of the parcels for '
-                        '%s--skipping') % uncommitted_property.property_address
+            if not parcel.probably_is_vacant:
+                print '%s is probably not vacant--skipping' % (
+                    uncommitted_property.property_address,
+                )
                 continue
             else:
-                print 'No building on parcel %d' % parcel.pk
+                print 'Parcel %d is probably vacant' % parcel.pk
                 return parcel
         return None
 
