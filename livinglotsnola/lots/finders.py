@@ -50,12 +50,45 @@ class NoraUncommittedPropertiesFinder(object):
                 return parcel
         return None
 
+    def find_existing_lot(self, parcel=None, address=None, geom=None):
+        """
+        Try to find existing lots, in order of least to most expensive. Returns
+        as soon as any of the conditions find lots.
+        """
+        if parcel:
+            lots = Lot.objects.filter(parcel=parcel)
+            if lots.count():
+                return lots
+        if address:
+            lots = Lot.objects.filter(address_line1__iexact=address)
+            if lots.count():
+                return lots
+        if geom:
+            lots = Lot.objects.filter(polygon__overlaps=geom)
+            if lots.count():
+                return lots
+        return None
+
     def find_lots(self):
         owner = self.get_owner()
         for uncommitted_property in UncommittedProperty.objects.all():
+            # Get parcel
             parcel = self.find_parcel(uncommitted_property)
             if not parcel:
                 continue
+
+            # Get existing lots
+            existing_lots = self.find_existing_lot(
+                parcel=parcel,
+                address=uncommitted_property.property_address,
+                geom=parcel.geom,
+            )
+            if existing_lots:
+                # TODO save uncommitted_property -> lot
+                print 'Lot already exists. Skipping.'
+                continue
+
+            # Save lot
             lot = Lot(
                 parcel=parcel,
                 polygon=parcel.geom,
