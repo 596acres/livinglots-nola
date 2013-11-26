@@ -295,13 +295,18 @@ nav.navbar {
     color: #2593c6;
     font-family: 'Oswald', sans-serif;
     font-size: 20px;
-    font-weight: 700;
+    font-weight: 300;
     line-height: 22px;
     margin-top: 25px;
     margin-bottom: 25px;
 }
 
+.action .actor {
+    font-weight: 700;
+}
+
 .action-timestamp {
+    color: #58595b;
     font-size: 14px;
     font-weight: 300;
 }
