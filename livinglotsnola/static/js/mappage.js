@@ -56,8 +56,6 @@ define(
                 lotsLayer = L.geoJson(data, {
                     onEachFeature: function (feature, layer) {
                         layer.on('click', function (layer) {
-                            // Change offset to make room for the bar on top of
-                            // the map
                             var latlng = layer.latlng;
                             var x = map.latLngToContainerPoint(latlng).x;
                             var y = map.latLngToContainerPoint(latlng).y - 100;
