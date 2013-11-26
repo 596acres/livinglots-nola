@@ -49,12 +49,31 @@ define(
             return radius;
         }
 
+        function onMouseOverFeature(feature) {
+            // If recent activities box is open
+            if ($('.overlaymenu-news:visible')) {
+                // If feature is in recent activities, highlight it
+                _.each($('.overlaymenu-news .action'), function (action) {
+                    var $action = $(action);
+                    if ($action.data('lotPk') === feature.properties.pk) {
+                        $action.addClass('feature-hover');
+                    }
+                });
+            }
+        }
+
+        function onMouseOutFeature(feature) {
+            // Un-highlight recent activities
+            $('.overlaymenu-news .action').removeClass('feature-hover');
+        }
+
         function addLotsLayer(map, params) {
             var url = map.options.lotsurl + '?' + $.param(params);
             $.getJSON(url, function (data) {
                 var initialRadius = pickRadius(map.getZoom());
                 lotsLayer = L.geoJson(data, {
                     onEachFeature: function (feature, layer) {
+
                         layer.on('click', function (layer) {
                             var latlng = layer.latlng;
                             var x = map.latLngToContainerPoint(latlng).x;
@@ -62,6 +81,15 @@ define(
                             var point = map.containerPointToLatLng([x, y]);
                             return map.setView(point, map._zoom);
                         });
+
+                        layer.on('mouseover', function (event) {
+                            onMouseOverFeature(event.target.feature);
+                        });
+
+                        layer.on('mouseout', function (event) {
+                            onMouseOutFeature(event.target.feature);
+                        });
+
                     },
                     pointToLayer: function (feature, latlng) {
                         return L.circleMarker(latlng);

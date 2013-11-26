@@ -301,6 +301,11 @@ nav.navbar {
     margin-bottom: 25px;
 }
 
+.action.feature-hover,
+.action.feature-hover a {
+    color: #ed1a6d;
+}
+
 .action .actor {
     font-weight: 700;
 }

@@ -2,7 +2,7 @@
 
 <ul class="action-list">
     {% for action in action_list %}
-        <li class="action">
+        <li class="action" data-lot-pk="{{ action.target.pk }}">
             {% display_action action %}
         </li>
     {% endfor %}
