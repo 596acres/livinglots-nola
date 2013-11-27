@@ -44,6 +44,7 @@ class LotGeoJSONMixin(object):
             geometry=json.loads(lot_geojson),
             properties={
                 'address_line1': lot.address_line1,
+                'has_organizers': lot.organizers.count() > 0,
                 'layer': layer,
                 'owner': str(lot.owner) or 'unknown',
                 'pk': lot.pk,

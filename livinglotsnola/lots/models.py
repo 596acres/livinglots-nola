@@ -1,9 +1,12 @@
 from pint import UnitRegistry
 
+from django.contrib.contenttypes import generic
 from django.db import models
 from django.utils.translation import ugettext_lazy as _
 
 from livinglots_lots.models import BaseLot, BaseLotGroup
+
+from organize.models import Organizer
 
 
 ureg = UnitRegistry()
@@ -29,6 +32,8 @@ class LotMixin(models.Model):
         null=True,
         on_delete=models.SET_NULL,
     )
+
+    organizers = generic.GenericRelation(Organizer)
 
     uncommitted_properties = models.ManyToManyField('nora.UncommittedProperty',
         null=True,

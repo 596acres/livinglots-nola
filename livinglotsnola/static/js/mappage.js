@@ -16,6 +16,7 @@ define(
         'leaflet.dataoptions',
         'leaflet.handlebars',
         'leaflet.hash',
+        'leaflet.lotmarker',
         'leaflet.usermarker',
 
         'map.overlaymenu',
@@ -32,6 +33,7 @@ define(
         }
 
         // Scale radius by zoom level
+        // TODO move to leaflet.lotmarker
         function pickRadius(zoom) {
             var radius = 4;   
             if (zoom >= 13) {
@@ -92,7 +94,11 @@ define(
 
                     },
                     pointToLayer: function (feature, latlng) {
-                        return L.circleMarker(latlng);
+                        var options = {};
+                        if (feature.properties.has_organizers) {
+                            options.hasOrganizers = true;
+                        }
+                        return L.lotMarker(latlng, options);
                     },
                     style: function (feature) {
                         var style = {
