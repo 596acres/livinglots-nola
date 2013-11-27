@@ -12,6 +12,7 @@ requirejs.config({
         "leaflet.hash": "../bower_components/leaflet-hash/leaflet-hash",
         "leaflet.usermarker": "../bower_components/leaflet.usermarker/src/leaflet.usermarker",
         "requirejs": "../bower_components/requirejs",
+        "spin": "../bower_components/spin.js/spin",
         "underscore": "../bower_components/underscore/underscore"
     },
     shim: {

@@ -286,6 +286,10 @@ nav.navbar {
     left: 140px;
 }
 
+.overlaymenu-news .activity-stream-container {
+    min-height: 200px;
+}
+
 .activity-stream ul.action-list {
     list-style: none;
     padding: 0;

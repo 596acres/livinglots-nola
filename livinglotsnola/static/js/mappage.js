@@ -11,6 +11,7 @@ define(
         'handlebars',
         'underscore',
         'leaflet',
+        'spin',
         'map.styles',
 
         'leaflet.dataoptions',
@@ -21,7 +22,7 @@ define(
 
         'map.overlaymenu',
         'map.search'
-    ], function (Django, $, Handlebars, _, L, mapstyles) {
+    ], function (Django, $, Handlebars, _, L, Spinner, mapstyles) {
 
         var lotsLayer;
 
@@ -229,6 +230,11 @@ define(
                     menu: '.overlaymenu-news'
                 })
                 .on('overlaymenuopen', function () {
+                    var spinner = new Spinner({
+                        left: '50px',
+                        top: '50px'
+                    }).spin($('.activity-stream-container')[0]);
+
                     var url = Django.url('activitystream_activity_list');
                     $('.activity-stream-container').load(url);
                 });
