@@ -383,6 +383,12 @@ nav.navbar {
     width: 10px;
 }
 
+.legend-marker-organized {
+    background: url(/static/img/action_star_small.png);
+    height: 20px;
+    width: 20px;
+}
+
 .legend-marker-public {
     background: #812683;
 }
