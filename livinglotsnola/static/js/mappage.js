@@ -14,6 +14,8 @@ define(
         'spin',
         'map.styles',
 
+        'jquery.infinitescroll',
+
         'leaflet.dataoptions',
         'leaflet.handlebars',
         'leaflet.hash',
@@ -233,10 +235,21 @@ define(
                     var spinner = new Spinner({
                         left: '50px',
                         top: '50px'
-                    }).spin($('.activity-stream-container')[0]);
+                    }).spin($('.activity-stream')[0]);
 
                     var url = Django.url('activitystream_activity_list');
-                    $('.activity-stream-container').load(url);
+                    $('.activity-stream').load(url, function () {
+                        $('.action-list').infinitescroll({
+                            loading: {
+                                finishedMsg: 'No more activities to load.'
+                            },
+                            behavior: 'local',
+                            binder: $('.overlaymenu-news .overlaymenu-menu-content'),
+                            itemSelector: 'li.action',
+                            navSelector: '.activity-stream-nav',
+                            nextSelector: '.activity-stream-nav a:first'
+                        });
+                    });
                 });
 
             $('.overlay-filter-button').mapoverlaymenu({

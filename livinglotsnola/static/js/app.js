@@ -5,6 +5,7 @@ requirejs.config({
         'django': 'djangojs/django',
         "fancybox": "../bower_components/fancybox/source/jquery.fancybox",
         "jquery": "../bower_components/jquery/jquery",
+        "jquery.infinitescroll": "../bower_components/infinite-scroll/jquery.infinitescroll",
         "handlebars": "../bower_components/handlebars/handlebars",
         "leaflet": "../bower_components/leaflet/leaflet-src",
         "leaflet.dataoptions": "../bower_components/leaflet.dataoptions/src/leaflet.dataoptions",
@@ -24,6 +25,7 @@ requirejs.config({
         'handlebars': {
             'exports': 'Handlebars'
         },
+        'jquery.infinitescroll': ['jquery'],
         'leaflet.hash': ['leaflet'],
         'leaflet.usermarker': ['leaflet'],
         'underscore': {
