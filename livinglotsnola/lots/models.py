@@ -40,6 +40,11 @@ class LotMixin(models.Model):
         blank=True
     )
 
+    scattered_sites = models.ManyToManyField('hano.ScatteredSite',
+        null=True,
+        blank=True
+    )
+
     has_blight_liens = models.BooleanField(_('has blight liens'),
         default=False,
     )

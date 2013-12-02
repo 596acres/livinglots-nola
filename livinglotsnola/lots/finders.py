@@ -2,16 +2,107 @@ from time import sleep
 
 from django.utils.timezone import now
 
+from livinglots_lots.load import get_addresses_in_range
 from noladata.assessor.load import load_tax_bill_number
 from noladata.buildings.models import Building
 from noladata.codeenforcement.models import Case
 from noladata.habitat.load import lots_available_for_gardening
+from noladata.hano.models import ScatteredSite
 from noladata.nora.models import UncommittedProperty
 from noladata.parcels.models import Parcel
 from noladata.treasury.load import load_code_lien_information
 
 from owners.models import Owner
-from .models import Lot
+from .models import Lot, LotGroup
+
+
+def find_existing_lot(parcel=None, address=None, geom=None):
+    """
+    Try to find existing lots, in order of least to most expensive. Returns
+    as soon as any of the conditions filters the number of lots to 1.
+    """
+    lots = Lot.objects.all()
+    if parcel:
+        lots = lots.filter(parcel=parcel)
+        if lots.count() == 1:
+            return lots
+    if address:
+        lots = lots.filter(address_line1__iexact=address)
+        if lots.count() == 1:
+            return lots
+    if geom:
+        lots = lots.filter(polygon__overlaps=geom)
+        if lots.count() == 1:
+            return lots
+    return lots
+
+
+class HanoScatteredSitesFinder(object):
+
+    def get_owner(self):
+        owner, created = Owner.objects.get_or_create('Housing Authority of New Orleans', defaults={
+            'owner_type': 'public',
+        })
+        return owner
+
+    def find_parcel(self, address):
+        parcels = Parcel.objects.filter_by_address_fuzzy(address)
+        if parcels.count():
+            return parcels[0]
+        return None
+
+    def find_lots(self):
+        owner = self.get_owner()
+        default_kwargs = {
+            'city': 'New Orleans',
+            'state_province': 'LA',
+            'country': 'USA',
+            'known_use_certainty': 7,
+            'owner': owner,
+        }
+        for site in ScatteredSite.objects.filter(lot=None):
+            site_lots = []
+            for address in get_addresses_in_range(site.address):
+                parcel = self.find_parcel(address)
+
+                if not parcel:
+                    print ('Could not find parcel for address "%s" within '
+                           'scattered site "%s"') % (address, site.address)
+                    continue
+
+                # If already added as a lot, update the lot and move on
+                existing_lots = find_existing_lot(parcel=parcel,
+                                                  address=address)
+                if existing_lots:
+                    for lot in existing_lots:
+                        lot.scattered_sites.add(site)
+                        lot.save()
+                        site_lots.append(lot)
+                    continue
+
+                # Save lot
+                lot = Lot(
+                    parcel=parcel,
+                    polygon=parcel.geom,
+                    centroid=parcel.geom.centroid,
+                    address_line1=address,
+                    added_reason="in HANO's scattered sites list",
+                    **default_kwargs
+                )
+                lot.save()
+                site_lots.append(lot)
+
+            # Add to lot group if there are multiple lots for this site
+            if len(site_lots) > 1:
+                lot_group = LotGroup(
+                    address_line1=site.address,
+                    **default_kwargs
+                )
+                lot_group.save()
+
+                for lot in site_lots:
+                    lot.group = lot_group
+                    lot.save()
 
 
 class NoraUncommittedPropertiesFinder(object):
@@ -50,26 +141,6 @@ class NoraUncommittedPropertiesFinder(object):
                 return parcel
         return None
 
-    def find_existing_lot(self, parcel=None, address=None, geom=None):
-        """
-        Try to find existing lots, in order of least to most expensive. Returns
-        as soon as any of the conditions filters the number of lots to 1.
-        """
-        lots = Lot.objects.all()
-        if parcel:
-            lots = lots.filter(parcel=parcel)
-            if lots.count() == 1:
-                return lots
-        if address:
-            lots = lots.filter(address_line1__iexact=address)
-            if lots.count() == 1:
-                return lots
-        if geom:
-            lots = lots.filter(polygon__overlaps=geom)
-            if lots.count() == 1:
-                return lots
-        return lots
-
     def find_lots(self):
         owner = self.get_owner()
         for uncommitted_property in UncommittedProperty.objects.all():
@@ -79,7 +150,7 @@ class NoraUncommittedPropertiesFinder(object):
                 continue
 
             # Get existing lots
-            existing_lots = self.find_existing_lot(
+            existing_lots = find_existing_lot(
                 parcel=parcel,
                 address=uncommitted_property.property_address,
                 geom=parcel.geom,
