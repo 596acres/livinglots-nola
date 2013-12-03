@@ -17,7 +17,6 @@ class BoundingBoxFilter(django_filters.Filter):
 class LayerFilter(django_filters.Filter):
 
     def filter(self, qs, value):
-        print value
         layers = value.split(',')
         layer_filter = Q()
         for layer in layers:
