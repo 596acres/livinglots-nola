@@ -92,5 +92,5 @@ class Lot(LotMixin, LotGroupLotMixin, BaseLot):
         )
 
 
-class LotGroup(LotGroupLotMixin, BaseLotGroup):
+class LotGroup(BaseLotGroup, Lot):
     pass
