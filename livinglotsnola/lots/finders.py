@@ -61,7 +61,8 @@ class HanoScatteredSitesFinder(object):
             'owner': owner,
         }
         for site in ScatteredSite.objects.filter(lot=None):
-            site_lots = []
+            site_lots = set()
+            default_kwargs['name'] = site.address
             for address in get_addresses_in_range(site.address):
                 parcel = self.find_parcel(address)
 
@@ -77,7 +78,7 @@ class HanoScatteredSitesFinder(object):
                     for lot in existing_lots:
                         lot.scattered_sites.add(site)
                         lot.save()
-                        site_lots.append(lot)
+                        site_lots.add(lot)
                     continue
 
                 # Save lot
@@ -90,7 +91,7 @@ class HanoScatteredSitesFinder(object):
                     **default_kwargs
                 )
                 lot.save()
-                site_lots.append(lot)
+                site_lots.add(lot)
 
             # Add to lot group if there are multiple lots for this site
             if len(site_lots) > 1:
@@ -101,8 +102,7 @@ class HanoScatteredSitesFinder(object):
                 lot_group.save()
 
                 for lot in site_lots:
-                    lot.group = lot_group
-                    lot.save()
+                    lot_group.add(lot)
 
 
 class NoraUncommittedPropertiesFinder(object):
