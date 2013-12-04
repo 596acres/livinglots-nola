@@ -173,6 +173,13 @@
                             </li>
                         {% endif %}
 
+                        {% if lot.parcel and lot.parcel.probably_is_vacant %}
+                            <li>
+                                Based on the lot's size and the City's building
+                                data, it seems to be vacant.
+                            </li>
+                        {% endif %}
+
                     </ul>
                 {% else %}
                     {% blocktrans with use=lot.known_use %}
