@@ -93,6 +93,19 @@ class LotMixin(models.Model):
 
     in_scattered_sites = property(_in_scattered_sites)
 
+    def _in_uncommitted_properties(self):
+        # Trivial case--lot itself has associated ScatteredSite instances
+        if self.uncommitted_properties.count():
+            return True
+
+        # Else, if we have a group, look at its lots for ScatteredSites
+        if self.lotgroup:
+            if self.lotgroup.lot_set.exclude(uncommitted_properties=None).count():
+                return True
+        return False
+
+    in_uncommitted_properties = property(_in_uncommitted_properties)
+
     class Meta:
         abstract = True
 
