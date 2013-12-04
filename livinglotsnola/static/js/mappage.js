@@ -26,7 +26,8 @@ define(
         'map.search'
     ], function (Django, $, Handlebars, _, L, Spinner, mapstyles) {
 
-        var lotsLayer;
+        var lotsLayer,
+            userLayer;
 
         function addBaseLayer(map) {
             var baseLayer = L.tileLayer('http://{s}.tile.cloudmade.com/{key}/{styleId}/256/{z}/{x}/{y}.png', {
@@ -261,9 +262,14 @@ define(
             });
 
             $('form.map-search-form').mapsearch()
+                .on('searchstart', function (e) {
+                    if (userLayer) {
+                        map.removeLayer(userLayer);
+                    }
+                })
                 .on('searchresultfound', function (e, result) {
                     var latlng = [result.latitude, result.longitude];
-                    L.userMarker(latlng, {
+                    userLayer = L.userMarker(latlng, {
                         smallIcon: true,
                     }).addTo(map);
                     map.setView(latlng, 15);

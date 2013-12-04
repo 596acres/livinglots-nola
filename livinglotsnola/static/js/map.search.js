@@ -16,6 +16,7 @@ define(
 
         function searchByAddress(form) {
             form = $(form);
+            form.trigger('searchstart');
             var warningSelector = form.data('warningSelector'),
                 bounds = form.data('bounds'),
                 city = form.data('city'),
