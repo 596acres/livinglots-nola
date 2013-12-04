@@ -26,12 +26,18 @@ define(
             $.getJSON(map.options.lotsurl, function (data) {
                 var lotsLayer = L.geoJson(data, {
                     style: function (feature) {
-                        return {
+                        var style = {
                             color: mapstyles[feature.properties.layer],
                             fillColor: mapstyles[feature.properties.layer],
                             fillOpacity: 0.5,
-                            opacity: 0.5
+                            opacity: 0.5,
+                            weight: 1
                         };
+                        if (feature.properties.pk === map.options.lotPk) {
+                            style.color = '#000';
+                            style.opacity = 1;
+                        }
+                        return style;
                     }
                 });
                 lotsLayer.addTo(map);
