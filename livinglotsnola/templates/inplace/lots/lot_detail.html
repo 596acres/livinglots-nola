@@ -173,18 +173,20 @@
                             </li>
                         {% endif %}
 
-                        {% if lot.parcel and lot.parcel.probably_is_vacant %}
-                            <li>
-                                Based on the lot's size and the City's building
-                                data, it seems to be vacant.
-                            </li>
-                        {% endif %}
-
                         {% if lot.in_uncommitted_properties %}
                             <li>
                                 The lot is listed in the 
                                 <a href="http://www.noraworks.org/" target="_blank">New Orleans Redevelopment Authority</a>'s
                                 <a href="https://data.nola.gov/Administrative-Data/NORA-Uncommitted-Property-Inventory/5ktx-e9wc" target="_blank">Uncommitted Property Inventory</a>.
+                            </li>
+                        {% endif %}
+
+                        {% if lot.parcel and lot.parcel.probably_is_vacant %}
+                            <li>
+                                It seems to be vacant&mdash;based on the lot's
+                                size and the City's building data, there do not
+                                appear to be any structures on it (the Street
+                                View imagery above may be out of date).
                             </li>
                         {% endif %}
 
