@@ -71,6 +71,26 @@ footer {
     text-transform: uppercase;
 }
 
+footer #mc_embed_signup {
+    background: transparent;
+}
+
+footer #mc_embed_signup label {
+    display: block;
+    line-height: 26px;
+}
+
+footer #mc_embed_signup input[type=email] {
+    font-size: 24px;
+    height: 38px;
+    line-height: 36px;
+    vertical-align: bottom;
+}
+
+footer #mc_embed_signup .btn-default {
+    border: 1px solid white;
+}
+
 
 /*
  * Nav

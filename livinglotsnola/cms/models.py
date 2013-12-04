@@ -60,6 +60,39 @@ class ExternallyLinkedMediaFileContent(ContentWithMediaFile):
         ], ctx, context_instance=kwargs.get('context'))
 
 
+class MailchimpSignup(models.Model):
+
+    header_text = models.CharField(_('header text'),
+        max_length=50,
+    )
+
+    button_text = models.CharField(_('button text'),
+        max_length=50,
+    )
+
+    user_id = models.CharField(_('Mailchimp user id'),
+        max_length=50,
+        help_text=_('Provided when generating an embed code (u parameter)'),
+    )
+
+    list_id = models.CharField(_('Mailchimp list id'),
+        max_length=50,
+        help_text=_('Provided under List > Settings > Unique id'),
+    )
+
+    class Meta:
+        abstract = True
+        verbose_name = _('Mailchimp signup')
+        verbose_name_plural = _('Mailchimp signup')
+
+    def render(self, **kwargs):
+        ctx = { 'signup': self }
+        ctx.update(kwargs)
+        return render_to_string([
+            'content/mailchimp/signup.html',
+        ], ctx, context_instance=kwargs.get('context'))
+
+
 Page.register_extensions(
     'feincms.module.extensions.datepublisher',
     'feincms.module.extensions.translations',
@@ -102,6 +135,7 @@ Page.create_content_type(MediaFileContent, TYPE_CHOICES=(
 ))
 
 Page.create_content_type(ExternallyLinkedMediaFileContent)
+Page.create_content_type(MailchimpSignup)
 
 Page.create_content_type(ApplicationContent, APPLICATIONS=(
     ('livinglots_lots.map_urls', _('Lots map')),
