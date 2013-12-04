@@ -80,6 +80,19 @@ class LotMixin(models.Model):
 
     area_acres = property(_area_acres)
 
+    def _in_scattered_sites(self):
+        # Trivial case--lot itself has associated ScatteredSite instances
+        if self.scattered_sites.count():
+            return True
+
+        # Else, if we have a group, look at its lots for ScatteredSites
+        if self.lotgroup:
+            if self.lotgroup.lot_set.exclude(scattered_sites=None).count():
+                return True
+        return False
+
+    in_scattered_sites = property(_in_scattered_sites)
+
     class Meta:
         abstract = True
 
