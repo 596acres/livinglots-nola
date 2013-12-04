@@ -145,14 +145,24 @@ define(
         }
 
         function buildLotFilterParams(map) {
+            var filters = _.map($('.filter:checked'), function (filter) {
+                return $(filter).attr('name'); 
+            });
             return {
-                bbox: map.getBounds().toBBoxString(),
+                layers: filters.join(','),
+                parents_only: true
             };
+        }
+
+        function buildLotFilterCountParams(map) {
+            var params = buildLotFilterParams(map);
+            params.bbox = map.getBounds().toBBoxString();
+            return params;
         }
 
         function updateLotCount(map) {
             var url = Django.url('lots:lot_count') + '?' +
-                $.param(buildLotFilterParams(map));
+                $.param(buildLotFilterCountParams(map));
             $.getJSON(url, function (data) {
                 _.each(data, function (value, key) {
                     $('#' + key).text(value);
@@ -162,13 +172,7 @@ define(
 
         function updateDisplayedLots(map, lotsLayer) {
             map.removeLayer(lotsLayer);
-            var filters = _.map($('.filter:checked'), function (filter) {
-                return $(filter).attr('name'); 
-            });
-            var params = {
-                layers: filters.join(',')
-            };
-            addLotsLayer(map, params);
+            addLotsLayer(map, buildLotFilterParams(map));
         }
 
         function updateOwnershipOverview(map) {
@@ -186,7 +190,7 @@ define(
         $(document).ready(function () {
             var map = L.map('map');
             addBaseLayer(map);
-            addLotsLayer(map, {});
+            addLotsLayer(map, buildLotFilterParams(map));
             var hash = new L.Hash(map);
 
             //
@@ -267,6 +271,7 @@ define(
 
             $('.filter').change(function () {
                 updateDisplayedLots(map, lotsLayer);
+                updateLotCount(map);
             });
 
             updateLotCount(map);

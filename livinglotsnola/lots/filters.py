@@ -27,10 +27,19 @@ class LayerFilter(django_filters.Filter):
         return qs.filter(layer_filter)
 
 
+class LotGroupParentFilter(django_filters.Filter):
+
+    def filter(self, qs, value):
+        if value == 'true':
+            qs = qs.filter(group=None)
+        return qs
+
+
 class LotFilter(django_filters.FilterSet):
 
     bbox = BoundingBoxFilter()
     layers = LayerFilter()
+    parents_only = LotGroupParentFilter()
 
     def __init__(self, *args, **kwargs):
         user = kwargs.pop('user', None)
@@ -45,4 +54,5 @@ class LotFilter(django_filters.FilterSet):
             'bbox',
             'known_use',
             'layers',
+            'parents_only',
         ]
