@@ -1,6 +1,7 @@
 from django.db.models import Q
 
 from django.contrib.gis.geos import Polygon
+from django.contrib.gis.measure import D
 
 import django_filters
 
@@ -35,10 +36,23 @@ class LotGroupParentFilter(django_filters.Filter):
         return qs
 
 
+class LotCenterFilter(django_filters.Filter):
+
+    def filter(self, qs, value):
+        if not value:
+            return qs
+        try:
+            lot = Lot.objects.get(pk=value)
+        except Exception:
+            return qs
+        return qs.filter(centroid__distance_lte=(lot.centroid, D(mi=.5)))
+
+
 class LotFilter(django_filters.FilterSet):
 
     bbox = BoundingBoxFilter()
     layers = LayerFilter()
+    lot_center = LotCenterFilter()
     parents_only = LotGroupParentFilter()
 
     def __init__(self, *args, **kwargs):
@@ -54,5 +68,6 @@ class LotFilter(django_filters.FilterSet):
             'bbox',
             'known_use',
             'layers',
+            'lot_center',
             'parents_only',
         ]

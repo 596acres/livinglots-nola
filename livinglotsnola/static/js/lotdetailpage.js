@@ -23,7 +23,9 @@ define(
         }
 
         function addLotsLayer(map) {
-            $.getJSON(map.options.lotsurl, function (data) {
+            var url = map.options.lotsurl + '?' + 
+                $.param({ lot_center: map.options.lotPk });
+            $.getJSON(url, function (data) {
                 var lotsLayer = L.geoJson(data, {
                     style: function (feature) {
                         var style = {
