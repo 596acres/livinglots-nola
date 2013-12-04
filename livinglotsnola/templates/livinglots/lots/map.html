@@ -15,7 +15,12 @@
                     </div>
                 </div>
                 <div class="popup-lot-details col-md-6">
-                    <div class="lot-count">1 lot</div>
+                    {{#if feature.properties.number_of_lots_plural}}
+                        <div class="lot-count">
+                            {{feature.properties.number_of_lots}}
+                            lots
+                        </div>
+                    {{/if}}
                     <div class="size">Size: {{feature.properties.size}} acres</div>
                     <div class="owner">Owner: {{feature.properties.owner}}</div>
                     <!--

@@ -39,17 +39,22 @@ class LotGeoJSONMixin(object):
                 lot_geojson = lot.polygon.geojson
             else:
                 lot_geojson = lot.centroid.geojson
+
+        properties = {
+            'address_line1': lot.address_line1,
+            'has_organizers': lot.organizers__count > 0,
+            'layer': layer,
+            'number_of_lots': lot.number_of_lots,
+            'number_of_lots_plural': lot.number_of_lots > 1,
+            'owner': str(lot.owner) or 'unknown',
+            'pk': lot.pk,
+            'size': self.get_acres(lot),
+        }
+
         return geojson.Feature(
             lot.pk,
             geometry=json.loads(lot_geojson),
-            properties={
-                'address_line1': lot.address_line1,
-                'has_organizers': lot.organizers.count() > 0,
-                'layer': layer,
-                'owner': str(lot.owner) or 'unknown',
-                'pk': lot.pk,
-                'size': self.get_acres(lot),
-            },
+            properties=properties,
         )
 
 
@@ -59,7 +64,11 @@ class LotsGeoJSONCentroid(LotGeoJSONMixin, FilteredLotsMixin, GeoJSONListView):
         return self.get_lots().qs.filter(centroid__isnull=False).geojson(
             field_name='centroid',
             precision=8,
-        ).select_related('known_use', 'owner__owner_type')
+        ).select_related(
+            'known_use',
+            'lotgroup',
+            'owner__owner_type'
+        ).annotate(organizers__count=Count('organizers'))
 
 
 class LotsOwnershipOverview(FilteredLotsMixin, JSONResponseView):
