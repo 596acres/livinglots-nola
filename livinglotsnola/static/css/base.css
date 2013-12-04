@@ -71,6 +71,15 @@ footer {
     text-transform: uppercase;
 }
 
+.footer-bottom {
+    font-family: 'Oswald', sans-serif;
+    font-size: 28px;
+    font-weight: 300;
+    margin-bottom: 15px;
+    padding-bottom: 5px;
+    text-transform: uppercase;
+}
+
 footer #mc_embed_signup {
     background: transparent;
 }
