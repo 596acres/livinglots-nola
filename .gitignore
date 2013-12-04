@@ -1,6 +1,7 @@
 .*.sw*
 *.pyc
 bower_components
+TODO
 logs/*
 .project
 .ropeproject
