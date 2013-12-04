@@ -547,6 +547,11 @@ ul.note-list {
     font-size: 12px;
 }
 
+.lot-detail-main {
+    font-family: 'Oswald', sans-serif;
+    font-weight: 300;
+}
+
 .lot-detail-main-section {
     margin-top: 50px;
     margin-bottom: 50px;
