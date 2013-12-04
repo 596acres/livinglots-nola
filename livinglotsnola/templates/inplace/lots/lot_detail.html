@@ -164,6 +164,7 @@
                 {% elif not lot.known_use %}
                     <p>{% trans "We think this lot is vacant because:" %}</p>
                     <ul class="lot-detail-reasons">
+
                         {% if lot.in_scattered_sites %}
                             <li>
                                 The lot is listed in a "scattered sites for 
@@ -171,6 +172,7 @@
                                 <a href="http://www.hano.org/" target="_blank">Housing Authority of New Orleans</a>.
                             </li>
                         {% endif %}
+
                     </ul>
                 {% else %}
                     {% blocktrans with use=lot.known_use %}
