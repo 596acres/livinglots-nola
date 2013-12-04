@@ -91,54 +91,37 @@
                 <h2 style="margin-top: 0;">Information about this lot</h2>
                 <div class="lot-detail-details">
 
-                    <table>
-                        <tr>
-                            <th>{% trans "address" %}:</th>
-                            <td>
-                                {{ lot.address_line1|default:"unknown" }}{% if lot.postal_code %}, 
-                                {{ lot.postal_code }}
-                                {% endif %}
-                            </td>
-                        </tr>
+                    {% if lot.number_of_lots > 1 %}
+                        <div>
+                            {% trans "number of lots" %}:
+                            {{ lot.number_of_lots }}
+                        </div>
+                    {% endif %}
 
-                        {% if lot.number_of_lots > 1 %}
-                        <tr>
-                            <th>{% trans "number of lots" %}:</th>
-                            <td>{{ lot.number_of_lots }}</td>
-                        </tr>
+                    <div>
+                        {% trans "owner" %}:
+                        {{ lot.owner|default:"unknown" }}
+                        {% if lot.owner and "owners.change_owner" in perms %}
+                            <span class="lot-detail-admin admin-only">
+                                <a class="btn btn-small btn-warning" href="{% url "admin:lots_lot_changelist" %}?owner={{ lot.owner.pk }}">
+                                    {% trans "View all lots this owner owns" %}
+                                </a>
+                            </span>
                         {% endif %}
+                    </div>
 
-                        <tr>
-                            <th>{% trans "owner" %}:</th>
-                            <td>
-                                {{ lot.owner|default:"unknown" }}
+                    {% if lot.known_use %}
+                        <div>
+                            {% trans "known use" %}:
+                            {{ lot.known_use }}
+                        </div>
+                    {% endif %}
 
-                                {% if lot.owner and "owners.change_owner" in perms %}
-                                    <span class="lot-detail-admin admin-only">
-                                        <a class="btn btn-small btn-warning" href="{% url "admin:lots_lot_changelist" %}?owner={{ lot.owner.pk }}">
-                                            {% trans "View all lots this owner owns" %}
-                                        </a>
-                                    </span>
-                                {% endif %}
+                    <div>
+                        {% trans "area" %}:
+                        {{ lot.area_acres|floatformat:"2"|default:"unknown" }} acres
+                    </div>
 
-                            </td>
-                        </tr>
-
-                        {% if lot.known_use %}
-                            <tr>
-                                <th>{% trans "known use" %}:</th>
-                                <td>{{ lot.known_use }}</td>
-                            </tr>
-                        {% endif %}
-
-                        <tr>
-                            <th>{% trans "area" %}:</th>
-                            <td>
-                                {{ lot.area_acres|floatformat:"2"|default:"unknown" }} acres
-                            </td>
-                        </tr>
-
-                    </table>
                 </div>
             </section>
 
