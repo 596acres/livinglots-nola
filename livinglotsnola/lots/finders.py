@@ -1,5 +1,6 @@
 from time import sleep
 
+from django.contrib.gis.geos import Point
 from django.utils.timezone import now
 
 from livinglots_lots.load import get_addresses_in_range
@@ -12,6 +13,7 @@ from noladata.nora.models import UncommittedProperty
 from noladata.parcels.models import Parcel
 from noladata.treasury.load import load_code_lien_information
 
+from livinglotsnola.geocode import nominatim
 from owners.models import Owner
 from .models import Lot, LotGroup
 
@@ -49,6 +51,13 @@ class HanoScatteredSitesFinder(object):
         parcels = Parcel.objects.filter_by_address_fuzzy(address)
         if parcels.count():
             return parcels[0]
+        if not parcels:
+            geocoded = nominatim(street=address, city='New Orleans',
+                                 state='Louisiana')
+            geocoded_point = Point(geocoded['lon'], geocoded['lat'])
+            parcels = Parcel.objects.filter(geom__contains=geocoded_point)
+            if parcels.count():
+                return parcels[0]
         return None
 
     def find_lots(self):
