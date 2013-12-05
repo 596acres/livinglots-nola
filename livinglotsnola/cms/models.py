@@ -111,6 +111,7 @@ Page.register_templates({
         ('footer_main', _('Footer Main'), 'inherited'),
         ('footer_left', _('Footer Left'), 'inherited'),
         ('footer_right', _('Footer Right'), 'inherited'),
+        ('footer_bottom', _('Footer Bottom'), 'inherited'),
     ),
 })
 
