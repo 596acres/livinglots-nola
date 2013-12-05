@@ -1,5 +1,6 @@
 import geojson
 import json
+from operator import itemgetter
 from pint import UnitRegistry
 
 from django.db.models import Count, Sum
@@ -85,7 +86,7 @@ class LotsOwnershipOverview(FilteredLotsMixin, JSONResponseView):
                 'name': row['owner__name'],
                 'count': row['count'],
             })
-        return owners
+        return sorted(owners, key=itemgetter('name'))
 
     def get_layers(self, lots):
         return {
