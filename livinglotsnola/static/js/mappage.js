@@ -161,7 +161,7 @@ define(
 
         function updateOwnershipOverview(map) {
             var url = Django.url('lots:lot_ownership_overview'),
-                params = buildLotFilterParams(map);
+                params = buildLotFilterCountParams(map);
             $.getJSON(url + '?' + $.param(params), function (data) {
                 var template = Handlebars.compile($('#details-template').html());
                 var content = template({
