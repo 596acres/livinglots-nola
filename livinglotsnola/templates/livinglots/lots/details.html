@@ -1,5 +1,25 @@
 {% load i18n %}
 
+<script id="details-template" type="text/x-handlebars-template">
+    {% verbatim %}
+        <ul>
+            {{#each lottypes}}
+                <li>
+                    <span class="legend-marker legend-marker-{{type}}"></span>
+                    {{type}}
+                    <ul>
+                        {{#each owners}}
+                            <li>
+                                {{count}} lots owned by {{name}}
+                            </li>
+                        {{/each}}
+                    </ul>
+                </li>
+            {{/each}}
+        </ul>
+    {% endverbatim %}
+</script>
+
 <div class="overlaymenu-tip-container hidden-print">
     <div class="overlaymenu-tip"></div>
 </div>

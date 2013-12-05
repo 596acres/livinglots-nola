@@ -33,26 +33,6 @@
     {% endverbatim %}
 </script>
 
-<script id="details-template" type="text/x-handlebars-template">
-    {% verbatim %}
-        <ul>
-            {{#each lottypes}}
-                <li>
-                    <span class="legend-marker legend-marker-{{type}}"></span>
-                    {{type}}
-                    <ul>
-                        {{#each owners}}
-                            <li>
-                                {{count}} lots owned by {{name}}
-                            </li>
-                        {{/each}}
-                    </ul>
-                </li>
-            {{/each}}
-        </ul>
-    {% endverbatim %}
-</script>
-
 <section id="map-welcome" class="hidden-print">
     <h1>
         {% trans "Welcome!" %}
