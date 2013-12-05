@@ -1,4 +1,4 @@
-{% load i18n %}
+{% load i18n owners_tags %}
 
 <div class="overlaymenu-tip-container">
     <div class="overlaymenu-tip"></div>
@@ -9,6 +9,15 @@
             <input type="checkbox" class="filter" name="public" checked />
             <span class="legend-marker legend-marker-public"></span>
             {% trans "publicly owned land" %}
+            <ul class="owners-list owners-list-public">
+                {% get_owners type "public" as owners %}
+                {% for owner in owners %}
+                    <li>
+                        <input type="checkbox" class="filter filter-owner-public" id="owner-public-{{ owner.pk }}" data-owner-pk="{{ owner.pk }}" checked />
+                        <label for="owner-public-{{owner.pk }}">{{ owner.name }}</label>
+                    </li>
+                {% endfor %}
+            </ul>
         </li>
         <li>
             <input type="checkbox" class="filter" name="private" checked />

@@ -50,11 +50,20 @@ class LotCenterFilter(django_filters.Filter):
 
 class OwnerFilter(django_filters.Filter):
 
+    def __init__(self, owner_type=None, **kwargs):
+        super(OwnerFilter, self).__init__(**kwargs)
+        self.owner_type = owner_type
+
     def filter(self, qs, value):
         if not value:
             return qs
         owner_pks = value.split(',')
-        return qs.filter(owner__pk__in=owner_pks)
+        owner_query = Q(
+            owner__owner_type=self.owner_type,
+            owner__pk__in=owner_pks,
+        )
+        other_owners_query = ~Q(owner__owner_type=self.owner_type)
+        return qs.filter(owner_query | other_owners_query)
 
 
 class LotFilter(django_filters.FilterSet):
@@ -62,8 +71,8 @@ class LotFilter(django_filters.FilterSet):
     bbox = BoundingBoxFilter()
     layers = LayerFilter()
     lot_center = LotCenterFilter()
-    owners = OwnerFilter()
     parents_only = LotGroupParentFilter()
+    public_owners = OwnerFilter(owner_type='public')
 
     def __init__(self, *args, **kwargs):
         user = kwargs.pop('user', None)
@@ -79,6 +88,6 @@ class LotFilter(django_filters.FilterSet):
             'known_use',
             'layers',
             'lot_center',
-            'owners',
             'parents_only',
+            'public_owners',
         ]

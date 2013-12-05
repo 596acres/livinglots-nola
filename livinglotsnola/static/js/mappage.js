@@ -13,6 +13,7 @@ define(
         'leaflet',
         'spin',
         'map.styles',
+        'singleminded',
 
         'jquery.infinitescroll',
 
@@ -24,7 +25,7 @@ define(
 
         'map.overlaymenu',
         'map.search'
-    ], function (Django, $, Handlebars, _, L, Spinner, mapstyles) {
+    ], function (Django, $, Handlebars, _, L, Spinner, mapstyles, singleminded) {
 
         var lotsLayer,
             userLayer;
@@ -56,64 +57,67 @@ define(
 
         function addLotsLayer(map, params) {
             var url = map.options.lotsurl + '?' + $.param(params);
-            $.getJSON(url, function (data) {
-                lotsLayer = L.geoJson(data, {
-                    onEachFeature: function (feature, layer) {
+            singleminded.remember({
+                name: 'addLotsLayer',
+                jqxhr: $.getJSON(url, function (data) {
+                    lotsLayer = L.geoJson(data, {
+                        onEachFeature: function (feature, layer) {
 
-                        layer.on('click', function (layer) {
-                            var latlng = layer.latlng;
-                            var x = map.latLngToContainerPoint(latlng).x;
-                            var y = map.latLngToContainerPoint(latlng).y - 100;
-                            var point = map.containerPointToLatLng([x, y]);
-                            return map.setView(point, map._zoom);
-                        });
+                            layer.on('click', function (layer) {
+                                var latlng = layer.latlng;
+                                var x = map.latLngToContainerPoint(latlng).x;
+                                var y = map.latLngToContainerPoint(latlng).y - 100;
+                                var point = map.containerPointToLatLng([x, y]);
+                                return map.setView(point, map._zoom);
+                            });
 
-                        layer.on('mouseover', function (event) {
-                            onMouseOverFeature(event.target.feature);
-                        });
+                            layer.on('mouseover', function (event) {
+                                onMouseOverFeature(event.target.feature);
+                            });
 
-                        layer.on('mouseout', function (event) {
-                            onMouseOutFeature(event.target.feature);
-                        });
+                            layer.on('mouseout', function (event) {
+                                onMouseOutFeature(event.target.feature);
+                            });
 
-                    },
-                    pointToLayer: function (feature, latlng) {
-                        var options = {};
-                        if (feature.properties.has_organizers) {
-                            options.hasOrganizers = true;
+                        },
+                        pointToLayer: function (feature, latlng) {
+                            var options = {};
+                            if (feature.properties.has_organizers) {
+                                options.hasOrganizers = true;
+                            }
+                            return L.lotMarker(latlng, options);
+                        },
+                        style: function (feature) {
+                            var style = {
+                                fillColor: '#000000',
+                                fillOpacity: 1,
+                                stroke: 0
+                            };
+                            style.fillColor = mapstyles[feature.properties.layer];
+                            if (!style.fillColor) {
+                                style.fillColor = '#000000';
+                            }
+                            return style;
+                        },
+                        popupOptions: {
+                            autoPan: false,
+                            maxWidth: 250,
+                            minWidth: 250,
+                            offset: [0, 0]
+                        },
+                        handlebarsTemplateSelector: '#popup-template',
+                        getTemplateContext: function (layer) {
+                            return {
+                                detailUrl: Django.url('lots:lot_detail', {
+                                    pk: layer.feature.id
+                                }),
+                                feature: layer.feature
+                            };
                         }
-                        return L.lotMarker(latlng, options);
-                    },
-                    style: function (feature) {
-                        var style = {
-                            fillColor: '#000000',
-                            fillOpacity: 1,
-                            stroke: 0
-                        };
-                        style.fillColor = mapstyles[feature.properties.layer];
-                        if (!style.fillColor) {
-                            style.fillColor = '#000000';
-                        }
-                        return style;
-                    },
-                    popupOptions: {
-                        autoPan: false,
-                        maxWidth: 250,
-                        minWidth: 250,
-                        offset: [0, 0]
-                    },
-                    handlebarsTemplateSelector: '#popup-template',
-                    getTemplateContext: function (layer) {
-                        return {
-                            detailUrl: Django.url('lots:lot_detail', {
-                                pk: layer.feature.id
-                            }),
-                            feature: layer.feature
-                        };
-                    }
-                });
-                lotsLayer.addTo(map);
+                    });
+                    lotsLayer.addTo(map);
 
+                })
             });
         }
 
@@ -121,9 +125,13 @@ define(
             var filters = _.map($('.filter:checked'), function (filter) {
                 return $(filter).attr('name'); 
             });
+            var publicOwners = _.map($('.filter-owner-public:checked'), function (ownerFilter) {
+                return $(ownerFilter).data('ownerPk');
+            });
             return {
                 layers: filters.join(','),
-                parents_only: true
+                parents_only: true,
+                public_owners: publicOwners.join(',')
             };
         }
 
@@ -136,10 +144,13 @@ define(
         function updateLotCount(map) {
             var url = Django.url('lots:lot_count') + '?' +
                 $.param(buildLotFilterCountParams(map));
-            $.getJSON(url, function (data) {
-                _.each(data, function (value, key) {
-                    $('#' + key).text(value);
-                });
+            singleminded.remember({
+                name: 'updateLotCount',
+                jqxhr: $.getJSON(url, function (data) {
+                    _.each(data, function (value, key) {
+                        $('#' + key).text(value);
+                    });
+                })
             });
         }
 
@@ -248,6 +259,23 @@ define(
                 });
 
             $('.filter').change(function () {
+                updateDisplayedLots(map, lotsLayer);
+                updateLotCount(map);
+            });
+
+            // Check or uncheck all public owners when the public layer is 
+            // turned on or off
+            $('.filter[name=public]').change(function () {
+                $('.filter-owner-public').prop('checked', $(this).is(':checked'));
+            });
+
+            $('.filter-owner-public').change(function () {
+                if ($('.filter-owner-public:checked').length > 0) {
+                    $('.filter[name=public]').prop('checked', true);
+                }
+                else {
+                    $('.filter[name=public]').prop('checked', false);
+                }
                 updateDisplayedLots(map, lotsLayer);
                 updateLotCount(map);
             });

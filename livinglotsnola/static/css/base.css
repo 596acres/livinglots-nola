@@ -385,6 +385,11 @@ nav.navbar {
     padding: 0;
 }
 
+.owners-list {
+    list-style: none;
+    padding-left: 15px;
+}
+
 #map-legend {
     background: rgba(256, 256, 256, 0.85);
     border: 3px solid #2593c6;
