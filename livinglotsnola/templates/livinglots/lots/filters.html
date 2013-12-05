@@ -6,9 +6,12 @@
 <div class="overlaymenu-menu-content">
     <ul class="filters-list">
         <li>
-            <input type="checkbox" class="filter" name="public" checked />
-            <span class="legend-marker legend-marker-public"></span>
-            {% trans "publicly owned land" %}
+            <input id="layer-public" type="checkbox" class="filter" name="public" checked />
+            <label for="layer-public">
+                <span class="legend-marker legend-marker-public"></span>
+                {% trans "publicly owned land" %}
+            </label>
+
             <ul class="owners-list owners-list-public">
                 {% get_owners type "public" as owners %}
                 {% for owner in owners %}
@@ -20,9 +23,11 @@
             </ul>
         </li>
         <li>
-            <input type="checkbox" class="filter" name="private" checked />
-            <span class="legend-marker legend-marker-private"></span>
-            {% trans "private land belonging to an owner who wants to see it used" %}
+            <input id="layer-private" type="checkbox" class="filter" name="private" checked />
+            <label for="layer-private">
+                <span class="legend-marker legend-marker-private"></span>
+                {% trans "private land belonging to an owner who wants to see it used" %}
+            </label>
         </li>
         <li>
             <input type="checkbox" class="filter" name="private-lien" disabled />
