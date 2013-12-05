@@ -385,6 +385,10 @@ nav.navbar {
     padding: 0;
 }
 
+.filters-list label {
+    display: inline;
+}
+
 .owners-list {
     list-style: none;
     padding-left: 15px;
