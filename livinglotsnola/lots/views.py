@@ -73,6 +73,11 @@ class LotsGeoJSONCentroid(LotGeoJSONMixin, FilteredLotsMixin, GeoJSONListView):
 
 class LotsOwnershipOverview(FilteredLotsMixin, JSONResponseView):
 
+    layer_labels = {
+        'public': 'publicly owned land',
+        'private': 'private land belonging to an owner who wants to see it used',
+    }
+
     def get_owners(self, lots_qs):
         owners = []
         for row in lots_qs.values('owner__name').annotate(count=Count('pk')):
@@ -92,16 +97,21 @@ class LotsOwnershipOverview(FilteredLotsMixin, JSONResponseView):
         }
 
     def get_layer_counts(self, layers):
+        counts = []
         for layer, qs in layers.items():
-            yield {
-                'type': layer,
-                'owners': self.get_owners(qs),
-            }
+            owners = self.get_owners(qs)
+            if owners:
+                counts.append({
+                    'label': self.layer_labels[layer],
+                    'owners': owners,
+                    'type': layer,
+                })
+        return counts
 
     def get_context_data(self, **kwargs):
         lots = self.get_lots().qs
         layers = self.get_layers(lots)
-        return list(self.get_layer_counts(layers))
+        return self.get_layer_counts(layers)
 
 
 class LotsCountViewWithAcres(LotsCountView):
