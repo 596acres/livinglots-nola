@@ -8,6 +8,7 @@ requirejs.config({
         "jquery.infinitescroll": "../bower_components/infinite-scroll/jquery.infinitescroll",
         "handlebars": "../bower_components/handlebars/handlebars",
         "leaflet": "../bower_components/leaflet/leaflet-src",
+        "leaflet.bing": "../bower_components/leaflet-plugins/layer/tile/Bing",
         "leaflet.dataoptions": "../bower_components/leaflet.dataoptions/src/leaflet.dataoptions",
         "leaflet.handlebars": "../bower_components/leaflet.handlebars/src/leaflet.handlebars",
         "leaflet.hash": "../bower_components/leaflet-hash/leaflet-hash",
@@ -26,6 +27,7 @@ requirejs.config({
             'exports': 'Handlebars'
         },
         'jquery.infinitescroll': ['jquery'],
+        'leaflet.bing': ['leaflet'],
         'leaflet.hash': ['leaflet'],
         'leaflet.usermarker': ['leaflet'],
         'underscore': {

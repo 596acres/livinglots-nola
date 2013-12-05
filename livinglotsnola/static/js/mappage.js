@@ -17,6 +17,7 @@ define(
 
         'jquery.infinitescroll',
 
+        'leaflet.bing',
         'leaflet.dataoptions',
         'leaflet.handlebars',
         'leaflet.hash',
@@ -31,9 +32,17 @@ define(
             userLayer;
 
         function addBaseLayer(map) {
-            var baseLayer = L.tileLayer('http://{s}.tile.cloudmade.com/{key}/{styleId}/256/{z}/{x}/{y}.png', {
+            var cloudmade = L.tileLayer('http://{s}.tile.cloudmade.com/{key}/{styleId}/256/{z}/{x}/{y}.png', {
                 key: map.options.apikey,
                 styleId: map.options.styleid
+            }).addTo(map);
+
+            var bing = new L.BingLayer('Ajio1n0EgmAAvT3zLndCpHrYR_LHJDgfDU6B0tV_1RClr7OFLzy4RnkLXlSdkJ_x');
+            //map.addLayer(bing);
+
+            L.control.layers({
+                streets: cloudmade,
+                satellite: bing
             }).addTo(map);
         }
 
