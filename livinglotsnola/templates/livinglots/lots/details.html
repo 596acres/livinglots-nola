@@ -1,0 +1,21 @@
+{% load i18n %}
+
+<div class="overlaymenu-tip-container hidden-print">
+    <div class="overlaymenu-tip"></div>
+</div>
+
+<div class="overlaymenu-menu-content">
+    <section class="details-overview"></section>
+
+    <section class="details-buttons hidden-print">
+        <a class="details-button details-link btn btn-default btn-block disabled" href="#">
+            {% trans "Link to this view" %}
+        </a>
+        <a class="details-button details-print btn btn-default btn-block" href="#">
+            {% trans "Print" %}
+        </a>
+        <a class="details-button details-email btn btn-default btn-block disabled" href="#">
+            {% trans "Email" %}
+        </a>
+    </section>
+</div>
