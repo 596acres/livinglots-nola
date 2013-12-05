@@ -210,33 +210,7 @@
 </div>
 
 <div class="overlaymenu overlaymenu-filter">
-    <div class="overlaymenu-tip-container">
-        <div class="overlaymenu-tip"></div>
-    </div>
-    <div class="overlaymenu-menu-content">
-        <ul class="filters-list">
-            <li>
-                <input type="checkbox" class="filter" name="public" checked />
-                <span class="legend-marker legend-marker-public"></span>
-                {% trans "publicly owned land" %}
-            </li>
-            <li>
-                <input type="checkbox" class="filter" name="private" checked />
-                <span class="legend-marker legend-marker-private"></span>
-                {% trans "private land belonging to an owner who wants to see it used" %}
-            </li>
-            <li>
-                <input type="checkbox" class="filter" name="private-lien" disabled />
-                <span class="legend-marker legend-marker-private-lien"></span>
-                {% trans "private land with a blight lien" %}
-            </li>
-            <li>
-                <input type="checkbox" class="filter" name="project" disabled />
-                <span class="legend-marker legend-marker-project"></span>
-                {% trans "project" %}
-            </li>
-        </ul>
-    </div>
+    {% include "livinglots/lots/filters.html" %}
 </div>
 
 <div class="overlaymenu overlaymenu-news">
