@@ -48,11 +48,21 @@ class LotCenterFilter(django_filters.Filter):
         return qs.filter(centroid__distance_lte=(lot.centroid, D(mi=.5)))
 
 
+class OwnerFilter(django_filters.Filter):
+
+    def filter(self, qs, value):
+        if not value:
+            return qs
+        owner_pks = value.split(',')
+        return qs.filter(owner__pk__in=owner_pks)
+
+
 class LotFilter(django_filters.FilterSet):
 
     bbox = BoundingBoxFilter()
     layers = LayerFilter()
     lot_center = LotCenterFilter()
+    owners = OwnerFilter()
     parents_only = LotGroupParentFilter()
 
     def __init__(self, *args, **kwargs):
@@ -69,5 +79,6 @@ class LotFilter(django_filters.FilterSet):
             'known_use',
             'layers',
             'lot_center',
+            'owners',
             'parents_only',
         ]
