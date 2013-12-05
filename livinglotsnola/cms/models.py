@@ -8,6 +8,8 @@ from feincms.content.application.models import ApplicationContent
 from feincms.content.medialibrary.models import MediaFileContent
 from feincms.content.richtext.models import RichTextContent
 
+from livinglots_pathways.cms import PathwayListContent
+
 from pathways.models import Pathway
 
 
@@ -129,6 +131,7 @@ Page.register_templates({
 Page.create_content_type(RichTextContent)
 
 Page.create_content_type(CollapsibleSectionContent)
+Page.create_content_type(PathwayListContent)
 Page.create_content_type(RecentActivitiesContent)
 
 Page.create_content_type(MediaFileContent, TYPE_CHOICES=(
