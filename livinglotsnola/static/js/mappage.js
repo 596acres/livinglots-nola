@@ -122,14 +122,14 @@ define(
         }
 
         function buildLotFilterParams(map) {
-            var filters = _.map($('.filter:checked'), function (filter) {
-                return $(filter).attr('name'); 
+            var layers = _.map($('.filter-layer:checked'), function (layer) {
+                return $(layer).attr('name'); 
             });
             var publicOwners = _.map($('.filter-owner-public:checked'), function (ownerFilter) {
                 return $(ownerFilter).data('ownerPk');
             });
             return {
-                layers: filters.join(','),
+                layers: layers.join(','),
                 parents_only: true,
                 public_owners: publicOwners.join(',')
             };
@@ -171,7 +171,49 @@ define(
             });
         }
 
+        function updateDetailsLink(map) {
+            var params = buildLotFilterParams(map);
+            delete params.parents_only;
+
+            var l = window.location,
+                query = '?' + $.param(params),
+                url = l.protocol + '//' + l.host + l.pathname + query + l.hash;
+            $('a.details-link').attr('href', url);
+        }
+
+        function deparam() {
+            var vars = {},
+                param,
+                params = window.location.search.slice(1).split('&');
+            for(var i = 0; i < params.length; i++) {
+                param = params[i].split('=');
+                vars[param[0]] = decodeURIComponent(param[1]);
+            }
+            return vars;
+        }
+
+        function setFilters(params) {
+            // Clear checkbox filters
+            $('.filter[type=checkbox]').prop('checked', false);
+
+            // Set layers filters
+            var layers = params.layers.split(',');
+            _.each(layers, function (layer) {
+                $('.filter-layer[name=' + layer +']').prop('checked', true);
+            });
+
+            // Set owners filters
+            var publicOwners = params.public_owners.split(',');
+            _.each(publicOwners, function (pk) {
+                $('.filter-owner-public[data-owner-pk=' + pk +']').prop('checked', true);
+            });
+        }
+
         $(document).ready(function () {
+            if (window.location.search.length) {
+                setFilters(deparam());
+            }
+
             var map = L.map('map');
             addBaseLayer(map);
             addLotsLayer(map, buildLotFilterParams(map));
@@ -201,6 +243,7 @@ define(
                     menu: '.overlaymenu-details'
                 })
                 .on('overlaymenuopen', function () {
+                    updateDetailsLink(map);
                     updateOwnershipOverview(map);
                 });
             $('.details-print').click(function () {
