@@ -305,11 +305,13 @@ nav.navbar {
     overflow-y: auto;
 }
 
+.overlaymenu-details,
 .overlaymenu-filter,
 .overlaymenu-news {
     width: 350px;
 }
 
+.overlaymenu-details .overlaymenu-tip-container,
 .overlaymenu-filter .overlaymenu-tip-container,
 .overlaymenu-news .overlaymenu-tip-container {
     left: 140px;
