@@ -733,10 +733,13 @@ textarea.form-control {
     color: #f2ce1e;
 }
 
+.leaflet-control-layers,
 .leaflet-control-zoom {
+    background: #58595b;
     border: 3px solid #2593c6;
     -webkit-border-radius: 6px;
     border-radius: 6px;
+    color: white;
 }
 
 .leaflet-control-zoom a,
@@ -750,6 +753,9 @@ textarea.form-control {
 }
 .leaflet-control-zoom a:active {
     color: white;
+}
+.leaflet-control-zoom a.leaflet-disabled {
+    background: gray;
 }
 
 .leaflet-control-zoom .leaflet-control-zoom-in {
