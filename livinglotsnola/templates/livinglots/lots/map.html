@@ -11,7 +11,11 @@
             <div class="row">
                 <div class="popup-streetview col-md-6">
                     <div>
-                        <img src="http://maps.googleapis.com/maps/api/streetview?location={{feature.geometry.coordinates.[1]}},{{feature.geometry.coordinates.[0]}}&size=105x110&sensor=false&fov=45" />
+                        {{#if feature.properties.centroid}}
+                            <img src="http://maps.googleapis.com/maps/api/streetview?location={{feature.properties.centroid.[1]}},{{feature.properties.centroid.[0]}}&size=105x110&sensor=false&fov=45" />
+                        {{else}}
+                            <img src="http://maps.googleapis.com/maps/api/streetview?location={{feature.geometry.coordinates.[1]}},{{feature.geometry.coordinates.[0]}}&size=105x110&sensor=false&fov=45" />
+                        {{/if}}
                     </div>
                 </div>
                 <div class="popup-lot-details col-md-6">
@@ -102,7 +106,8 @@
 
     data-l-apikey="{% inplace_setting PLACES_CLOUDMADE_KEY %}"
     data-l-styleid="{% inplace_setting PLACES_CLOUDMADE_STYLE %}"
-    data-l-lotsurl="{% url "lots:lot_geojson_centroid" %}"
+    data-l-lot-centroids-url="{% url "lots:lot_geojson_centroid" %}"
+    data-l-lot-polygons-url="{% url "lots:lot_geojson_polygon" %}"
 >
     <div id="map-legend" class="row hidden-print">
         <div class="col-sm-4">

@@ -21,30 +21,22 @@ class LotGeoJSONMixin(object):
             return 'unknown'
         return round(acres, 2)
 
-    def get_feature(self, lot):
+    def get_layer(self, lot):
         if lot.known_use:
-            layer = 'in use'
+            return 'in use'
         elif lot.owner and lot.owner.owner_type == 'public':
-            layer = 'public'
+            return 'public'
         elif lot.owner and lot.owner.owner_type == 'private':
-            layer = 'private'
+            return 'private'
             if lot.has_blight_liens:
-                layer = 'private_blight_liens'
-        else:
-            layer = ''
+                return 'private_blight_liens'
+        return ''
 
-        try:
-            lot_geojson = lot.geojson
-        except Exception:
-            if lot.polygon:
-                lot_geojson = lot.polygon.geojson
-            else:
-                lot_geojson = lot.centroid.geojson
-
-        properties = {
+    def get_properties(self, lot):
+        return {
             'address_line1': lot.address_line1,
             'has_organizers': lot.organizers__count > 0,
-            'layer': layer,
+            'layer': self.get_layer(lot),
             'number_of_lots': lot.number_of_lots,
             'number_of_lots_plural': lot.number_of_lots > 1,
             'owner': str(lot.owner) or 'unknown',
@@ -52,10 +44,21 @@ class LotGeoJSONMixin(object):
             'size': self.get_acres(lot),
         }
 
+    def get_geometry(self, lot):
+        try:
+            lot_geojson = lot.geojson
+        except Exception:
+            if lot.polygon:
+                lot_geojson = lot.polygon.geojson
+            else:
+                lot_geojson = lot.centroid.geojson
+        return json.loads(lot_geojson)
+
+    def get_feature(self, lot):
         return geojson.Feature(
             lot.pk,
-            geometry=json.loads(lot_geojson),
-            properties=properties,
+            geometry=self.get_geometry(lot),
+            properties=self.get_properties(lot),
         )
 
 
@@ -64,6 +67,27 @@ class LotsGeoJSONCentroid(LotGeoJSONMixin, FilteredLotsMixin, GeoJSONListView):
     def get_queryset(self):
         return self.get_lots().qs.filter(centroid__isnull=False).geojson(
             field_name='centroid',
+            precision=8,
+        ).select_related(
+            'known_use',
+            'lotgroup',
+            'owner__owner_type'
+        ).annotate(organizers__count=Count('organizers'))
+
+
+class LotsGeoJSONPolygon(LotGeoJSONMixin, FilteredLotsMixin, GeoJSONListView):
+
+    def get_properties(self, lot):
+        properties = super(LotsGeoJSONPolygon, self).get_properties(lot)
+        properties['centroid'] = (
+            round(lot.centroid.x, 4),
+            round(lot.centroid.y, 4)
+        )
+        return properties
+
+    def get_queryset(self):
+        return self.get_lots().qs.filter(centroid__isnull=False).geojson(
+            field_name='polygon',
             precision=8,
         ).select_related(
             'known_use',
