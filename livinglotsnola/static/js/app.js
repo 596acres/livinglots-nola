@@ -15,7 +15,16 @@ requirejs.config({
         "leaflet.usermarker": "../bower_components/leaflet.usermarker/src/leaflet.usermarker",
         "requirejs": "../bower_components/requirejs",
         "spin": "../bower_components/spin.js/spin",
-        "underscore": "../bower_components/underscore/underscore"
+        "underscore": "../bower_components/underscore/underscore",
+
+        // TileLayer.GeoJSON paths
+        "communist": "../bower_components/leaflet-tilelayer-vector/lib/communist.min",
+        "TileCache": "../bower_components/leaflet-tilelayer-vector/src/TileCache",
+        "AbstractWorker": "../bower_components/leaflet-tilelayer-vector/src/AbstractWorker",
+        "CommunistWorker": "../bower_components/leaflet-tilelayer-vector/src/CommunistWorker",
+        "TileLayer.GeoJSON": "../bower_components/leaflet-tilelayer-vector/src/TileLayer.GeoJSON",
+        "TileLayer.Overzoom": "../bower_components/leaflet-tilelayer-vector/src/TileLayer.Overzoom",
+        "TileQueue": "../bower_components/leaflet-tilelayer-vector/src/TileQueue"
     },
     shim: {
         'bootstrap': ['jquery'],

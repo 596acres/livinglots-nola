@@ -21,6 +21,7 @@ define(
         'leaflet.dataoptions',
         'leaflet.handlebars',
         'leaflet.hash',
+        'leaflet.lotlayer',
         'leaflet.lotmarker',
         'leaflet.usermarker',
 
@@ -66,68 +67,70 @@ define(
 
         function addLotsLayer(map, params) {
             var url = map.options.lotsurl + '?' + $.param(params);
-            singleminded.remember({
-                name: 'addLotsLayer',
-                jqxhr: $.getJSON(url, function (data) {
-                    lotsLayer = L.geoJson(data, {
-                        onEachFeature: function (feature, layer) {
+            lotsLayer = L.lotLayer(url, {
 
-                            layer.on('click', function (layer) {
-                                var latlng = layer.latlng;
-                                var x = map.latLngToContainerPoint(latlng).x;
-                                var y = map.latLngToContainerPoint(latlng).y - 100;
-                                var point = map.containerPointToLatLng([x, y]);
-                                return map.setView(point, map._zoom);
-                            });
+                    unique: function (feature) {
+                        return feature.id;
+                    }
 
-                            layer.on('mouseover', function (event) {
-                                onMouseOverFeature(event.target.feature);
-                            });
+                }, {
+                    onEachFeature: function (feature, layer) {
 
-                            layer.on('mouseout', function (event) {
-                                onMouseOutFeature(event.target.feature);
-                            });
+                        layer.on('click', function (layer) {
+                            var latlng = layer.latlng;
+                            var x = map.latLngToContainerPoint(latlng).x;
+                            var y = map.latLngToContainerPoint(latlng).y - 100;
+                            var point = map.containerPointToLatLng([x, y]);
+                            return map.setView(point, map._zoom);
+                        });
 
-                        },
-                        pointToLayer: function (feature, latlng) {
-                            var options = {};
-                            if (feature.properties.has_organizers) {
-                                options.hasOrganizers = true;
-                            }
-                            return L.lotMarker(latlng, options);
-                        },
-                        style: function (feature) {
-                            var style = {
-                                fillColor: '#000000',
-                                fillOpacity: 1,
-                                stroke: 0
-                            };
-                            style.fillColor = mapstyles[feature.properties.layer];
-                            if (!style.fillColor) {
-                                style.fillColor = '#000000';
-                            }
-                            return style;
-                        },
-                        popupOptions: {
-                            autoPan: false,
-                            maxWidth: 250,
-                            minWidth: 250,
-                            offset: [0, 0]
-                        },
-                        handlebarsTemplateSelector: '#popup-template',
-                        getTemplateContext: function (layer) {
-                            return {
-                                detailUrl: Django.url('lots:lot_detail', {
-                                    pk: layer.feature.id
-                                }),
-                                feature: layer.feature
-                            };
+                        layer.on('mouseover', function (event) {
+                            onMouseOverFeature(event.target.feature);
+                        });
+
+                        layer.on('mouseout', function (event) {
+                            onMouseOutFeature(event.target.feature);
+                        });
+
+                    },
+                    pointToLayer: function (feature, latlng) {
+                        var options = {};
+                        if (feature.properties.has_organizers) {
+                            options.hasOrganizers = true;
                         }
-                    });
-                    lotsLayer.addTo(map);
-
-                })
-            });
+                        return L.lotMarker(latlng, options);
+                    },
+                    style: function (feature) {
+                        var style = {
+                            fillColor: '#000000',
+                            fillOpacity: 1,
+                            stroke: 0
+                        };
+                        style.fillColor = mapstyles[feature.properties.layer];
+                        if (!style.fillColor) {
+                            style.fillColor = '#000000';
+                        }
+                        return style;
+                    },
+                    popupOptions: {
+                        autoPan: false,
+                        maxWidth: 250,
+                        minWidth: 250,
+                        offset: [0, 0]
+                    },
+                    handlebarsTemplateSelector: '#popup-template',
+                    getTemplateContext: function (layer) {
+                        if (!layer.feature) {
+                            throw 'noFeatureForContext';
+                        }
+                        return {
+                            detailUrl: Django.url('lots:lot_detail', {
+                                pk: layer.feature.id
+                            }),
+                            feature: layer.feature
+                        };
+                    }
+            }).addTo(map);
         }
 
         function buildLotFilterParams(map) {
