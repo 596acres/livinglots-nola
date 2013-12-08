@@ -171,8 +171,9 @@ define(
                 this.polygonsLayer = L.lotLayer(url, options, layerOptions);
             },
 
-            updateDisplayedLots: function (lotsLayer, params) {
-                this.removeLayer(lotsLayer);
+            updateDisplayedLots: function (params) {
+                this.removeLayer(this.centroidsLayer);
+                this.removeLayer(this.polygonsLayer);
                 this.addLotsLayer(params);
             },
 

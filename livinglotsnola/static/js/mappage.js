@@ -212,8 +212,7 @@ define(
 
             $('.filter').change(function () {
                 var params = buildLotFilterParams(map);
-                map.updateDisplayedLots(map.centroidsLayer, params);
-                map.updateDisplayedLots(map.polygonsLayer, params);
+                map.updateDisplayedLots(params);
                 updateLotCount(map);
             });
 
@@ -231,8 +230,7 @@ define(
                     $('.filter[name=public]').prop('checked', false);
                 }
                 var params = buildLotFilterParams(map);
-                map.updateDisplayedLots(map.centroidsLayer, params);
-                map.updateDisplayedLots(map.polygonsLayer, params);
+                map.updateDisplayedLots(params);
                 updateLotCount(map);
             });
 
