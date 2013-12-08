@@ -12,165 +12,15 @@ define(
         'underscore',
         'leaflet',
         'spin',
-        'map.styles',
         'singleminded',
 
         'jquery.infinitescroll',
 
-        'leaflet.bing',
-        'leaflet.dataoptions',
-        'leaflet.handlebars',
-        'leaflet.hash',
-        'leaflet.lotlayer',
-        'leaflet.lotmarker',
-        'leaflet.usermarker',
+        'leaflet.lotmap',
 
         'map.overlaymenu',
         'map.search'
-    ], function (Django, $, Handlebars, _, L, Spinner, mapstyles, singleminded) {
-
-        var centroidsLayer,
-            polygonsLayer,
-            previousZoom,
-            userLayer;
-
-        var lotLayerOptions = {
-            onEachFeature: function (feature, layer) {
-
-                layer.on('click', function (layer) {
-                    var latlng = layer.latlng;
-                    var x = map.latLngToContainerPoint(latlng).x;
-                    var y = map.latLngToContainerPoint(latlng).y - 100;
-                    var point = map.containerPointToLatLng([x, y]);
-                    return map.setView(point, map._zoom);
-                });
-
-                layer.on('mouseover', function (event) {
-                    onMouseOverFeature(event.target.feature);
-                });
-
-                layer.on('mouseout', function (event) {
-                    onMouseOutFeature(event.target.feature);
-                });
-
-            },
-            pointToLayer: function (feature, latlng) {
-                var options = {};
-                if (feature.properties.has_organizers) {
-                    options.hasOrganizers = true;
-                }
-                return L.lotMarker(latlng, options);
-            },
-            style: function (feature) {
-                var style = {
-                    fillColor: '#000000',
-                    fillOpacity: 1,
-                    stroke: 0
-                };
-                style.fillColor = mapstyles[feature.properties.layer];
-                if (!style.fillColor) {
-                    style.fillColor = '#000000';
-                }
-                return style;
-            },
-            popupOptions: {
-                autoPan: false,
-                maxWidth: 250,
-                minWidth: 250,
-                offset: [0, 0]
-            },
-            handlebarsTemplateSelector: '#popup-template',
-            getTemplateContext: function (layer) {
-                if (!layer.feature) {
-                    throw 'noFeatureForContext';
-                }
-                return {
-                    detailUrl: Django.url('lots:lot_detail', {
-                        pk: layer.feature.id
-                    }),
-                    feature: layer.feature
-                };
-            }
-        };
-
-        function addBaseLayer(map) {
-            var cloudmade = L.tileLayer('http://{s}.tile.cloudmade.com/{key}/{styleId}/256/{z}/{x}/{y}.png', {
-                key: map.options.apikey,
-                styleId: map.options.styleid
-            }).addTo(map);
-
-            var bing = new L.BingLayer('Ajio1n0EgmAAvT3zLndCpHrYR_LHJDgfDU6B0tV_1RClr7OFLzy4RnkLXlSdkJ_x');
-            //map.addLayer(bing);
-
-            L.control.layers({
-                streets: cloudmade,
-                satellite: bing
-            }).addTo(map);
-        }
-
-        function onMouseOverFeature(feature) {
-            // If recent activities box is open
-            if ($('.overlaymenu-news:visible')) {
-                // If feature is in recent activities, highlight it
-                _.each($('.overlaymenu-news .action'), function (action) {
-                    var $action = $(action);
-                    if ($action.data('lotPk') === feature.properties.pk) {
-                        $action.addClass('feature-hover');
-                    }
-                });
-            }
-        }
-
-        function onMouseOutFeature(feature) {
-            // Un-highlight recent activities
-            $('.overlaymenu-news .action').removeClass('feature-hover');
-        }
-
-        function addCentroidsLayer(map, params) {
-            if (centroidsLayer) {
-                map.removeLayer(centroidsLayer);
-            }
-            var url = map.options.lotCentroidsUrl + '?' + $.param(params);
-
-            var options = {
-                serverZooms: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12],
-                unique: function (feature) {
-                    return feature.id;
-                }
-            };
-
-            centroidsLayer = L.lotLayer(url, options, lotLayerOptions);
-        }
-
-        function addPolygonsLayer(map, params) {
-            if (polygonsLayer) {
-                map.removeLayer(polygonsLayer);
-            }
-            var url = map.options.lotPolygonsUrl + '?' + $.param(params);
-
-            var options = {
-                serverZooms: [16],
-                unique: function (feature) {
-                    return feature.id;
-                }
-            };
-
-            var layerOptions = L.extend({}, lotLayerOptions);
-            polygonsLayer = L.lotLayer(url, options, layerOptions);
-        }
-
-        function addLotsLayer(map, params) {
-            addCentroidsLayer(map, params);
-            addPolygonsLayer(map, params);
-            if (map.getZoom() <= 15) {
-                map.addLayer(centroidsLayer);
-                map.removeLayer(polygonsLayer);
-            }
-            else {
-                map.removeLayer(centroidsLayer);
-                map.addLayer(polygonsLayer);
-            }
-        }
+    ], function (Django, $, Handlebars, _, L, Spinner, singleminded) {
 
         function buildLotFilterParams(map) {
             var layers = _.map($('.filter-layer:checked'), function (layer) {
@@ -203,11 +53,6 @@ define(
                     });
                 })
             });
-        }
-
-        function updateDisplayedLots(map, lotsLayer) {
-            map.removeLayer(lotsLayer);
-            addLotsLayer(map, buildLotFilterParams(map));
         }
 
         function updateOwnershipOverview(map) {
@@ -265,10 +110,29 @@ define(
                 setFilters(deparam());
             }
 
-            var map = L.map('map');
-            addBaseLayer(map);
-            addLotsLayer(map, buildLotFilterParams(map));
-            var hash = new L.Hash(map);
+            var map = L.lotMap('map', {
+
+                onMouseOverFeature: function (feature) {
+                    // If recent activities box is open
+                    if ($('.overlaymenu-news:visible')) {
+                        // If feature is in recent activities, highlight it
+                        _.each($('.overlaymenu-news .action'), function (action) {
+                            var $action = $(action);
+                            if ($action.data('lotPk') === feature.properties.pk) {
+                                $action.addClass('feature-hover');
+                            }
+                        });
+                    }
+                },
+
+                onMouseOutFeature: function (feature) {
+                    // Un-highlight recent activities
+                    $('.overlaymenu-news .action').removeClass('feature-hover');
+                }
+
+            });
+
+            map.addLotsLayer(buildLotFilterParams(map));
 
             //
             // Welcome header
@@ -340,21 +204,16 @@ define(
 
             $('form.map-search-form').mapsearch()
                 .on('searchstart', function (e) {
-                    if (userLayer) {
-                        map.removeLayer(userLayer);
-                    }
+                    map.removeUserLayer();
                 })
                 .on('searchresultfound', function (e, result) {
-                    var latlng = [result.latitude, result.longitude];
-                    userLayer = L.userMarker(latlng, {
-                        smallIcon: true,
-                    }).addTo(map);
-                    map.setView(latlng, 15);
+                    map.addUserLayer([result.latitude, result.longitude]);
                 });
 
             $('.filter').change(function () {
-                updateDisplayedLots(map, centroidsLayer);
-                updateDisplayedLots(map, polygonsLayer);
+                var params = buildLotFilterParams(map);
+                map.updateDisplayedLots(map.centroidsLayer, params);
+                map.updateDisplayedLots(map.polygonsLayer, params);
                 updateLotCount(map);
             });
 
@@ -371,43 +230,23 @@ define(
                 else {
                     $('.filter[name=public]').prop('checked', false);
                 }
-                updateDisplayedLots(map, centroidsLayer);
-                updateDisplayedLots(map, polygonsLayer);
+                var params = buildLotFilterParams(map);
+                map.updateDisplayedLots(map.centroidsLayer, params);
+                map.updateDisplayedLots(map.polygonsLayer, params);
                 updateLotCount(map);
             });
 
             updateLotCount(map);
-            map.on('moveend', function () {
-                updateLotCount(map);
-            });
-            map.on('zoomend', function () {
-                updateLotCount(map);
-                var transitionPoint = 15;
-
-                var currentZoom = map.getZoom();
-                if (previousZoom) {
-                    // Switch to centroids
-                    if (currentZoom <= transitionPoint && 
-                        previousZoom > transitionPoint) {
-                        addLotsLayer(map, buildLotFilterParams(map));
-                    }
-                    // Switch to polygons
-                    else if (currentZoom > transitionPoint &&
-                             previousZoom <= transitionPoint) {
-                        addLotsLayer(map, buildLotFilterParams(map));
-                    }
+            map.on({
+                'moveend': function () {
+                    updateLotCount(map);
+                },
+                'zoomend': function () {
+                    updateLotCount(map);
+                },
+                'lotlayertransition': function (e) {
+                    map.addLotsLayer(buildLotFilterParams(map));
                 }
-                else {
-                    // Start with centroids
-                    if (currentZoom <= transitionPoint) {
-                        addLotsLayer(map, buildLotFilterParams(map));
-                    }
-                    // Start with polygons
-                    else if (currentZoom > transitionPoint) {
-                        addLotsLayer(map, buildLotFilterParams(map));
-                    }
-                }
-                previousZoom = currentZoom;
             });
         });
 
