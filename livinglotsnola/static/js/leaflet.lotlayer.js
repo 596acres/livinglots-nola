@@ -9,7 +9,6 @@ define(
         L.LotLayer = L.TileLayer.Vector.extend({
 
             initialize: function (url, options, geojsonOptions) {
-                options.serverZooms = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12];
                 options.tileCacheFactory = L.tileCache;
                 L.TileLayer.Vector.prototype.initialize.call(this, url, options,
                                                               geojsonOptions);
@@ -18,9 +17,8 @@ define(
             getTileUrl: function (coords) {
                 var x = coords.x,
                     y = coords.y,
-                    z = this._getZoomForUrl();
+                    z = this._getZoomForUrl(),
                     bounds = this.getTileBBox(x, y, z);
-
                 return this._url + '&bbox=' + bounds.toBBoxString();
             },
 
