@@ -1,33 +1,6 @@
 define(['leaflet', 'leaflet.lotpath'], function (L) {
     L.LotMarker = L.CircleMarker.extend({
 
-        initialize: function (latlng, options) {
-            L.CircleMarker.prototype.initialize.call(this, latlng, options);
-            this.on('add', function () {
-                this.initActionPath();
-            });
-        },
-
-        onAdd: function (map) {
-            L.CircleMarker.prototype.onAdd.call(this, map);
-
-            // If this layer's feature has organizers, try to keep it rendering
-            // on top so the star shows up without being confusing
-            if (this.feature && this.feature.properties.has_organizers) {
-                var layer = this;
-                map.on('zoomend', this.onZoomEnd, layer);
-            }
-        },
-
-        onRemove: function (map) {
-            L.CircleMarker.prototype.onRemove.call(this, map);
-
-            if (this.feature && this.feature.properties.has_organizers) {
-                var layer = this;
-                map.off('zoomend', this.onZoomEnd, layer);
-            }
-        },
-
         onZoomEnd: function () {
             if (this._map) {
                 this.bringToFront();
@@ -64,6 +37,25 @@ define(['leaflet', 'leaflet.lotpath'], function (L) {
     });
 
     L.LotMarker.include(L.LotPathMixin);
+
+    L.LotMarker.addInitHook(function () {
+        this.on({
+            'add': function () {
+                this.initActionPath();
+
+                if (this.feature && this.feature.properties.has_organizers) {
+                    var layer = this;
+                    this._map.on('zoomend', this.onZoomEnd, layer);
+                }
+            },
+            'remove': function () {
+                if (this.feature && this.feature.properties.has_organizers) {
+                    var layer = this;
+                    this._map.off('zoomend', this.onZoomEnd, layer);
+                }
+            }
+        });
+    });
 
     L.lotMarker = function (latlng, options) {
         return new L.LotMarker(latlng, options);
