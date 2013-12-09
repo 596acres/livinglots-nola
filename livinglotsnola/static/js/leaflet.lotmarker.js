@@ -8,7 +8,7 @@ define(['leaflet', 'leaflet.lotpath'], function (L) {
             // on top so the star shows up without being confusing
             if (this.feature && this.feature.properties.has_organizers) {
                 var layer = this;
-                map.on('zoomend', layer.bringToFront);
+                map.on('zoomend', this.onZoomEnd, layer);
             }
         },
 
@@ -17,7 +17,13 @@ define(['leaflet', 'leaflet.lotpath'], function (L) {
 
             if (this.feature && this.feature.properties.has_organizers) {
                 var layer = this;
-                map.off('zoomend', layer.bringToFront);
+                map.off('zoomend', this.onZoomEnd, layer);
+            }
+        },
+
+        onZoomEnd: function () {
+            if (this._map) {
+                this.bringToFront();
             }
         },
 
