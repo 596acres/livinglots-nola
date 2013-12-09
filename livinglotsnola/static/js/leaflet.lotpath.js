@@ -18,7 +18,10 @@ define(['leaflet'], function (L) {
             if (this._actionPath) {
                 // Translate and scale around the layer's point
                 var scale = 0.5;
-                if (zoom >= 15) {
+                if (zoom >= 18) {
+                    scale = 1.5;
+                }
+                else if (zoom >= 15) {
                     scale = 0.75;
                 }
                 this._actionPath.setAttribute('transform', 'translate(' + point.x + ',' + point.y + ') scale(' + scale + ')');
