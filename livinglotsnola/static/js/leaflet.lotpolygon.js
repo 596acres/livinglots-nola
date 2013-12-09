@@ -3,7 +3,7 @@ define(['leaflet', 'leaflet.lotpath'], function (L) {
 
         _updatePath: function () {
             var center = this._map.latLngToLayerPoint(this.getBounds().getCenter());
-            this.updateActionPathScale(center, this._map.getZoom());
+            this.updateActionPathScale();
             L.Polygon.prototype._updatePath.call(this);
         }
 

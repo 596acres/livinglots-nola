@@ -30,7 +30,7 @@ define(['leaflet', 'leaflet.lotpath'], function (L) {
             // Update the circle's radius according to the map's zoom level
             this.options.radius = this._radius = this._pickRadius(zoom);
 
-            this.updateActionPathScale(this._point, zoom);
+            this.updateActionPathScale();
             L.CircleMarker.prototype._updatePath.call(this);
         }
 
