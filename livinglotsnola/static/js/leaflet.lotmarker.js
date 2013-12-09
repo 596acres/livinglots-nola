@@ -8,9 +8,16 @@ define(['leaflet', 'leaflet.lotpath'], function (L) {
             // on top so the star shows up without being confusing
             if (this.feature && this.feature.properties.has_organizers) {
                 var layer = this;
-                map.on('zoomend', function () {
-                    layer.bringToFront();
-                });
+                map.on('zoomend', layer.bringToFront);
+            }
+        },
+
+        onRemove: function (map) {
+            L.CircleMarker.prototype.onRemove.call(this, map);
+
+            if (this.feature && this.feature.properties.has_organizers) {
+                var layer = this;
+                map.off('zoomend', layer.bringToFront);
             }
         },
 
