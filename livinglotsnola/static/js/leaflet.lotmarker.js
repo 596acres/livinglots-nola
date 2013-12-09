@@ -1,6 +1,19 @@
 define(['leaflet', 'leaflet.lotpath'], function (L) {
     L.LotMarker = L.CircleMarker.extend({
 
+        onAdd: function (map) {
+            L.CircleMarker.prototype.onAdd.call(this, map);
+
+            // If this layer's feature has organizers, try to keep it rendering
+            // on top so the star shows up without being confusing
+            if (this.feature && this.feature.properties.has_organizers) {
+                var layer = this;
+                map.on('zoomend', function () {
+                    layer.bringToFront();
+                });
+            }
+        },
+
         _initPath: function () {
             this._container = this._createElement('g');
 
