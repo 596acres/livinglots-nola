@@ -1,6 +1,13 @@
 define(['leaflet', 'leaflet.lotpath'], function (L) {
     L.LotMarker = L.CircleMarker.extend({
 
+        initialize: function (latlng, options) {
+            L.CircleMarker.prototype.initialize.call(this, latlng, options);
+            this.on('add', function () {
+                this.initActionPath();
+            });
+        },
+
         onAdd: function (map) {
             L.CircleMarker.prototype.onAdd.call(this, map);
 
@@ -25,20 +32,6 @@ define(['leaflet', 'leaflet.lotpath'], function (L) {
             if (this._map) {
                 this.bringToFront();
             }
-        },
-
-        _initPath: function () {
-            this._container = this._createElement('g');
-
-            // If there is action here, add it before the circles
-            this.initActionPath();
-
-            // Add circle path as usual
-            this._path = this._createElement('path');
-            if (this.options.className) {
-                L.DomUtil.addClass(this._path, this.options.className);
-            }
-            this._container.appendChild(this._path);
         },
 
         _pickRadius: function (zoom) {

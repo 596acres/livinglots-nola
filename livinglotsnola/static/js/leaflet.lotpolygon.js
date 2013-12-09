@@ -1,18 +1,11 @@
 define(['leaflet', 'leaflet.lotpath'], function (L) {
     L.LotPolygon = L.Polygon.extend({
 
-        _initPath: function () {
-            this._container = this._createElement('g');
-
-            // If there is action here, add it before the polygon
-            this.initActionPath();
-
-            // Add polygon path as usual
-            this._path = this._createElement('path');
-            if (this.options.className) {
-                L.DomUtil.addClass(this._path, this.options.className);
-            }
-            this._container.appendChild(this._path);
+        initialize: function (latlngs, options) {
+            L.Polygon.prototype.initialize.call(this, latlngs, options);
+            this.on('add', function () {
+                this.initActionPath();
+            });
         },
 
         _updatePath: function () {

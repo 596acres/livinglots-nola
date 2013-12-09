@@ -6,7 +6,10 @@ define(['leaflet'], function (L) {
                 this._actionPath = this._createElement('path');
                 this._actionPath.setAttribute('style', 'fill:#eec619; fill-opacity:1;');
                 this._actionPath.setAttribute('d', this.getActionPathSvgStr());
-                this._container.appendChild(this._actionPath);
+                this._container.insertBefore(this._actionPath, this._path);
+
+                var point = this._map.latLngToLayerPoint(this.getBounds().getCenter());
+                this.updateActionPathScale(point, this._map.getZoom());
             }
         },
 
