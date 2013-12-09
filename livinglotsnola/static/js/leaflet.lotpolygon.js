@@ -1,13 +1,6 @@
 define(['leaflet', 'leaflet.lotpath'], function (L) {
     L.LotPolygon = L.Polygon.extend({
 
-        initialize: function (latlngs, options) {
-            L.Polygon.prototype.initialize.call(this, latlngs, options);
-            this.on('add', function () {
-                this.initActionPath();
-            });
-        },
-
         _updatePath: function () {
             var center = this._map.latLngToLayerPoint(this.getBounds().getCenter());
             this.updateActionPathScale(center, this._map.getZoom());
@@ -17,6 +10,14 @@ define(['leaflet', 'leaflet.lotpath'], function (L) {
     });
 
     L.LotPolygon.include(L.LotPathMixin);
+
+    L.LotPolygon.addInitHook(function () {
+        this.on({
+            'add': function () {
+                this.initActionPath();
+            }
+        });
+    });
 
     L.lotPolygon = function (latlngs, options) {
         return new L.LotPolygon(latlngs, options);
