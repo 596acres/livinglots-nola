@@ -20,6 +20,7 @@ define(
             lotLayerTransitionPoint: 15,
             previousZoom: null,
             userLayer: null,
+            userLocationZoom: 16,
 
             lotLayerOptions: {
                 onEachFeature: function (feature, layer) {
@@ -128,7 +129,7 @@ define(
             addLotsLayer: function (params) {
                 this.addCentroidsLayer(params);
                 this.addPolygonsLayer(params);
-                if (this.getZoom() <= 15) {
+                if (this.getZoom() <= this.lotLayerTransitionPoint) {
                     this.addLayer(this.centroidsLayer);
                     this.removeLayer(this.polygonsLayer);
                 }
@@ -181,7 +182,7 @@ define(
                 this.userLayer = L.userMarker(latlng, {
                     smallIcon: true,
                 }).addTo(this);
-                this.setView(latlng, 15);
+                this.setView(latlng, this.userLocationZoom);
             },
 
             removeUserLayer: function () {
