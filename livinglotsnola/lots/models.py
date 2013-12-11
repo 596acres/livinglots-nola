@@ -49,12 +49,6 @@ class LotMixin(models.Model):
         default=False,
     )
 
-    blight_liens_last_checked = models.DateTimeField(
-        _('blight liens last checked'),
-        blank=True,
-        null=True,
-    )
-
     @classmethod
     def get_filter(cls):
         from .filters import LotFilter
