@@ -27,9 +27,9 @@ class LotGeoJSONMixin(object):
         elif lot.owner and lot.owner.owner_type == 'public':
             return 'public'
         elif lot.owner and lot.owner.owner_type == 'private':
-            return 'private'
             if lot.has_blight_liens:
                 return 'private_blight_liens'
+            return 'private'
         return ''
 
     def get_properties(self, lot):
