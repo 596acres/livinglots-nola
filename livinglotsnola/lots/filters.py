@@ -23,9 +23,12 @@ class LayerFilter(django_filters.Filter):
         for layer in layers:
             if layer == 'public':
                 layer_filter = layer_filter | Q(owner__owner_type='public')
-            if layer == 'private':
-                layer_filter = layer_filter | Q(owner__owner_type='private')
-            if layer == 'private_blight_liens':
+            elif layer == 'private':
+                layer_filter = layer_filter | Q(
+                    owner__owner_type='private',
+                    has_blight_liens=False,
+                )
+            elif layer == 'private_blight_liens':
                 layer_filter = layer_filter | Q(
                     owner__owner_type='private',
                     has_blight_liens=True,

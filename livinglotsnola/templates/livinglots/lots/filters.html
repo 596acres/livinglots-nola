@@ -30,9 +30,11 @@
             </label>
         </li>
         <li>
-            <input type="checkbox" class="filter filter-layer" name="private-lien" disabled />
-            <span class="legend-marker legend-marker-private-lien"></span>
-            {% trans "private land with a blight lien" %}
+            <input id="layer-private-liens" type="checkbox" class="filter filter-layer" name="private_blight_liens" checked />
+            <label for="layer-private-liens">
+                <span class="legend-marker legend-marker-private-lien"></span>
+                {% trans "private land with a blight lien" %}
+            </label>
         </li>
         <li>
             <input type="checkbox" class="filter filter-layer" name="project" disabled />
