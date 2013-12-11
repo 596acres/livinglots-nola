@@ -1,17 +1,12 @@
-from time import sleep
-
 from django.contrib.gis.geos import Point
 from django.utils.timezone import now
 
 from livinglots_lots.load import get_addresses_in_range
-from noladata.assessor.load import load_tax_bill_number
-from noladata.buildings.models import Building
 from noladata.codeenforcement.models import Case
 from noladata.habitat.load import lots_available_for_gardening
 from noladata.hano.models import ScatteredSite
 from noladata.nora.models import UncommittedProperty
 from noladata.parcels.models import Parcel
-from noladata.treasury.load import load_code_lien_information
 
 from livinglotsnola.geocode import nominatim
 from owners.models import Owner
@@ -240,68 +235,32 @@ class HabitatLotsAvailableForGardeningFinder(object):
 
 class PrivateLotsWithBlightLiensFinder(object):
 
-    def find_parcel(self, case):
-        # Search by GEOPIN
-        parcels = Parcel.objects.filter(geopin=case.geopin)
-        if not parcels.count():
-            # TODO Search by location and/or geom
-            return None
-        return parcels[0]
-
-    def get_blight_liens(self, parcel):
-        tax_bill_number = load_tax_bill_number(parcel.situs_numb,
-                                               parcel.situs_stre,
-                                               parcel.situs_type,
-                                               street_direction=parcel.situs_dir)
-        if not tax_bill_number:
-            raise Exception('Could not find tax bill number for Parcel %d' %
-                            parcel.pk)
-        return list(load_code_lien_information(tax_bill_number))
-
     def find_lots(self):
         # Generic private owner
         owner, created = Owner.objects.get_or_create('private owner', defaults={
             'owner_type': 'private',
         })
 
-        for case in Case.objects.all():
+        kwargs = {
+            'city': 'New Orleans',
+            'state_province': 'LA',
+            'country': 'USA',
+            'known_use_certainty': 7,
+            'owner': owner,
+            'added_reason': "has blight liens",
+            'has_blight_liens': True,
+        }
+
+        for parcel in Parcel.objects.exclude(lien=None).filter(lot=None):
+            if not parcel.probably_is_vacant():
+                continue
             try:
-                parcel = self.find_parcel(case)
-                if not parcel:
-                    print 'No parcel found for %s' % case.location
-                    continue
-
-                # Check whether there is a building on the property
-                if Building.objects.filter_by_parcel(parcel).count():
-                    print ('*** Parcel contains a building. Probably should '
-                           'not add')
-
-                # Wait a bit between requests
-                sleep(.1)
-
-                # Try to find liens on this property
-                liens = self.get_blight_liens(parcel)
-                if not liens:
-                    print 'No blight liens found for %s' % case.location
-                    continue
-                else:
-                    print 'Found blight liens for %s. Adding.' % case.location
-                if not parcel:
-                    continue
-
                 lot = Lot(
                     parcel=parcel,
                     polygon=parcel.geom,
                     centroid=parcel.geom.centroid,
                     address_line1=parcel.address,
-                    city='New Orleans',
-                    state_province='LA',
-                    country='USA',
-                    known_use_certainty=7,
-                    owner=owner,
-                    added_reason="in Code Enforcement Active Pipeline",
-                    has_blight_liens=True,
-                    blight_liens_last_checked=now(),
+                    **kwargs
                 )
                 lot.save()
             except Exception:
