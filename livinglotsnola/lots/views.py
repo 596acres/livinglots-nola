@@ -1,3 +1,4 @@
+from collections import OrderedDict
 import geojson
 import json
 from operator import itemgetter
@@ -101,25 +102,34 @@ class LotsOwnershipOverview(FilteredLotsMixin, JSONResponseView):
     layer_labels = {
         'public': 'publicly owned land',
         'private': 'private land belonging to an owner who wants to see it used',
+        'private-lien': 'private land that has blight liens',
     }
 
     def get_owners(self, lots_qs):
         owners = []
         for row in lots_qs.values('owner__name').annotate(count=Count('pk')):
+            label = 'owned by %s' % row['owner__name']
+            if row['owner__name'] == 'private owner':
+                label = ''
             owners.append({
                 'name': row['owner__name'],
+                'label': label,
                 'count': row['count'],
             })
         return sorted(owners, key=itemgetter('name'))
 
     def get_layers(self, lots):
-        return {
+        return OrderedDict({
+            'public': lots.filter(owner__owner_type='public'),
             'private': lots.filter(
                 owner__owner_type='private',
                 has_blight_liens=False
             ),
-            'public': lots.filter(owner__owner_type='public'),
-        }
+            'private-lien': lots.filter(
+                owner__owner_type='private',
+                has_blight_liens=True
+            ),
+        })
 
     def get_layer_counts(self, layers):
         counts = []
