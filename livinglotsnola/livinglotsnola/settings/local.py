@@ -76,3 +76,8 @@ DEBUG_TOOLBAR_CONFIG = {
 }
 
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+
+NOLADATA_TREASURY_PARCELS_GEOPINS = '/home/eric/Documents/596/nola_vacancy_working/probably_vacant_geopin.csv'
+NOLADATA_TREASURY_UA = ('Mozilla/5.0 (Windows NT 6.2; Win64; x64) '
+                        'AppleWebKit/537.36 (KHTML, like Gecko) '
+                        'Chrome/32.0.1667.0 Safari/537.36')

@@ -157,6 +157,7 @@ INSTALLED_APPS = (
     #
     # first-party, project-generic
     #
+    'external_data_sync',
     'inplace_activity_stream',
     'pagepermissions',
 
@@ -175,10 +176,12 @@ INSTALLED_APPS = (
     'noladata.assessor',
     'noladata.buildings',
     'noladata.codeenforcement',
+    'noladata.datasync',
     'noladata.habitat',
     'noladata.hano',
     'noladata.nora',
     'noladata.parcels',
+    'noladata.treasury',
 
     #
     # first-party, project-specific
@@ -310,3 +313,5 @@ SOUTH_MIGRATION_MODULES = {
     'page': 'cms.migrate.page',
     'medialibrary': 'cms.migrate.medialibrary',
 }
+
+NOLADATA_TREASURY_BASE_TAX_URL = 'http://services.nola.gov/service.aspx?load=treasury&Type=1&TaxBill='
