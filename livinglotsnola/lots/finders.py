@@ -1,8 +1,6 @@
 from django.contrib.gis.geos import Point
-from django.utils.timezone import now
 
 from livinglots_lots.load import get_addresses_in_range
-from noladata.codeenforcement.models import Case
 from noladata.habitat.load import lots_available_for_gardening
 from noladata.hano.models import ScatteredSite
 from noladata.nora.models import UncommittedProperty
