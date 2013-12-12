@@ -93,3 +93,5 @@ LOGGING = {
         'level': 'WARNING',
     },
 }
+
+NOLADATA_TREASURY_PARCELS_GEOPINS = '/home/farmthisnow/webapps/llnola_django/data/probably_vacant.csv'
