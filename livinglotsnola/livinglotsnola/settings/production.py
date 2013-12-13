@@ -18,24 +18,6 @@ FACILITATORS = {
 
 ALLOWED_HOSTS = get_env_variable('ALLOWED_HOSTS').split(',')
 
-#
-# johnny cache
-#
-#MIDDLEWARE_CLASSES = (
-    #'johnny.middleware.LocalStoreClearMiddleware',
-    #'johnny.middleware.QueryCacheMiddleware',
-#) + MIDDLEWARE_CLASSES
-
-#CACHES = {
-    #'default' : dict(
-        #BACKEND = 'johnny.backends.memcached.MemcachedCache',
-        #LOCATION = [get_env_variable('MEMCACHE_LOCATION')],
-        #JOHNNY_CACHE = True,
-    #)
-#}
-
-#JOHNNY_MIDDLEWARE_KEY_PREFIX = get_env_variable('CACHE_KEY_PREFIX')
-
 
 #
 # email
