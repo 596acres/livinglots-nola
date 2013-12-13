@@ -610,6 +610,11 @@ ul.pathway-list {
     margin-top: 10px;
 }
 
+.pathway {
+    margin-bottom: 25px;
+    margin-top: 25px;
+}
+
 .blog-entry-archive h1,
 .blog-entry-detail h1 {
     font-family: 'Oswald', sans-serif;
