@@ -33,6 +33,7 @@ CACHEOPS_REDIS = {
 
 CACHEOPS = {
     'pathways.*': ('all', 60 * 60),
+    '*.*': ('just_enable', 60 * 5),
 }
 
 
