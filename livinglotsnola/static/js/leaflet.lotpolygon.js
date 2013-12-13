@@ -16,7 +16,6 @@ define(['leaflet', 'leaflet.lotpath'], function (L) {
             this.options.fillOpacity = this._pickOpacity(this._map.getZoom());
             this._updateStyle();
 
-            var center = this._map.latLngToLayerPoint(this.getBounds().getCenter());
             this.updateActionPathScale();
             L.Polygon.prototype._updatePath.call(this);
         }
