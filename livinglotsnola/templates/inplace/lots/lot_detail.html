@@ -176,7 +176,12 @@
                             <li>
                                 The lot has blight liens according to the 
                                 city's Bureau of the Treasury. 
-                                {# TODO links to more info #}
+                                
+                                {% with tax_bill_number=lot.parcel.parcellienrecord_set.all.0.tax_bill_number %}
+                                    {% if tax_bill_number %}
+                                        <a href="http://services.nola.gov/service.aspx?load=treasury&Type=1&TaxBill={{ tax_bill_number }}" target="_blank">Learn more at the Bureau of the Treasury's site.</a>
+                                    {% endif %}
+                                {% endwith %}
                             </li>
                         {% endif %}
 
