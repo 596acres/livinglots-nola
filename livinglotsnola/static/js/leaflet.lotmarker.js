@@ -2,7 +2,7 @@ define(['leaflet', 'leaflet.lotpath'], function (L) {
     L.LotMarker = L.CircleMarker.extend({
 
         onZoomEnd: function () {
-            if (this._map) {
+            if (this._map && this.feature.properties.has_organizers) {
                 this.bringToFront();
             }
         },
