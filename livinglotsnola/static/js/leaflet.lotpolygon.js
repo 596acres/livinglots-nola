@@ -1,7 +1,21 @@
 define(['leaflet', 'leaflet.lotpath'], function (L) {
     L.LotPolygon = L.Polygon.extend({
 
+        _pickOpacity: function (zoom) {
+            if (zoom >= 18) {
+                return 0.65;
+            }
+            if (zoom >= 17) {
+                return 0.85;
+            }
+            return 1;
+        },
+
         _updatePath: function () {
+            // Update opacity
+            this.options.fillOpacity = this._pickOpacity(this._map.getZoom());
+            this._updateStyle();
+
             var center = this._map.latLngToLayerPoint(this.getBounds().getCenter());
             this.updateActionPathScale();
             L.Polygon.prototype._updatePath.call(this);
