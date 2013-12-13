@@ -22,7 +22,7 @@ ALLOWED_HOSTS = get_env_variable('ALLOWED_HOSTS').split(',')
 #
 # Cacheops
 #
-INSTALLED_APPS = ('cacheops') + INSTALLED_APPS
+INSTALLED_APPS = ('cacheops',) + INSTALLED_APPS
 
 CACHEOPS_REDIS = {
     'host': 'localhost',
