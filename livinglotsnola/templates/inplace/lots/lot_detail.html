@@ -172,6 +172,14 @@
                             </li>
                         {% endif %}
 
+                        {% if lot.has_blight_liens %}
+                            <li>
+                                The lot has blight liens according to the 
+                                city's Bureau of the Treasury. 
+                                {# TODO links to more info #}
+                            </li>
+                        {% endif %}
+
                     </ul>
                 {% else %}
                     {% blocktrans with use=lot.known_use %}
