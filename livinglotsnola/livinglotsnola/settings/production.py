@@ -20,6 +20,22 @@ ALLOWED_HOSTS = get_env_variable('ALLOWED_HOSTS').split(',')
 
 
 #
+# cache-machine
+#
+
+CACHES = {
+    'default': {
+        'BACKEND': 'caching.backends.memcached.MemcachedCache',
+        'LOCATION': [
+            get_env_variable('MEMCACHE_LOCATION'),
+        ],
+        'PREFIX': 'llnola:',
+    },
+}
+CACHE_COUNT_TIMEOUT = 60
+
+
+#
 # email
 #
 INSTALLED_APPS += (
