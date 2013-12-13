@@ -182,6 +182,13 @@
                                         <a href="http://services.nola.gov/service.aspx?load=treasury&Type=1&TaxBill={{ tax_bill_number }}" target="_blank">Learn more at the Bureau of the Treasury's site.</a>
                                     {% endif %}
                                 {% endwith %}
+
+                                {% with assessor_key=lot.parcel.parcelassessorrecord_set.all.0.key %}
+                                    {% if assessor_key %}
+                                        There is more information about the owner
+                                        <a href="http://qpublic9.qpublic.net/la_orleans_display.php?KEY={{ assessor_key }}" target="_blank">on the assessor's site</a>.
+                                    {% endif %}
+                                {% endwith %}
                             </li>
                         {% endif %}
 
