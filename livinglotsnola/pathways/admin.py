@@ -1,12 +1,31 @@
 from django.contrib import admin
 
+from feincms.admin import item_editor
+
 from livinglots_pathways.admin import BasePathwayAdmin
 
 from .models import Pathway
 
 
 class PathwayAdmin(BasePathwayAdmin):
-    pass
+    fieldsets = [
+        [None, {
+            'fields': [
+                ('is_active', 'author',),
+                ('name', 'slug',),
+            ],
+        }],
+        ['Which lots does this pathway apply to?', {
+            'fields': [
+                ('public_owners', 'specific_public_owners'),
+                ('private_owners', 'specific_private_owners'),
+            ],
+        }],
+        ['Do the lots this pathway applies to have blight liens?', {
+            'fields': ['has_blight_liens'],
+        }],
+        item_editor.FEINCMS_CONTENT_FIELDSET,
+    ]
 
 
 admin.site.register(Pathway, PathwayAdmin)
