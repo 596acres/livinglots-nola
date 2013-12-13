@@ -20,24 +20,6 @@ ALLOWED_HOSTS = get_env_variable('ALLOWED_HOSTS').split(',')
 
 
 #
-# Cacheops
-#
-INSTALLED_APPS = ('cacheops',) + INSTALLED_APPS
-
-CACHEOPS_REDIS = {
-    'host': 'localhost',
-    'port': int(get_env_variable('REDIS_PORT')),
-    'db': 1,
-    'socket_timeout': 3,
-}
-
-CACHEOPS = {
-    'pathways.*': ('all', 60 * 60),
-    '*.*': ('just_enable', 60 * 5),
-}
-
-
-#
 # email
 #
 INSTALLED_APPS += (
