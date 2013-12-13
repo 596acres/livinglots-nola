@@ -26,7 +26,7 @@ INSTALLED_APPS = ('cacheops',) + INSTALLED_APPS
 
 CACHEOPS_REDIS = {
     'host': 'localhost',
-    'port': get_env_variable('REDIS_PORT'),
+    'port': int(get_env_variable('REDIS_PORT')),
     'db': 1,
     'socket_timeout': 3,
 }
