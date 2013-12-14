@@ -87,7 +87,7 @@ class LotsGeoJSONPolygon(LotGeoJSONMixin, FilteredLotsMixin, GeoJSONListView):
         return properties
 
     def get_queryset(self):
-        return self.get_lots().qs.filter(centroid__isnull=False).geojson(
+        return self.get_lots().qs.filter(polygon__isnull=False).geojson(
             field_name='polygon',
             precision=8,
         ).select_related(
