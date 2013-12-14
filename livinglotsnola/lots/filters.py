@@ -1,3 +1,5 @@
+from hashlib import sha1
+
 from django.db.models import Q
 
 from django.contrib.gis.geos import Polygon
@@ -87,6 +89,9 @@ class LotFilter(django_filters.FilterSet):
         super(LotFilter, self).__init__(*args, **kwargs)
         # TODO adjust initial queryset based on user
         self.user = user
+
+    def hashkey(self):
+        return sha1(repr(sorted(self.data.items()))).hexdigest()
 
     class Meta:
         model = Lot

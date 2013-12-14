@@ -6,6 +6,8 @@ from pint import UnitRegistry
 
 from django.db.models import Count, Sum
 
+from caching.base import cached
+
 from inplace.views import GeoJSONListView
 from livinglots_genericviews.views import JSONResponseView
 from livinglots_lots.views import FilteredLotsMixin, LotsCountView
@@ -66,14 +68,20 @@ class LotGeoJSONMixin(object):
 class LotsGeoJSONCentroid(LotGeoJSONMixin, FilteredLotsMixin, GeoJSONListView):
 
     def get_queryset(self):
-        return self.get_lots().qs.filter(centroid__isnull=False).geojson(
-            field_name='centroid',
-            precision=8,
-        ).select_related(
-            'known_use',
-            'lotgroup',
-            'owner__owner_type'
-        ).annotate(organizers__count=Count('organizers'))
+        filterset = self.get_lots()
+        key = '%s:%s' % (self.__class__.__name__, filterset.hashkey())
+
+        def _load_lots():
+            return filterset.qs.filter(centroid__isnull=False).geojson(
+                field_name='centroid',
+                precision=8,
+            ).select_related(
+                'known_use',
+                'lotgroup',
+                'owner__owner_type'
+            ).annotate(organizers__count=Count('organizers'))
+
+        return cached(_load_lots, key, 60 * 15)
 
 
 class LotsGeoJSONPolygon(LotGeoJSONMixin, FilteredLotsMixin, GeoJSONListView):
