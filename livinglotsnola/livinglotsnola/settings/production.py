@@ -30,7 +30,6 @@ CACHES = {
         'LOCATION': [
             get_env_variable('MEMCACHE_LOCATION'),
         ],
-        'PREFIX': 'llnola:',
     },
 }
 CACHE_COUNT_TIMEOUT = 60
