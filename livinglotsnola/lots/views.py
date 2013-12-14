@@ -3,6 +3,7 @@ import geojson
 import json
 from operator import itemgetter
 from pint import UnitRegistry
+from random import shuffle
 
 from django.db.models import Count, Sum
 
@@ -82,7 +83,9 @@ class LotsGeoJSONCentroid(LotGeoJSONMixin, FilteredLotsMixin, GeoJSONListView):
         key = '%s:%s' % (self.__class__.__name__, filterset.hashkey())
 
         def _get_value():
-            return super(LotsGeoJSONCentroid, self).get_features()
+            features = super(LotsGeoJSONCentroid, self).get_features()
+            shuffle(features)
+            return features
         return cached(_get_value, key, 60 * 15)
 
 
