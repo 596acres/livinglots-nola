@@ -25,23 +25,24 @@ a:focus {
 }
 
 #page-header {
-    background: url(/static/img/header-bg.png) white no-repeat;
-    height: 180px;
+    color: white;
+    background: #2593c6;
+    height: 160px;
+    margin-left: 0;
+    margin-right: 0;
 }
 
 .header-home-link {
+    background: url(/static/img/llnola_logo.png);
     display: inline-block;
-    float: left;
-    position: relative;
-    height: 75px;
-    width: 225px;
-    top: 55px;
-    left: 165px;
+    width: 224px;
+    height: 115px;
 }
 
 .header-content {
-    margin-top: 60px;
-    padding-left: 410px;
+    margin-top: 20px;
+    margin-left: 0;
+    margin-right: 0;
 }
 
 .content-wrapper {
@@ -113,6 +114,7 @@ nav.navbar {
     font-family: 'Oswald', sans-serif;
     font-size: 28px;
     font-weight: 300;
+    margin-top: 30px;
     z-index: 5000;
 }
 
@@ -128,22 +130,32 @@ nav.navbar {
     }
 
     .navbar-collapse {
-        background-color: rgba(256, 256, 256, 0.8);
+        /*background-color: rgba(256, 256, 256, 0.8);*/
+        background-color: #2593c6;
         border: 0;
+        margin-top: 70px;
     }
 
 }
 
 .navbar-default .navbar-nav > li > a {
-    color: black;
+    color: white;
+}
+
+.navbar-default .navbar-nav > .active > a {
+    font-weight: 400;
 }
 
 .navbar-default .navbar-nav > .active > a,
 .navbar-default .navbar-nav > .active > a:hover,
 .navbar-default .navbar-nav > li > a:hover {
     background-color: transparent;
+    color: white;
 }
 
+.navbar-default .navbar-toggle .icon-bar {
+    background-color: white;
+}
 
 /*
  * Modules
@@ -151,6 +163,7 @@ nav.navbar {
 
 #social {
     display: inline-block;
+    margin-top: 30px;
 }
 
 
@@ -167,13 +180,11 @@ nav.navbar {
     padding: 0;
 }
 
-.map-page footer {
+footer {
     margin: 0;
 }
 
 #map-welcome h1 {
-    background: #2593c6;
-    color: white;
     font-family: 'Oswald', sans-serif;
     font-size: 56px;
     font-weight: 300;
@@ -188,7 +199,7 @@ nav.navbar {
 .map-welcome-open-button,
 .map-welcome-open-button:active,
 .map-welcome-open-button:hover {
-    color: white;
+    color: black;
     float: right;
     font-size: 16px;
     margin-right: 50px;

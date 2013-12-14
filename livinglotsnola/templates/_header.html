@@ -1,9 +1,6 @@
 {% load feincms_tags feincms_page_tags i18n static %}
 
 <header id="page-header" class="row">
-    <a href="/" class="header-home-link hidden-print">
-        <h1 style="display: none;">{% trans "Living Lots NOLA" %}</h1>
-    </a>
 
     <div class="visible-print" style="margin-left: 30px; margin-top: 15px; font-size: 30px; line-height: 30px;">
         Living Lots NOLA<br />
@@ -11,7 +8,12 @@
     </div>
 
     <div class="header-content hidden-print row">
-        <nav class="navbar navbar-default col-md-8" role="navigation">
+
+        <a href="/" class="header-home-link hidden-print col-md-2 col-sm-2 col-xs-offset-1">
+            <h1 style="display: none;">{% trans "Living Lots NOLA" %}</h1>
+        </a>
+
+        <nav class="navbar navbar-default col-md-6 col-sm-6" role="navigation">
             <div class="navbar-header">
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-main-collapse">
                     <span class="sr-only">Toggle navigation</span>
@@ -38,7 +40,7 @@
             </div>
         </nav>
 
-        <div id="social" class="col-md-4 hidden-xs hidden-sm">
+        <div id="social" class="col-md-2 hidden-xs hidden-sm">
             <img src="{% static "img/facebook.png" %}" />
             <img src="{% static "img/twitter.png" %}" />
         </div>
