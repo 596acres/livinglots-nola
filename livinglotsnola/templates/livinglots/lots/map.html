@@ -9,7 +9,7 @@
                 </a>
             </header>
             <div class="row">
-                <div class="popup-streetview col-md-6">
+                <div class="popup-streetview col-xs-6">
                     <div>
                         {{#if feature.properties.centroid}}
                             <img src="http://maps.googleapis.com/maps/api/streetview?location={{feature.properties.centroid.[1]}},{{feature.properties.centroid.[0]}}&size=105x110&sensor=false&fov=45" />
@@ -18,7 +18,7 @@
                         {{/if}}
                     </div>
                 </div>
-                <div class="popup-lot-details col-md-6">
+                <div class="popup-lot-details col-xs-6">
                     {{#if feature.properties.number_of_lots_plural}}
                         <div class="lot-count">
                             {{feature.properties.number_of_lots}}
