@@ -16,6 +16,13 @@ a:focus {
     color: #2593c6;
 }
 
+h2 {
+    font-family: 'Oswald', sans-serif;
+    font-size: 28px;
+    font-weight: 400;
+    text-transform: uppercase;
+}
+
 #page-wrapper-row {
     margin: 0;
 }
