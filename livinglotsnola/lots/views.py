@@ -106,6 +106,14 @@ class LotsGeoJSONPolygon(LotGeoJSONMixin, FilteredLotsMixin, GeoJSONListView):
             'owner__owner_type'
         ).annotate(organizers__count=Count('organizers'))
 
+    def get_features(self):
+        filterset = self.get_lots()
+        key = '%s:%s' % (self.__class__.__name__, filterset.hashkey())
+
+        def _get_value():
+            return super(LotsGeoJSONPolygon, self).get_features()
+        return cached(_get_value, key, 60 * 15)
+
 
 class LotsOwnershipOverview(FilteredLotsMixin, JSONResponseView):
 
