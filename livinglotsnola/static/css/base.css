@@ -644,6 +644,12 @@ article {
     background: white;
 }
 
+.blog-entry-archive article img,
+.blog-entry-detail article img {
+    height: auto;
+    max-width: 100%;
+}
+
 .blog-entry-archive article.hentry {
     padding-left: 0;
 }
