@@ -47,16 +47,16 @@ h2 {
 }
 
 .header-home-link {
-    background: url(/static/img/llnola_logo.png);
+    float:left;
+    margin-left: 8.3333333%;
+}
+
+.header-home-link a {
     display: inline-block;
-    width: 224px;
-    height: 115px;
 }
 
 .header-content {
-    margin-top: 20px;
-    margin-left: 0;
-    margin-right: 0;
+    padding-top: 20px;
 }
 
 .content-wrapper {
@@ -139,6 +139,7 @@ nav.navbar {
     nav.navbar {
         left: 0;
         padding: 0;
+        padding-top: 20px;
         position: absolute;
         width: 100%;
     }
@@ -147,7 +148,7 @@ nav.navbar {
         /*background-color: rgba(256, 256, 256, 0.8);*/
         background-color: #2593c6;
         border: 0;
-        margin-top: 70px;
+        margin-top: 35px;
     }
 
 }
@@ -178,6 +179,7 @@ nav.navbar {
 #social {
     display: inline-block;
     margin-top: 30px;
+    margin-right: 8.3333333%;
 }
 
 
