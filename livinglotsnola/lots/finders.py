@@ -109,6 +109,9 @@ class HanoScatteredSitesFinder(object):
 
 class NoraUncommittedPropertiesFinder(object):
 
+    # TODO clean this up a bit, make it possible / quick to find lots added
+    #  dynamically using a Synchronizer
+
     def get_owner(self):
         owner, created = Owner.objects.get_or_create('New Orleans Redevelopment Authority', defaults={
             'owner_type': 'public',
@@ -179,6 +182,7 @@ class NoraUncommittedPropertiesFinder(object):
                 owner=owner,
                 added_reason="in NORA's uncommitted properties list",
             )
+            # TODO also add uncommitted_property here!
             lot.save()
 
 
