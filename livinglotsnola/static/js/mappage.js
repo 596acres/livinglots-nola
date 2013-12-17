@@ -223,6 +223,19 @@ define(
                 updateLotCount(map);
             });
 
+            $('.filter-zipcode').change(function () {
+                var zipcode = $(this).val();
+                if (zipcode) {
+                    var url = Django.url('zipcode_details_geojson', { label: zipcode });
+                    $.getJSON(url, function (data) {
+                        map.updateBoundaries(data, { zoomToBounds: true });
+                    });
+                }
+                else {
+                    map.removeBoundaries();
+                }
+            });
+
             // Check or uncheck all public owners when the public layer is 
             // turned on or off
             $('.filter[name=public]').change(function () {

@@ -15,6 +15,7 @@ define(
 
         L.LotMap = L.Map.extend({
 
+            boundariesLayer: null,
             centroidsLayer: null,
             polygonsLayer: null,
             lotLayerTransitionPoint: 15,
@@ -83,6 +84,11 @@ define(
                 L.Map.prototype.initialize.call(this, id, options);
                 this.addBaseLayer();
                 var hash = new L.Hash(this);
+
+                this.boundariesLayer = L.geoJson(null, {
+                    color: '#58595b',
+                    fill: false
+                }).addTo(this);
 
                 this.on('zoomend', function () {
                     var currentZoom = this.getZoom();
@@ -188,6 +194,18 @@ define(
             removeUserLayer: function () {
                 if (this.userLayer) {
                     this.removeLayer(this.userLayer);
+                }
+            },
+
+            removeBoundaries: function (data, options) {
+                this.boundariesLayer.clearLayers();
+            },
+
+            updateBoundaries: function (data, options) {
+                this.boundariesLayer.clearLayers();
+                this.boundariesLayer.addData(data);
+                if (options.zoomToBounds) {
+                    this.fitBounds(this.boundariesLayer.getBounds());
                 }
             }
 

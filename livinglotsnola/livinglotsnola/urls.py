@@ -29,6 +29,9 @@ urlpatterns += patterns('',
     url(r'^lots/(?P<pk>\d+)/grow-community/', include('organize.urls', 'organize')),
     url(r'^lots/', include('lots.urls', 'lots')),
 
+    # NOLA data
+    url('^zipcodes/', include('noladata.zipcodes.urls')),
+
     # Activity stream urls
     url('^activity/', include('actstream.urls')),
     url('^activity-stream/', include('inplace_activity_stream.urls')),
