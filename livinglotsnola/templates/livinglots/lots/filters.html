@@ -1,4 +1,4 @@
-{% load i18n owners_tags %}
+{% load i18n owners_tags zipcodes_tags %}
 
 <div class="overlaymenu-tip-container">
     <div class="overlaymenu-tip"></div>
@@ -42,4 +42,17 @@
             {% trans "project" %}
         </li>
     </ul>
+
+    <div>
+        zipcode
+        <select class="filter filter-zipcode">
+            <option></option>
+            {% get_zip_codes as zipcodes %}
+            {% for zipcode in zipcodes %}
+                <option value="{{ zipcode.label }}">
+                    {{ zipcode.label }}
+                </option>
+            {% endfor %}
+        </select>
+    </div>
 </div>

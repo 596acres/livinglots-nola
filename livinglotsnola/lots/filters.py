@@ -7,6 +7,8 @@ from django.contrib.gis.measure import D
 
 import django_filters
 
+from noladata.zipcodes.models import ZipCode
+
 from .models import Lot
 
 
@@ -76,6 +78,15 @@ class OwnerFilter(django_filters.Filter):
         return qs.filter(owner_query | other_owners_query)
 
 
+class ZipCodeFilter(django_filters.Filter):
+
+    def filter(self, qs, value):
+        if not value:
+            return qs
+        zipcode = ZipCode.objects.get(label=value)
+        return qs.filter(centroid__within=zipcode.geometry)
+
+
 class LotFilter(django_filters.FilterSet):
 
     bbox = BoundingBoxFilter()
@@ -83,6 +94,7 @@ class LotFilter(django_filters.FilterSet):
     lot_center = LotCenterFilter()
     parents_only = LotGroupParentFilter()
     public_owners = OwnerFilter(owner_type='public')
+    zipcode = ZipCodeFilter()
 
     def __init__(self, *args, **kwargs):
         user = kwargs.pop('user', None)
@@ -103,4 +115,5 @@ class LotFilter(django_filters.FilterSet):
             'lot_center',
             'parents_only',
             'public_owners',
+            'zipcode',
         ]

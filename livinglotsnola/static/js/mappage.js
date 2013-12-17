@@ -29,11 +29,18 @@ define(
             var publicOwners = _.map($('.filter-owner-public:checked'), function (ownerFilter) {
                 return $(ownerFilter).data('ownerPk');
             });
-            return {
+            var params = {
                 layers: layers.join(','),
                 parents_only: true,
                 public_owners: publicOwners.join(',')
             };
+
+            var zipcode = $('.filter-zipcode').val();
+            if (zipcode !== null) {
+                params.zipcode = zipcode;
+            }
+
+            return params;
         }
 
         function buildLotFilterCountParams(map) {
