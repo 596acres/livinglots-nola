@@ -40,7 +40,12 @@
         </div>
 
         <div class="col-md-9">
-            <h1>{{ lot.display_name|title|default:"unknown" }}</h1>
+            <h1>
+                {{ lot.display_name|title|default:"unknown" }}
+                {% if lot.postal_code %}
+                    <span class="postal-code">{{ lot.postal_code }}</span>
+                {% endif %}
+            </h1>
         </div>
     </div>
 

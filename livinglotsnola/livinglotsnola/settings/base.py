@@ -182,6 +182,7 @@ INSTALLED_APPS = (
     'noladata.nora',
     'noladata.parcels',
     'noladata.treasury',
+    'noladata.zipcodes',
 
     #
     # first-party, project-specific

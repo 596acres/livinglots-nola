@@ -2,9 +2,13 @@ from pint import UnitRegistry
 
 from django.contrib.contenttypes import generic
 from django.db import models
+from django.dispatch import receiver
 from django.utils.translation import ugettext_lazy as _
 
+from noladata.zipcodes.models import ZipCode
+
 from livinglots_lots.models import BaseLot, BaseLotGroup
+from livinglots_lots.signals import lot_details_loaded
 
 from organize.models import Organizer
 
@@ -100,6 +104,12 @@ class LotMixin(models.Model):
 
     in_uncommitted_properties = property(_in_uncommitted_properties)
 
+    def _postal_code(self):
+        try:
+            return ZipCode.objects.get(geometry__contains=self.centroid)
+        except ZipCode.DoesNotExist:
+            return None
+
     class Meta:
         abstract = True
 
@@ -114,3 +124,10 @@ class Lot(LotMixin, LotGroupLotMixin, BaseLot):
 
 class LotGroup(BaseLotGroup, Lot):
     pass
+
+
+@receiver(lot_details_loaded)
+def load_lazy_properties(sender, instance=None, **kwargs):
+    if not instance.postal_code:
+        instance.postal_code = instance._postal_code().label
+        instance.save()

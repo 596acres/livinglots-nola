@@ -541,6 +541,11 @@ footer {
     margin-top: 15px;
 }
 
+.lot-detail-page .postal-code {
+    font-size: 20px;
+    margin-left: 10px;
+}
+
 .lot-detail-page h2 {
     font-family: 'Oswald', sans-serif;
     font-size: 22px;
