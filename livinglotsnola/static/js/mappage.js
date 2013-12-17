@@ -84,6 +84,18 @@ define(
             $('a.details-link').attr('href', url);
         }
 
+        function updateZipCode(map, zipcode) {
+            if (zipcode) {
+                var url = Django.url('zipcode_details_geojson', { label: zipcode });
+                $.getJSON(url, function (data) {
+                    map.updateBoundaries(data, { zoomToBounds: true });
+                });
+            }
+            else {
+                map.removeBoundaries();
+            }
+        }
+
         function deparam() {
             var vars = {},
                 param,
@@ -110,11 +122,19 @@ define(
             _.each(publicOwners, function (pk) {
                 $('.filter-owner-public[data-owner-pk=' + pk +']').prop('checked', true);
             });
+
+            // Set boundaries filters
+            var zipCode = params.zipcode;
+            if (zipCode !== '') {
+                $('.filter-zipcode option[value=' + zipCode + ']').prop('selected', true);
+            }
         }
 
         $(document).ready(function () {
+            var params;
             if (window.location.search.length) {
-                setFilters(deparam());
+                params = deparam();
+                setFilters(params);
             }
 
             var map = L.lotMap('map', {
@@ -140,6 +160,10 @@ define(
             });
 
             map.addLotsLayer(buildLotFilterParams(map));
+
+            if (params && params.zipcode !== '') {
+                updateZipCode(map, params.zipcode);
+            }
 
             //
             // Welcome header
@@ -224,16 +248,7 @@ define(
             });
 
             $('.filter-zipcode').change(function () {
-                var zipcode = $(this).val();
-                if (zipcode) {
-                    var url = Django.url('zipcode_details_geojson', { label: zipcode });
-                    $.getJSON(url, function (data) {
-                        map.updateBoundaries(data, { zoomToBounds: true });
-                    });
-                }
-                else {
-                    map.removeBoundaries();
-                }
+                updateZipCode(map, $(this).val());
             });
 
             // Check or uncheck all public owners when the public layer is 
