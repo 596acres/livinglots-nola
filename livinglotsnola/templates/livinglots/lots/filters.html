@@ -43,16 +43,22 @@
         </li>
     </ul>
 
-    <div>
-        zipcode
-        <select class="filter filter-zipcode">
-            <option></option>
-            {% get_zip_codes as zipcodes %}
-            {% for zipcode in zipcodes %}
-                <option value="{{ zipcode.label }}">
-                    {{ zipcode.label }}
-                </option>
-            {% endfor %}
-        </select>
-    </div>
+    <section class="filter-boundaries">
+        <div class="row form-horizontal filter-zipcode-row">
+            <div class="col-xs-6 control-label">
+                <label for="filter-zipcode">zipcode</label>
+            </div>
+            <div class="col-xs-6">
+                <select id="filter-zipcode" class="filter filter-zipcode form-control">
+                    <option></option>
+                    {% get_zip_codes as zipcodes %}
+                    {% for zipcode in zipcodes %}
+                        <option value="{{ zipcode.label }}">
+                            {{ zipcode.label }}
+                        </option>
+                    {% endfor %}
+                </select>
+            </div>
+        </div>
+    </section>
 </div>

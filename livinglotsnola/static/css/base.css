@@ -439,6 +439,17 @@ footer {
     display: inline;
 }
 
+.filter-boundaries {
+    border-top: 1px solid #2593c6;
+    padding-top: 15px;
+    padding-bottom: 15px;
+}
+
+.filter-zipcode-row {
+    margin: 0;
+    padding: 0;
+}
+
 .owners-list {
     list-style: none;
     padding-left: 15px;
