@@ -7,6 +7,7 @@ from django.contrib.gis.measure import D
 
 import django_filters
 
+from noladata.councildistricts.models import CouncilDistrict
 from noladata.zipcodes.models import ZipCode
 
 from .models import Lot
@@ -87,9 +88,19 @@ class ZipCodeFilter(django_filters.Filter):
         return qs.filter(centroid__within=zipcode.geometry)
 
 
+class CouncilDistrictFilter(django_filters.Filter):
+
+    def filter(self, qs, value):
+        if not value:
+            return qs
+        boundary = CouncilDistrict.objects.get(label=value)
+        return qs.filter(centroid__within=boundary.geometry)
+
+
 class LotFilter(django_filters.FilterSet):
 
     bbox = BoundingBoxFilter()
+    council_district = CouncilDistrictFilter()
     layers = LayerFilter()
     lot_center = LotCenterFilter()
     parents_only = LotGroupParentFilter()
@@ -110,6 +121,7 @@ class LotFilter(django_filters.FilterSet):
         fields = [
             'address_line1',
             'bbox',
+            'council_district',
             'known_use',
             'layers',
             'lot_center',

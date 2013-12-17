@@ -176,6 +176,7 @@ INSTALLED_APPS = (
     'noladata.assessor',
     'noladata.buildings',
     'noladata.codeenforcement',
+    'noladata.councildistricts',
     'noladata.datasync',
     'noladata.habitat',
     'noladata.hano',

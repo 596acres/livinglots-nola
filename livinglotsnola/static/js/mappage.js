@@ -35,6 +35,11 @@ define(
                 public_owners: publicOwners.join(',')
             };
 
+            var councildistrict = $('.filter-councildistrict').val();
+            if (councildistrict !== null) {
+                params.council_district = councildistrict;
+            }
+
             var zipcode = $('.filter-zipcode').val();
             if (zipcode !== null) {
                 params.zipcode = zipcode;
@@ -82,6 +87,20 @@ define(
                 query = '?' + $.param(params),
                 url = l.protocol + '//' + l.host + l.pathname + query + l.hash;
             $('a.details-link').attr('href', url);
+        }
+
+        function updateCouncilDistrict(map, councildistrict) {
+            if (councildistrict) {
+                var url = Django.url('councildistrict_details_geojson', {
+                    label: councildistrict 
+                });
+                $.getJSON(url, function (data) {
+                    map.updateBoundaries(data, { zoomToBounds: true });
+                });
+            }
+            else {
+                map.removeBoundaries();
+            }
         }
 
         function updateZipCode(map, zipcode) {
@@ -241,10 +260,20 @@ define(
                     map.addUserLayer([result.latitude, result.longitude]);
                 });
 
+            $('.filter-boundary').change(function () {
+                // When a boundary filter is changed, clear the rest
+                $('.filter-boundary:not(#' + $(this).attr('id') + ') option:eq(0)')
+                    .prop('selected', true)
+            });
+
             $('.filter').change(function () {
                 var params = buildLotFilterParams(map);
                 map.updateDisplayedLots(params);
                 updateLotCount(map);
+            });
+
+            $('.filter-councildistrict').change(function () {
+                updateCouncilDistrict(map, $(this).val());
             });
 
             $('.filter-zipcode').change(function () {

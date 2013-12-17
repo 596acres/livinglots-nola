@@ -30,6 +30,7 @@ urlpatterns += patterns('',
     url(r'^lots/', include('lots.urls', 'lots')),
 
     # NOLA data
+    url('^councildistricts/', include('noladata.councildistricts.urls')),
     url('^zipcodes/', include('noladata.zipcodes.urls')),
 
     # Activity stream urls
