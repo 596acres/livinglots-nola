@@ -162,6 +162,12 @@ define(
             });
 
             // Set boundaries filters
+
+            var councildistrict = params.council_district;
+            if (councildistrict !== '') {
+                $('.filter-councildistrict option[value=' + councildistrict + ']').prop('selected', true);
+            }
+
             var neighborhoodgroup = params.neighborhood_group;
             if (neighborhoodgroup !== '') {
                 $('.filter-neighborhoodgroup option[value=' + neighborhoodgroup + ']').prop('selected', true);
@@ -203,6 +209,10 @@ define(
             });
 
             map.addLotsLayer(buildLotFilterParams(map));
+
+            if (params && params.council_district !== '') {
+                updateCouncilDistrict(map, params.council_district);
+            }
 
             if (params && params.neighborhood_group !== '') {
                 updateNeighborhoodGroup(map, params.neighborhood_group);
