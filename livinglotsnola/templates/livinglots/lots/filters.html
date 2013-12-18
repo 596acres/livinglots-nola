@@ -1,4 +1,4 @@
-{% load councildistricts_tags i18n owners_tags zipcodes_tags %}
+{% load councildistricts_tags i18n neighborhoodgroups_tags owners_tags zipcodes_tags %}
 
 <div class="overlaymenu-tip-container">
     <div class="overlaymenu-tip"></div>
@@ -56,6 +56,23 @@
                     {% for councildistrict in councildistricts %}
                         <option value="{{ councildistrict.label }}">
                             {{ councildistrict.label }}
+                        </option>
+                    {% endfor %}
+                </select>
+            </div>
+        </div>
+
+        <div class="row form-horizontal filter-boundary-row filter-neighborhoodgroup-row">
+            <div class="col-xs-6 control-label">
+                <label for="filter-neighborhoodgroup">neighborhood group</label>
+            </div>
+            <div class="col-xs-6">
+                <select id="filter-neighborhoodgroup" class="filter filter-boundary filter-neighborhoodgroup form-control">
+                    <option></option>
+                    {% get_neighborhood_groups as neighborhoodgroups %}
+                    {% for group in neighborhoodgroups %}
+                        <option value="{{ group.label }}">
+                            {{ group.full_name }}
                         </option>
                     {% endfor %}
                 </select>

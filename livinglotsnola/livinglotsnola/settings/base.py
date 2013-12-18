@@ -180,6 +180,7 @@ INSTALLED_APPS = (
     'noladata.datasync',
     'noladata.habitat',
     'noladata.hano',
+    'noladata.neighborhoodgroups',
     'noladata.nora',
     'noladata.parcels',
     'noladata.treasury',

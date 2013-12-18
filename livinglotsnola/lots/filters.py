@@ -8,6 +8,7 @@ from django.contrib.gis.measure import D
 import django_filters
 
 from noladata.councildistricts.models import CouncilDistrict
+from noladata.neighborhoodgroups.models import NeighborhoodGroup
 from noladata.zipcodes.models import ZipCode
 
 from .models import Lot
@@ -61,6 +62,15 @@ class LotCenterFilter(django_filters.Filter):
         return qs.filter(centroid__distance_lte=(lot.centroid, D(mi=.5)))
 
 
+class NeighborhoodGroupFilter(django_filters.Filter):
+
+    def filter(self, qs, value):
+        if not value:
+            return qs
+        boundary = NeighborhoodGroup.objects.get(label=value)
+        return qs.filter(centroid__within=boundary.geometry)
+
+
 class OwnerFilter(django_filters.Filter):
 
     def __init__(self, owner_type=None, **kwargs):
@@ -103,6 +113,7 @@ class LotFilter(django_filters.FilterSet):
     council_district = CouncilDistrictFilter()
     layers = LayerFilter()
     lot_center = LotCenterFilter()
+    neighborhood_group = NeighborhoodGroupFilter()
     parents_only = LotGroupParentFilter()
     public_owners = OwnerFilter(owner_type='public')
     zipcode = ZipCodeFilter()
@@ -125,6 +136,7 @@ class LotFilter(django_filters.FilterSet):
             'known_use',
             'layers',
             'lot_center',
+            'neighborhood_group',
             'parents_only',
             'public_owners',
             'zipcode',

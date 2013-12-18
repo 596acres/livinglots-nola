@@ -31,6 +31,7 @@ urlpatterns += patterns('',
 
     # NOLA data
     url('^councildistricts/', include('noladata.councildistricts.urls')),
+    url('^neighborhoodgroups/', include('noladata.neighborhoodgroups.urls')),
     url('^zipcodes/', include('noladata.zipcodes.urls')),
 
     # Activity stream urls

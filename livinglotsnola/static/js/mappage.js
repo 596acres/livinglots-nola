@@ -40,6 +40,11 @@ define(
                 params.council_district = councildistrict;
             }
 
+            var neighborhoodgroup = $('.filter-neighborhoodgroup').val();
+            if (neighborhoodgroup !== null) {
+                params.neighborhood_group = neighborhoodgroup;
+            }
+
             var zipcode = $('.filter-zipcode').val();
             if (zipcode !== null) {
                 params.zipcode = zipcode;
@@ -103,6 +108,20 @@ define(
             }
         }
 
+        function updateNeighborhoodGroup(map, neighborhoodgroup) {
+            if (neighborhoodgroup) {
+                var url = Django.url('neighborhoodgroup_details_geojson', {
+                    label: neighborhoodgroup 
+                });
+                $.getJSON(url, function (data) {
+                    map.updateBoundaries(data, { zoomToBounds: true });
+                });
+            }
+            else {
+                map.removeBoundaries();
+            }
+        }
+
         function updateZipCode(map, zipcode) {
             if (zipcode) {
                 var url = Django.url('zipcode_details_geojson', { label: zipcode });
@@ -143,6 +162,11 @@ define(
             });
 
             // Set boundaries filters
+            var neighborhoodgroup = params.neighborhood_group;
+            if (neighborhoodgroup !== '') {
+                $('.filter-neighborhoodgroup option[value=' + neighborhoodgroup + ']').prop('selected', true);
+            }
+
             var zipCode = params.zipcode;
             if (zipCode !== '') {
                 $('.filter-zipcode option[value=' + zipCode + ']').prop('selected', true);
@@ -179,6 +203,10 @@ define(
             });
 
             map.addLotsLayer(buildLotFilterParams(map));
+
+            if (params && params.neighborhood_group !== '') {
+                updateNeighborhoodGroup(map, params.neighborhood_group);
+            }
 
             if (params && params.zipcode !== '') {
                 updateZipCode(map, params.zipcode);
@@ -274,6 +302,10 @@ define(
 
             $('.filter-councildistrict').change(function () {
                 updateCouncilDistrict(map, $(this).val());
+            });
+
+            $('.filter-neighborhoodgroup').change(function () {
+                updateNeighborhoodGroup(map, $(this).val());
             });
 
             $('.filter-zipcode').change(function () {
