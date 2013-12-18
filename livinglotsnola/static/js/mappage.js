@@ -300,7 +300,7 @@ define(
 
             $('.filter-boundary').change(function () {
                 // When a boundary filter is changed, clear the rest
-                $('.filter-boundary:not(#' + $(this).attr('id') + ') option:eq(0)')
+                $('.filter-boundary:not(#' + $(this).attr('id') + ') option:first-child')
                     .prop('selected', true)
             });
 
