@@ -31,9 +31,7 @@
     "spin.js": "~1.3.2",
     "infinite-scroll": "*",
     "leaflet-plugins": "https://github.com/shramov/leaflet-plugins.git#master",
-    "leaflet-tilelayer-vector": "https://github.com/ebrelsford/leaflet-tilelayer-vector.git#master"
-  },
-  "resolutions": {
-    "leaflet-tilelayer-vector": "master"
+    "leaflet-tilelayer-vector": "https://github.com/ebrelsford/leaflet-tilelayer-vector.git#master",
+    "select2": "~3.4.5"
   }
 }

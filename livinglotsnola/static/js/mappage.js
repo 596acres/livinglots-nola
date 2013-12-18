@@ -19,7 +19,9 @@ define(
         'leaflet.lotmap',
 
         'map.overlaymenu',
-        'map.search'
+        'map.search',
+
+        "select2"
     ], function (Django, $, Handlebars, _, L, Spinner, singleminded) {
 
         function buildLotFilterParams(map) {
@@ -40,7 +42,7 @@ define(
                 params.council_district = councildistrict;
             }
 
-            var neighborhoodgroup = $('.filter-neighborhoodgroup').val();
+            var neighborhoodgroup = $('.filter-neighborhoodgroup:input').val();
             if (neighborhoodgroup !== null) {
                 params.neighborhood_group = neighborhoodgroup;
             }
@@ -186,6 +188,8 @@ define(
                 setFilters(params);
             }
 
+            $('.filter-neighborhoodgroup').select2();
+
             var map = L.lotMap('map', {
 
                 onMouseOverFeature: function (feature) {
@@ -300,8 +304,12 @@ define(
 
             $('.filter-boundary').change(function () {
                 // When a boundary filter is changed, clear the rest
-                $('.filter-boundary:not(#' + $(this).attr('id') + ') option:first-child')
+                var id = $(this).attr('id');
+                $('.filter-boundary:not(#' + id  + ') option:first-child')
                     .prop('selected', true)
+                if (id !== 'filter-neighborhoodgroup') {
+                    $('#filter-neighborhoodgroup').select2('val', '');
+                }
             });
 
             $('.filter').change(function () {

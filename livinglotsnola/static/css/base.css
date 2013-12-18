@@ -463,6 +463,33 @@ footer {
     padding-right: 0;
 }
 
+.filter-neighborhoodgroup .select2-choice {
+    background-image: none;
+    border: none;
+    border-radius: none;
+    height: 32px;
+    line-height: 32px;
+    position: static;
+}
+
+.filter-neighborhoodgroup .select2-choice .select2-arrow {
+    background: none;
+    background-image: none;
+    border-left: none;
+}
+
+.filter-neighborhoodgroup.select2-container {
+    padding: 0;
+}
+
+.select2-drop-active {
+    border: 1px solid black;
+    border-radius: 0;
+    border-top: none;
+    box-shadow: none;
+    -webkit-box-shadow: none;
+}
+
 .owners-list {
     list-style: none;
     padding-left: 15px;
@@ -769,6 +796,7 @@ input[type=password],
 input[type=text],
 input[type=url],
 select.form-control,
+.select2-container.form-control,
 textarea.form-control {
     border: 1px solid black;
     border-radius: 0;

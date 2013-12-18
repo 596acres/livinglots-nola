@@ -46,10 +46,10 @@
     <section class="filter-boundaries">
 
         <div class="row form-horizontal filter-boundary-row filter-councildistrict-row">
-            <div class="col-xs-6 control-label">
+            <div class="col-xs-5 control-label">
                 <label for="filter-councildistrict">council district</label>
             </div>
-            <div class="col-xs-6">
+            <div class="col-xs-7">
                 <select id="filter-councildistrict" class="filter filter-boundary filter-councildistrict form-control">
                     <option></option>
                     {% get_council_districts as councildistricts %}
@@ -63,10 +63,10 @@
         </div>
 
         <div class="row form-horizontal filter-boundary-row filter-neighborhoodgroup-row">
-            <div class="col-xs-6 control-label">
+            <div class="col-xs-5 control-label">
                 <label for="filter-neighborhoodgroup">neighborhood group</label>
             </div>
-            <div class="col-xs-6">
+            <div class="col-xs-7">
                 <select id="filter-neighborhoodgroup" class="filter filter-boundary filter-neighborhoodgroup form-control">
                     <option></option>
                     {% get_neighborhood_groups as neighborhoodgroups %}
@@ -80,10 +80,10 @@
         </div>
 
         <div class="row form-horizontal filter-boundary-row filter-zipcode-row">
-            <div class="col-xs-6 control-label">
+            <div class="col-xs-5 control-label">
                 <label for="filter-zipcode">zipcode</label>
             </div>
-            <div class="col-xs-6">
+            <div class="col-xs-7">
                 <select id="filter-zipcode" class="filter filter-boundary filter-zipcode form-control">
                     <option></option>
                     {% get_zip_codes as zipcodes %}
