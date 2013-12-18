@@ -448,6 +448,19 @@ footer {
 .filter-boundary-row {
     margin: 0;
     padding: 0;
+    padding-bottom: 5px;
+    padding-top: 5px;
+}
+.filter-boundary-row:last-child {
+    padding-bottom: 0;
+}
+
+.filter-boundary-row div:first-child {
+    padding-left: 0;
+}
+
+.filter-boundary-row div:last-child {
+    padding-right: 0;
 }
 
 .owners-list {
