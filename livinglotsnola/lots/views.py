@@ -11,7 +11,8 @@ from caching.base import cached
 
 from inplace.views import GeoJSONListView
 from livinglots_genericviews.views import JSONResponseView
-from livinglots_lots.views import FilteredLotsMixin, LotsCountView
+from livinglots_lots.views import (FilteredLotsMixin, LotsCountView, LotsCSV,
+                                   LotsKML, LotsGeoJSON)
 
 
 ureg = UnitRegistry()
@@ -194,3 +195,21 @@ class LotsCountViewWithAcres(LotsCountView):
             'in-use-acres': self.get_area_in_acres(in_use),
         }
         return context
+
+
+class NolaLotsCSV(LotsCSV):
+
+    def get_sitename(self):
+        return 'Living Lots NOLA'
+
+
+class NolaLotsKML(LotsKML):
+
+    def get_sitename(self):
+        return 'Living Lots NOLA'
+
+
+class NolaLotsGeoJSON(LotsGeoJSON):
+
+    def get_sitename(self):
+        return 'Living Lots NOLA'
