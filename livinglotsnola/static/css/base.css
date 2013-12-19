@@ -407,6 +407,10 @@ footer {
     margin-bottom: 0;
 }
 
+.details-overview {
+    min-height: 100px;
+}
+
 .details-overview > ul {
     list-style: none;
     padding: 0;

@@ -248,6 +248,10 @@ define(
                     menu: '.overlaymenu-details'
                 })
                 .on('overlaymenuopen', function () {
+                    var spinner = new Spinner({
+                        left: '0px',
+                        top: '0px'
+                    }).spin($('.details-overview')[0]);
                     updateDetailsLink(map);
                     updateOwnershipOverview(map);
                 });
@@ -269,8 +273,8 @@ define(
                 })
                 .on('overlaymenuopen', function () {
                     var spinner = new Spinner({
-                        left: '50px',
-                        top: '50px'
+                        left: '0px',
+                        top: '0px'
                     }).spin($('.activity-stream')[0]);
 
                     var url = Django.url('activitystream_activity_list');
