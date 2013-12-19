@@ -24,7 +24,7 @@ define(
         "select2"
     ], function (Django, $, Handlebars, _, L, Spinner, singleminded) {
 
-        function buildLotFilterParams(map) {
+        function buildLotFilterParams(map, options) {
             var layers = _.map($('.filter-layer:checked'), function (layer) {
                 return $(layer).attr('name'); 
             });
@@ -38,32 +38,30 @@ define(
             };
 
             var councildistrict = $('.filter-councildistrict').val();
-            if (councildistrict !== null) {
+            if (councildistrict && councildistrict !== '') {
                 params.council_district = councildistrict;
             }
 
             var neighborhoodgroup = $('.filter-neighborhoodgroup:input').val();
-            if (neighborhoodgroup !== null) {
+            if (neighborhoodgroup && neighborhoodgroup !== '') {
                 params.neighborhood_group = neighborhoodgroup;
             }
 
             var zipcode = $('.filter-zipcode').val();
-            if (zipcode !== null) {
+            if (zipcode && zipcode !== '') {
                 params.zipcode = zipcode;
             }
 
-            return params;
-        }
+            if (options && options.bbox) {
+                params.bbox = map.getBounds().toBBoxString();
+            }
 
-        function buildLotFilterCountParams(map) {
-            var params = buildLotFilterParams(map);
-            params.bbox = map.getBounds().toBBoxString();
             return params;
         }
 
         function updateLotCount(map) {
             var url = Django.url('lots:lot_count') + '?' +
-                $.param(buildLotFilterCountParams(map));
+                $.param(buildLotFilterParams(map, { bbox: true }));
             singleminded.remember({
                 name: 'updateLotCount',
                 jqxhr: $.getJSON(url, function (data) {
@@ -76,7 +74,7 @@ define(
 
         function updateOwnershipOverview(map) {
             var url = Django.url('lots:lot_ownership_overview'),
-                params = buildLotFilterCountParams(map);
+                params = buildLotFilterParams(map, { bbox: true });
             $.getJSON(url + '?' + $.param(params), function (data) {
                 var template = Handlebars.compile($('#details-template').html());
                 var content = template({
@@ -360,6 +358,14 @@ define(
                     map.addLotsLayer(buildLotFilterParams(map));
                 }
             });
+
+            $('.export').click(function (e) {
+                var url = $(this).data('baseurl') + 
+                    $.param(buildLotFilterParams(map, { bbox: true }));
+                window.location.href = url;
+                e.preventDefault();
+            });
+
         });
 
     }
