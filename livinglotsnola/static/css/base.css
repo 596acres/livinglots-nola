@@ -350,6 +350,7 @@ footer {
 
 .overlaymenu-menu-content {
     max-height: 400px;
+    min-height: 150px;
     overflow-y: auto;
 }
 
