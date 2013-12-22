@@ -50,21 +50,17 @@
     </div>
 
 
-    {% if "lots.change_lot" in perms %}
-        <div class="pull-left lot-detail-admin admin-only" style="margin-right: 15px;">
+    <div class="lot-detail-actions">
+        {% if "lots.change_lot" in perms %}
             <a class="btn btn-small btn-warning" href="{% url "admin:lots_lot_change" lot.pk %}">
                 <i class="icon-edit icon-white"></i>
                 {% trans "Edit this lot" %}
             </a>
-        </div>
-    {% endif %}
+        {% endif %}
 
-    <div class="lot-detail-get-involved">
-        <div class="pull-left">
-            <a class="btn btn-default build-community-button lot-page-tooltip" href="{% url "organize:add_organizer" pk=lot.pk %}" data-toggle="tooltip" title="{% trans "Get involved with this lot or let people know you are already working towards growing community here." %}" style="margin-right: 15px;">
-                {% trans "organize" %}
-            </a>
-        </div>
+        <a class="btn btn-default build-community-button lot-page-tooltip" href="{% url "organize:add_organizer" pk=lot.pk %}" data-toggle="tooltip" title="{% trans "Get involved with this lot or let people know you are already working towards growing community here." %}">
+            {% trans "organize" %}
+        </a>
 
         {% if lot.nearby %}
             <a class="btn btn-default disabled">
@@ -73,19 +69,17 @@
         {% endif %}
 
         {% if not lot.known_use %}
-            <div class="btn-group pull-right">
-                {% comment %}
+            {% comment %}
                 <a class="btn lot-page-tooltip" href="{% url "lots:add_stewardnotification" pk=lot.pk %}" data-toggle="tooltip" title="{% trans "Tell us more about your garden project." %}">
                     {% trans "Is this an active garden?" %}
                 </a>
-                <a class="btn lot-page-tooltip" href="{% url "lots:add_groundtruthrecord" pk=lot.pk %}" data-toggle="tooltip" title="{% trans "Let us know that this lot's actual use is not correctly identified." %}">
-                    {% trans "Have we made a mistake?" %}
-                </a>
-                {% endcomment %}
-            </div>
+            {% endcomment %}
+
+            <a class="btn btn-default lot-page-tooltip" href="{% url "groundtruth:add_groundtruthrecord" pk=lot.pk %}" data-toggle="tooltip" title="{% trans "Let us know that this lot's actual use is not correctly identified." %}">
+                {% trans "Have we made a mistake?" %}
+            </a>
         {% endif %}
     </div>
-    <div class="clearfix"></div>
 
     <div class="lot-detail-main">
 

@@ -613,6 +613,10 @@ footer {
     margin-top: 20px;
 }
 
+.lot-detail-actions .btn {
+    margin-right: 15px;
+}
+
 .lot-detail-organizers h2 {
     background: #58595b;
     color: white;
