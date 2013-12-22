@@ -55,7 +55,7 @@ git+git://github.com/ebrelsford/johnny-cache/@master
 # Living Lots
 git+git://github.com/596acres/django-livinglots/@master
 git+git://github.com/596acres/django-livinglots-forms/@master
-git+git://github.com/597acres/django-livinglots-generictags/@master
+git+git://github.com/596acres/django-livinglots-generictags/@master
 git+git://github.com/596acres/django-livinglots-genericviews/@master
 git+git://github.com/596acres/django-livinglots-groundtruth/@master
 git+git://github.com/596acres/django-livinglots-lots/@master
