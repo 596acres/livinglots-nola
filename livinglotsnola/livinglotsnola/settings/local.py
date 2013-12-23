@@ -50,13 +50,13 @@ LOGGING = {
 INTERNAL_IPS = ('127.0.0.1',)
 
 MIDDLEWARE_CLASSES += (
-    'debug_toolbar.middleware.DebugToolbarMiddleware',
-    'django_pdb.middleware.PdbMiddleware',
+    #'debug_toolbar.middleware.DebugToolbarMiddleware',
+    #'django_pdb.middleware.PdbMiddleware',
 )
 
 INSTALLED_APPS += (
-    'debug_toolbar',
-    'django_pdb',
+    #'debug_toolbar',
+    #'django_pdb',
 )
 
 DEBUG_TOOLBAR_CONFIG = {
