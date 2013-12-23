@@ -26,18 +26,24 @@ class LayerFilter(django_filters.Filter):
     def filter(self, qs, value):
         layers = value.split(',')
         layer_filter = Q()
+
         for layer in layers:
             if layer == 'public':
-                layer_filter = layer_filter | Q(owner__owner_type='public')
+                layer_filter = layer_filter | Q(
+                    owner__owner_type='public',
+                    known_use=None,
+                )
             elif layer == 'private':
                 layer_filter = layer_filter | Q(
                     owner__owner_type='private',
                     has_blight_liens=False,
+                    known_use=None,
                 )
             elif layer == 'private_blight_liens':
                 layer_filter = layer_filter | Q(
                     owner__owner_type='private',
                     has_blight_liens=True,
+                    known_use=None,
                 )
         return qs.filter(layer_filter)
 
@@ -84,6 +90,7 @@ class OwnerFilter(django_filters.Filter):
         owner_query = Q(
             owner__owner_type=self.owner_type,
             owner__pk__in=owner_pks,
+            known_use=None,
         )
         other_owners_query = ~Q(owner__owner_type=self.owner_type)
         return qs.filter(owner_query | other_owners_query)
