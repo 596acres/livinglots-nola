@@ -1,10 +1,8 @@
 from django.db import models
-from django.db.models.signals import post_save
 from django.dispatch import receiver
 from django.utils.translation import ugettext_lazy as _
 
 import django_monitor
-from django_monitor.util import save_handler
 
 from livinglots_groundtruth.models import BaseGroundtruthRecord
 from livinglots_notify.helpers import notify_facilitators
@@ -22,12 +20,6 @@ class GroundtruthRecord(BaseGroundtruthRecord):
 #
 # Signals
 #
-
-
-# Disconnect monitor's post-save handler, moderation will be handled in the
-# view
-post_save.disconnect(save_handler, sender=GroundtruthRecord)
-
 
 @receiver(django_monitor.post_moderation, sender=GroundtruthRecord,
           dispatch_uid='groundtruth_groundtruthrecord_notify')
