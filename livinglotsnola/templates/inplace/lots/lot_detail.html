@@ -69,11 +69,9 @@
         {% endif %}
 
         {% if not lot.known_use %}
-            {% comment %}
-                <a class="btn lot-page-tooltip" href="{% url "lots:add_stewardnotification" pk=lot.pk %}" data-toggle="tooltip" title="{% trans "Tell us more about your garden project." %}">
-                    {% trans "Is this an active garden?" %}
-                </a>
-            {% endcomment %}
+            <a class="btn btn-default lot-page-tooltip" href="{% url "steward:add_stewardnotification" pk=lot.pk %}" data-toggle="tooltip" title="{% trans "Tell us more about your project." %}">
+                {% trans "Is this an active project?" %}
+            </a>
 
             <a class="btn btn-default lot-page-tooltip" href="{% url "groundtruth:add_groundtruthrecord" pk=lot.pk %}" data-toggle="tooltip" title="{% trans "Let us know that this lot's actual use is not correctly identified." %}">
                 {% trans "Have we made a mistake?" %}

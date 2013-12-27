@@ -25,9 +25,14 @@ if settings.DEBUG:
 
 urlpatterns += patterns('',
     # Living Lots
-    url(r'^lots/(?P<pk>\d+)/content/', include('usercontent.urls', 'usercontent')),
-    url(r'^lots/(?P<pk>\d+)/groundtruth/', include('groundtruth.urls', 'groundtruth')),
-    url(r'^lots/(?P<pk>\d+)/grow-community/', include('organize.urls', 'organize')),
+    url(r'^lots/(?P<pk>\d+)/content/',
+        include('usercontent.urls', 'usercontent')),
+    url(r'^lots/(?P<pk>\d+)/groundtruth/',
+        include('groundtruth.urls', 'groundtruth')),
+    url(r'^lots/(?P<pk>\d+)/grow-community/steward/',
+        include('steward.urls', 'steward')),
+    url(r'^lots/(?P<pk>\d+)/grow-community/',
+        include('organize.urls', 'organize')),
     url(r'^lots/', include('lots.urls', 'lots')),
 
     # NOLA data
