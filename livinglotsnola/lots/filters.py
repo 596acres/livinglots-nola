@@ -30,20 +30,20 @@ class LayerFilter(django_filters.Filter):
         for layer in layers:
             if layer == 'public':
                 layer_filter = layer_filter | Q(
+                    Q(known_use=None) | Q(known_use__visible=True),
                     owner__owner_type='public',
-                    known_use=None,
                 )
             elif layer == 'private':
                 layer_filter = layer_filter | Q(
+                    Q(known_use=None) | Q(known_use__visible=True),
                     owner__owner_type='private',
                     has_blight_liens=False,
-                    known_use=None,
                 )
             elif layer == 'private_blight_liens':
                 layer_filter = layer_filter | Q(
+                    Q(known_use=None) | Q(known_use__visible=True),
                     owner__owner_type='private',
                     has_blight_liens=True,
-                    known_use=None,
                 )
         return qs.filter(layer_filter)
 
@@ -88,9 +88,9 @@ class OwnerFilter(django_filters.Filter):
             return qs
         owner_pks = value.split(',')
         owner_query = Q(
+            Q(known_use=None) | Q(known_use__visible=True),
             owner__owner_type=self.owner_type,
             owner__pk__in=owner_pks,
-            known_use=None,
         )
         other_owners_query = ~Q(owner__owner_type=self.owner_type)
         return qs.filter(owner_query | other_owners_query)
@@ -114,6 +114,21 @@ class CouncilDistrictFilter(django_filters.Filter):
         return qs.filter(centroid__within=boundary.geometry)
 
 
+class ProjectFilter(django_filters.Filter):
+
+    def filter(self, qs, value):
+        if not value or value == 'include':
+            return qs
+        has_project_filter = Q(known_use__visible=True)
+        if value == 'include':
+            return qs
+        elif value == 'exclude':
+            return qs.filter(~has_project_filter)
+        elif value == 'only':
+            return qs.filter(has_project_filter)
+        return qs
+
+
 class LotFilter(django_filters.FilterSet):
 
     bbox = BoundingBoxFilter()
@@ -122,6 +137,7 @@ class LotFilter(django_filters.FilterSet):
     lot_center = LotCenterFilter()
     neighborhood_group = NeighborhoodGroupFilter()
     parents_only = LotGroupParentFilter()
+    projects = ProjectFilter()
     public_owners = OwnerFilter(owner_type='public')
     zipcode = ZipCodeFilter()
 
@@ -145,6 +161,7 @@ class LotFilter(django_filters.FilterSet):
             'lot_center',
             'neighborhood_group',
             'parents_only',
+            'projects',
             'public_owners',
             'zipcode',
         ]

@@ -34,6 +34,7 @@ define(
             var params = {
                 layers: layers.join(','),
                 parents_only: true,
+                projects: $('.filter-projects').val(),
                 public_owners: publicOwners.join(',')
             };
 
@@ -176,6 +177,11 @@ define(
             var zipCode = params.zipcode;
             if (zipCode !== '') {
                 $('.filter-zipcode option[value=' + zipCode + ']').prop('selected', true);
+            }
+
+            var projects = params.projects;
+            if (projects !== '') {
+                $('.filter-projects').val(projects);
             }
         }
 

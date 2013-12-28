@@ -28,7 +28,7 @@ class LotGeoJSONMixin(object):
 
     def get_layer(self, lot):
         if lot.known_use:
-            return 'in use'
+            return 'in_use'
         elif lot.owner and lot.owner.owner_type == 'public':
             return 'public'
         elif lot.owner and lot.owner.owner_type == 'private':

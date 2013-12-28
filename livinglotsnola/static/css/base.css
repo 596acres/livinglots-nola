@@ -444,12 +444,13 @@ footer {
     display: inline;
 }
 
-.filter-boundaries {
+.filter-section {
     border-top: 1px solid #2593c6;
     padding-top: 15px;
     padding-bottom: 15px;
 }
 
+.filter-projects-row,
 .filter-boundary-row {
     margin: 0;
     padding: 0;
@@ -460,10 +461,12 @@ footer {
     padding-bottom: 0;
 }
 
+.filter-projects-row div:first-child,
 .filter-boundary-row div:first-child {
     padding-left: 0;
 }
 
+.filter-projects-row div:last-child,
 .filter-boundary-row div:last-child {
     padding-right: 0;
 }

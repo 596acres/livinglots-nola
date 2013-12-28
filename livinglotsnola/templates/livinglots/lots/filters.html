@@ -36,14 +36,27 @@
                 {% trans "private land with a blight lien" %}
             </label>
         </li>
-        <li>
-            <input type="checkbox" class="filter filter-layer" name="project" disabled />
-            <span class="legend-marker legend-marker-project"></span>
-            {% trans "project" %}
-        </li>
     </ul>
 
-    <section class="filter-boundaries">
+    <section class="filter-section filter-section-projects">
+        <div class="row form-horizontal filter-projects-row">
+            <div class="col-xs-5 control-label">
+                <label for="projects" class="">
+                    <span class="legend-marker legend-marker-project"></span>
+                    {% trans "projects" %}
+                </label>
+            </div>
+            <div class="col-xs-7">
+                <select class="filter filter-projects form-control" id="projects">
+                    <option value="include">{% trans "include" %}</option>
+                    <option value="exclude">{% trans "exclude" %}</option>
+                    <option value="only">{% trans "show only projects" %}</option>
+                </select>
+            </div>
+        </div>
+    </section>
+
+    <section class="filter-section filter-section-boundaries">
 
         <div class="row form-horizontal filter-boundary-row filter-councildistrict-row">
             <div class="col-xs-5 control-label">
