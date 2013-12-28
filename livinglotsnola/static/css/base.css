@@ -510,16 +510,30 @@ footer {
     left: 25px;
     padding: 5px;
     position: absolute;
-    width: 50%;
+    width: 25%;
     z-index: 5000;
+}
+
+#map-legend .legend-marker {
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+#map-legend .legend-marker-organized {
+    margin-left: 5px;
+    margin-right: 5px;
 }
 
 .legend-label {
     display: inline;
     font-family: 'Oswald', sans-serif;
     font-weight: 300;
-    line-height: 14px;
+    line-height: 22px;
     text-transform: uppercase;
+}
+
+.legend-label-organized {
+    vertical-align: top;
 }
 
 .legend-marker {
