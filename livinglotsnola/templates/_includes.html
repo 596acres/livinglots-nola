@@ -1,16 +1,12 @@
 {% load compress js static %}
 
-<link rel="stylesheet" href="//cdn.leafletjs.com/leaflet-0.7.1/leaflet.css" />
-<!--[if lte IE 8]>
-    <link rel="stylesheet" href="//cdn.leafletjs.com/leaflet-0.7.1/leaflet.ie.css" />
-<![endif]-->
-
 <link href='//fonts.googleapis.com/css?family=Oswald:400,300,700' rel='stylesheet' type='text/css'>
 
 {% compress css %}
     <link rel="stylesheet" href="{% static "bower_components/normalize-css/normalize.css" %}">
     <link rel="stylesheet" href="{% static "bower_components/bootstrap/dist/css/bootstrap.css" %}">
     <link rel="stylesheet" href="{% static "bower_components/fancybox/source/jquery.fancybox.css" %}">
+    <link rel="stylesheet" href="{% static "bower_components/leaflet/leaflet.css" %}">
     <link rel="stylesheet" href="{% static "bower_components/leaflet.loading/src/Control.Loading.css" %}" />
     <link rel="stylesheet" href="{% static "bower_components/leaflet.usermarker/src/leaflet.usermarker.css" %}" />
     <link rel="stylesheet" href="{% static "bower_components/select2/select2.css" %}" />
