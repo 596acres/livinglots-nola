@@ -93,3 +93,10 @@ LOGGING = {
 }
 
 NOLADATA_TREASURY_PARCELS_GEOPINS = '/home/farmthisnow/webapps/llnola_django/data/probably_vacant.csv'
+
+
+#
+# SSL
+#
+CSRF_COOKIE_SECURE = True
+SESSION_COOKIE_SECURE = True
