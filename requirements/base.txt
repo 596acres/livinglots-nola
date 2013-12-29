@@ -64,6 +64,7 @@ git+git://github.com/596acres/django-livinglots-notify/@master
 git+git://github.com/596acres/django-livinglots-organize/@master
 git+git://github.com/596acres/django-livinglots-owners/@master
 git+git://github.com/596acres/django-livinglots-pathways/@master
+git+git://github.com/596acres/django-livinglots-steward/@master
 git+git://github.com/596acres/django-livinglots-usercontent/@master
 
 # NOLA
