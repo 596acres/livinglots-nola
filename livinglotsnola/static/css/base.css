@@ -907,3 +907,14 @@ textarea.form-control {
 .leaflet-control-zoom .leaflet-control-zoom-in:hover {
     border-bottom: 1px solid #2593c6;
 }
+
+.leaflet-control-zoom .leaflet-control-zoom-out {
+    border: none;
+}
+
+a.leaflet-control-loading {
+    background-image: url(/static/img/loading.gif);
+    background-repeat: no-repeat;
+    background-position: center;
+    border-top: 1px solid #2593c6;
+}

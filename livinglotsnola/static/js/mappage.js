@@ -16,6 +16,7 @@ define(
 
         'jquery.infinitescroll',
 
+        'leaflet.loading',
         'leaflet.lotmap',
 
         'map.overlaymenu',

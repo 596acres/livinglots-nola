@@ -22,7 +22,7 @@
     "requirejs": "~2.1.8",
     "almond": "~0.2.6",
     "tinymce": "~4.0.6",
-    "leaflet": "http://leaflet-cdn.s3.amazonaws.com/build/leaflet-0.7.zip",
+    "leaflet": "http://leaflet-cdn.s3.amazonaws.com/build/leaflet-0.7.1.zip",
     "leaflet.dataoptions": "https://github.com/ebrelsford/Leaflet.dataoptions.git#master",
     "handlebars": "~1.0.0",
     "leaflet.handlebars": "https://github.com/ebrelsford/Leaflet.handlebars.git#master",
@@ -32,6 +32,10 @@
     "infinite-scroll": "*",
     "leaflet-plugins": "https://github.com/shramov/leaflet-plugins.git#master",
     "leaflet-tilelayer-vector": "https://github.com/ebrelsford/leaflet-tilelayer-vector.git#master",
-    "select2": "~3.4.5"
+    "select2": "~3.4.5",
+    "leaflet.loading": "~0.1.4"
+  },
+  "resolutions": {
+    "leaflet": "e-tag:08329f89f"
   }
 }
