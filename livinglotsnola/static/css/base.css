@@ -909,7 +909,8 @@ textarea.form-control {
     border-bottom: 1px solid #2593c6;
 }
 
-.leaflet-control-zoom .leaflet-control-zoom-out {
+.leaflet-control-zoom .leaflet-control-zoom-out,
+.leaflet-control-zoom .leaflet-control-zoom-out:hover {
     border: none;
 }
 
