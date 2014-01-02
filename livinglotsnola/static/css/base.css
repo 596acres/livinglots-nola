@@ -354,6 +354,10 @@ footer {
     overflow-y: auto;
 }
 
+.overlaymenu-admin .overlaymenu-menu-content {
+    min-height: 10px;
+}
+
 .overlaymenu-details,
 .overlaymenu-filter,
 .overlaymenu-news {
@@ -398,6 +402,14 @@ footer {
     color: #58595b;
     font-size: 14px;
     font-weight: 300;
+}
+
+.overlay-details-button {
+    margin-bottom: 5px;
+}
+
+.overlay-admin-button {
+    margin-top: 5px;
 }
 
 .details-buttons .details-button {
@@ -564,6 +576,32 @@ footer {
 
 .legend-marker-project {
     background: #97b03d;
+}
+
+.map-add-lot-mode-container {
+    background: rgba(256, 256, 256, 0.85);
+    border: 3px solid #2593c6;
+    top: 10px;
+    left: 50px;
+    padding: 10px;
+    position: absolute;
+    width: 25%;
+    z-index: 5000;
+}
+
+.map-add-lot-mode-container h1 {
+    font-size: 24px;
+    margin-top: 0;
+}
+
+.map-add-lot-mode-container .map-add-lot-zoom-message {
+    display: none;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.map-add-lot-actions {
+    margin-top: 15px;
 }
 
 .lotpopup {

@@ -16,6 +16,7 @@ define(
 
         'jquery.infinitescroll',
 
+        'leaflet.adminlotmap',
         'leaflet.loading',
         'leaflet.lotmap',
 
@@ -272,6 +273,16 @@ define(
 
             $('.overlay-download-button').mapoverlaymenu({
                 menu: '.overlaymenu-download'
+            });
+
+            $('.overlay-admin-button').mapoverlaymenu({
+                menu: '.overlaymenu-admin'
+            });
+
+            $('.admin-button-add-lot').click(function () {
+                map.enterLotAddMode();
+                $('.overlaymenu-admin').hide();
+                return false;
             });
 
             $('.overlay-news-button')

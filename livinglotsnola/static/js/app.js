@@ -17,6 +17,7 @@ requirejs.config({
         "requirejs": "../bower_components/requirejs",
         "select2": "../bower_components/select2/select2",
         "spin": "../bower_components/spin.js/spin",
+        "text": "../bower_components/requirejs-text/text",
         "underscore": "../bower_components/underscore/underscore",
 
         // TileLayer.GeoJSON paths
