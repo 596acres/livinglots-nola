@@ -7,13 +7,52 @@ from django.utils.translation import ugettext_lazy as _
 
 from noladata.zipcodes.models import ZipCode
 
-from livinglots_lots.models import BaseLot, BaseLotGroup
+from livinglots_lots.models import BaseLot, BaseLotGroup, BaseLotManager
 from livinglots_lots.signals import lot_details_loaded
 
 from organize.models import Organizer
+from .exceptions import ParcelAlreadyInLot
 
 
 ureg = UnitRegistry()
+
+
+class LotManager(BaseLotManager):
+
+    def create_lot_for_parcels(self, parcels, **lot_kwargs):
+        lots = []
+
+        # Check parcel validity
+        for parcel in parcels:
+            if parcel.lot_set.count():
+                raise ParcelAlreadyInLot()
+
+        # Create lots for each parcel
+        for parcel in parcels:
+            kwargs = {
+                'parcel': parcel,
+                'polygon': parcel.geom,
+                'centroid': parcel.geom.centroid,
+                'address_line1': parcel.address,
+                'name': parcel.address,
+            }
+            kwargs.update(**lot_kwargs)
+            lot = Lot(**kwargs)
+            lot.save()
+            lots.append(lot)
+
+        # Multiple lots, create a lot group
+        if len(lots) > 1:
+            example_lot = lots[0]
+            kwargs = {
+                'address_line1': example_lot.address_line1,
+                'name': example_lot.name,
+            }
+            kwargs.update(**lot_kwargs)
+            lot = LotGroup(**kwargs)
+            lot.save()
+            lot.update(lots=lots)
+        return lot
 
 
 class LotGroupLotMixin(models.Model):
@@ -116,6 +155,8 @@ class LotMixin(models.Model):
 
 class Lot(LotMixin, LotGroupLotMixin, BaseLot):
 
+    objects = LotManager()
+
     class Meta:
         permissions = (
             ('view_preview', 'Can view preview map'),
@@ -123,7 +164,7 @@ class Lot(LotMixin, LotGroupLotMixin, BaseLot):
 
 
 class LotGroup(BaseLotGroup, Lot):
-    pass
+    objects = models.Manager()
 
 
 @receiver(lot_details_loaded)

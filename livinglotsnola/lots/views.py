@@ -6,13 +6,18 @@ from pint import UnitRegistry
 from random import shuffle
 
 from django.db.models import Count, Sum
+from django.http import HttpResponse, HttpResponseBadRequest
+from django.views.generic import View
 
+from braces.views import PermissionRequiredMixin
 from caching.base import cached
 
 from inplace.views import GeoJSONListView
 from livinglots_genericviews.views import JSONResponseView
 from livinglots_lots.views import (FilteredLotsMixin, LotsCountView, LotsCSV,
                                    LotsKML, LotsGeoJSON)
+from .exceptions import ParcelAlreadyInLot
+from .models import Lot
 
 
 ureg = UnitRegistry()
@@ -213,3 +218,27 @@ class NolaLotsGeoJSON(LotsGeoJSON):
 
     def get_sitename(self):
         return 'Living Lots NOLA'
+
+
+class CreateLotView(PermissionRequiredMixin, View):
+    permission_required = 'lots.add_lot'
+
+    def create_lot_for_parcels(self, pks, **lot_kwargs):
+        from noladata.parcels.models import Parcel
+        parcels = Parcel.objects.filter(pk__in=pks)
+        return Lot.objects.create_lot_for_parcels(parcels, **lot_kwargs)
+
+    def post(self, request, *args, **kwargs):
+        parcel_pks = request.POST.get('pks')
+        parcel_pks = parcel_pks.split(',')
+        try:
+            lot_kwargs = {
+                'added_reason': 'Created using add-lot mode',
+            }
+            lot = self.create_lot_for_parcels(parcel_pks, **lot_kwargs)
+            if lot:
+                return HttpResponse('%s' % lot.pk, content_type='text/plain')
+            else:
+                return HttpResponseBadRequest('No lot created')
+        except ParcelAlreadyInLot:
+            return HttpResponseBadRequest('One or more parcels already in lots')
