@@ -234,6 +234,8 @@ class CreateLotView(PermissionRequiredMixin, View):
         try:
             lot_kwargs = {
                 'added_reason': 'Created using add-lot mode',
+                'known_use_certainty': 10,
+                'known_use_locked': True,
             }
             lot = self.create_lot_for_parcels(parcel_pks, **lot_kwargs)
             if lot:
