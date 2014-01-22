@@ -23,7 +23,6 @@ ALLOWED_HOSTS = get_env_variable('ALLOWED_HOSTS').split(',')
 # cache-machine
 #
 
-# TODO is this doing anything?
 CACHES = {
     'default': {
         'BACKEND': 'caching.backends.memcached.MemcachedCache',
