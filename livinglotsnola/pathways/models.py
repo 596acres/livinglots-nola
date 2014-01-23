@@ -16,16 +16,10 @@ class PathwayManager(BasePathwayManager):
 
     def get_for_lot(self, lot):
         qs = super(PathwayManager, self).get_for_lot(lot)
-        if lot.has_blight_liens:
-            qs.filter(
-                Q(has_blight_liens__isnull=True) |
-                Q(has_blight_liens=True)
-            )
-        else:
-            qs.filter(
-                Q(has_blight_liens__isnull=True) |
-                Q(has_blight_liens=False)
-            )
+        qs = qs.filter(
+            Q(has_blight_liens__isnull=True) |
+            Q(has_blight_liens=lot.has_blight_liens)
+        )
         return qs
 
 
