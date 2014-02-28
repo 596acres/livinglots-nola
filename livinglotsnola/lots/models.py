@@ -169,6 +169,7 @@ class LotGroup(BaseLotGroup, Lot):
 
 @receiver(lot_details_loaded)
 def load_lazy_properties(sender, instance=None, **kwargs):
+    # TODO also things like ParcelAssessorRecord
     if not instance.postal_code:
         instance.postal_code = instance._postal_code().label
         instance.save()
