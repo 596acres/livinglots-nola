@@ -25,7 +25,9 @@ class LayerFilter(django_filters.Filter):
 
     def filter(self, qs, value):
         layers = value.split(',')
-        layer_filter = Q()
+        # If lot is a project, it doesn't matter what the owner is. Projects
+        # filtered by ProjectFilter, so allow them all through here
+        layer_filter = Q(known_use__visible=True, owner=None)
 
         for layer in layers:
             if layer == 'public':
