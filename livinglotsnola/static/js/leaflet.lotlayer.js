@@ -54,6 +54,9 @@ define(
                     latlng, latlngs, i, len;
 
                 var options = L.extend({}, vectorOptions);
+                if (geojson.properties.layer) {
+                    options.layer = geojson.properties.layer;
+                }
                 if (geojson.properties.has_organizers) {
                     options.hasOrganizers = true;
                 }
