@@ -43,6 +43,7 @@ define(
                 },
                 pointToLayer: function (feature, latlng) {
                     var options = {};
+                    options.layer = feature.properties.layer;
                     if (feature.properties.has_organizers) {
                         options.hasOrganizers = true;
                     }

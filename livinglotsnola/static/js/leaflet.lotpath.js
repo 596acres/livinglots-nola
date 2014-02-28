@@ -2,7 +2,7 @@ define(['leaflet'], function (L) {
     L.LotPathMixin = {
 
         initActionPath: function() {
-            if (this.options.hasOrganizers) {
+            if (this.options.hasOrganizers && this.options.layer !== 'in_use') {
                 this._actionPath = this._createElement('path');
                 this._actionPath.setAttribute('style', 'fill:#eec619; fill-opacity:1;');
                 this._actionPath.setAttribute('d', this.getActionPathSvgStr());
