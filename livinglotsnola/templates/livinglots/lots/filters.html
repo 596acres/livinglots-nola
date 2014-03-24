@@ -64,7 +64,7 @@
             </div>
             <div class="col-xs-7">
                 <select id="filter-councildistrict" class="filter filter-boundary filter-councildistrict form-control">
-                    <option></option>
+                    <option value=""></option>
                     {% get_council_districts as councildistricts %}
                     {% for councildistrict in councildistricts %}
                         <option value="{{ councildistrict.label }}">
@@ -81,7 +81,7 @@
             </div>
             <div class="col-xs-7">
                 <select id="filter-neighborhoodgroup" class="filter filter-boundary filter-neighborhoodgroup form-control">
-                    <option></option>
+                    <option value="">Pick one</option>
                     {% get_neighborhood_groups as neighborhoodgroups %}
                     {% for group in neighborhoodgroups %}
                         <option value="{{ group.label }}">
@@ -98,7 +98,7 @@
             </div>
             <div class="col-xs-7">
                 <select id="filter-zipcode" class="filter filter-boundary filter-zipcode form-control">
-                    <option></option>
+                    <option value="">Pick one</option>
                     {% get_zip_codes as zipcodes %}
                     {% for zipcode in zipcodes %}
                         <option value="{{ zipcode.label }}">
