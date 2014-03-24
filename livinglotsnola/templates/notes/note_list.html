@@ -8,7 +8,7 @@
             </span>
             {% trans "said" %}
             <span class="note-text">
-                "{{ note.text }}"
+                "{{ note.text|linebreaks|urlize }}"
             </span>
             <div class="note-added">
                 &mdash;
