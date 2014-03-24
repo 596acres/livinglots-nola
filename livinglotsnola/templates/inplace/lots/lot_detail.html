@@ -1,5 +1,5 @@
 {% extends "base.html" %}
-{% load files_tags flatblock_tags i18n inplace_tags notes_tags organize_tags pathways_tags photos_tags %}
+{% load files_tags flatblock_tags i18n inplace_tags neighborhoodgroups_tags notes_tags organize_tags pathways_tags photos_tags %}
 
 {% block title %}
     {{ lot.display_name|title|default:"unknown" }} |
@@ -119,6 +119,20 @@
                         {% trans "Area" %}:
                         {{ lot.area_acres|floatformat:"2"|default:"unknown" }} acres
                     </div>
+
+                    {% get_neighborhood_group lot.centroid.y lot.centroid.x True as groups %}
+                    {% if groups %}
+                        <div>
+                            {% trans "Neighborhood Groups" %}:
+                            {% for group in groups %}
+                                {% if group.url %}
+                                    <a href="{{ group.url }}" target="_blank">{{ group.full_name }}</a>
+                                {% else %}
+                                    {{ group.full_name }}
+                                {% endif %}
+                            {% endfor %}
+                        </div>
+                    {% endif %}
 
                 </div>
             </section>
