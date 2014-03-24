@@ -1,5 +1,5 @@
 {% extends "base.html" %}
-{% load councildistricts_tags files_tags flatblock_tags i18n inplace_tags neighborhoodgroups_tags notes_tags organize_tags pathways_tags photos_tags %}
+{% load councildistricts_tags files_tags flatblock_tags i18n inplace_tags neighborhoodgroups_tags notes_tags organize_tags pathways_tags photos_tags zoning_tags %}
 
 {% block title %}
     {{ lot.display_name|title|default:"unknown" }} |
@@ -142,6 +142,20 @@
                                     {{ group.full_name }}
                                 {% endif %}
                             {% endfor %}
+                        </div>
+                    {% endif %}
+
+                    {% get_zoning_district lot.centroid.y lot.centroid.x as zoning_district %}
+                    {% if zoning_district %}
+                        <div>
+                            {% trans "Zoning District" %}:
+                            {{ zoning_district.zonedesc }}
+                            ({{ zoning_district }})
+                            {% if zoning_district.dz_link %}
+                                <a href="{{ zoning_district.dz_link }}" target="_blank">
+                                    Learn more about this type of zoning (pdf)
+                                </a>
+                            {% endif %}
                         </div>
                     {% endif %}
 
