@@ -244,3 +244,21 @@ class CreateLotView(PermissionRequiredMixin, View):
                 return HttpResponseBadRequest('No lot created')
         except ParcelAlreadyInLot:
             return HttpResponseBadRequest('One or more parcels already in lots')
+
+
+class CheckLotWithParcelExistsView(PermissionRequiredMixin, View):
+    permission_required = 'lots.add_lot'
+
+    def get_by_parcel(self, pk):
+        try:
+            return Lot.objects.get(parcel__pk=pk)
+        except Exception:
+            return None
+
+    def get(self, request, *args, **kwargs):
+        parcel_pk = kwargs.get('pk')
+        lot = self.get_by_parcel(parcel_pk)
+        if lot:
+            return HttpResponse(lot.pk)
+        else:
+            return HttpResponse('None')

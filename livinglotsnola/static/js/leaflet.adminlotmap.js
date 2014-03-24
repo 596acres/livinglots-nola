@@ -10,10 +10,12 @@ define(
         'text!templates/admin.addlotwindow.html',
         'text!templates/admin.addlotwindow.success.html',
         'text!templates/admin.addlotwindow.failure.html',
+        'text!templates/admin.existspopup.html',
 
         'leaflet.handlebars'
     ], function (L, $, Handlebars, _, Django, Spinner,
-                 windowTemplate, successTemplate, failureTemplate) {
+                 windowTemplate, successTemplate, failureTemplate,
+                 existsPopupTemplate) {
 
         var parcelDefaultStyle = {
             color: '#2593c6',
@@ -46,6 +48,12 @@ define(
                                 layer.setStyle(parcelDefaultStyle);
                             }
                             else {
+                                $.get(Django.url('lots:create_by_parcels_check_parcel', { pk: feature.id }))
+                                    .success(function(data) {
+                                        if (data !== 'None') {
+                                            map.createLotExistsPopup(event.latlng, data);
+                                        }
+                                    });
                                 map.selectedParcels.push({
                                     id: feature.id,
                                     address: feature.properties.address
@@ -140,6 +148,13 @@ define(
                 else {
                     $('.map-add-lot-zoom-message').hide();
                 }
+            },
+
+            createLotExistsPopup: function (latlng, pk) {
+                var template = Handlebars.compile(existsPopupTemplate),
+                    url = Django.url('lots:lot_detail', { pk: pk }),
+                    content = template({ lotUrl: url });
+                this.openPopup(content, latlng, { offset: [0, 0] });
             },
 
             updateLotAddModeWindow: function () {

@@ -2,7 +2,8 @@ from django.conf.urls import patterns, url
 
 import livinglots_lots.urls as llurls
 
-from .views import (CreateLotView, LotsCountViewWithAcres, LotsGeoJSONCentroid,
+from .views import (CheckLotWithParcelExistsView, CreateLotView,
+                    LotsCountViewWithAcres, LotsGeoJSONCentroid,
                     LotsGeoJSONPolygon, LotsOwnershipOverview, NolaLotsCSV,
                     NolaLotsKML, NolaLotsGeoJSON)
 
@@ -20,6 +21,9 @@ urlpatterns = patterns('',
     url(r'^kml/', NolaLotsKML.as_view(), name='kml'),
     url(r'^geojson/', NolaLotsGeoJSON.as_view(), name='geojson'),
 
+    url(r'^create/by-parcels/check-parcel/(?P<pk>\d+)/$',
+        CheckLotWithParcelExistsView.as_view(),
+        name='create_by_parcels_check_parcel'),
     url(r'^create/by-parcels/', CreateLotView.as_view(),
         name='create_by_parcels'),
 
