@@ -120,15 +120,16 @@ define(
             },
 
             addBaseLayer: function () {
-                var cloudmade = L.tileLayer('http://{s}.tile.cloudmade.com/{key}/{styleId}/256/{z}/{x}/{y}.png', {
-                    key: this.options.apikey,
-                    styleId: this.options.styleid
+                var mapbox = L.tileLayer('https://{s}.tiles.mapbox.com/v3/{mapboxId}/{z}/{x}/{y}.png', {
+                    attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, Imagery &copy; <a href="http://mapbox.com">Mapbox</a>',
+                    maxZoom: 18,
+                    mapboxId: this.options.mapboxId
                 }).addTo(this);
 
                 var bing = new L.BingLayer('Ajio1n0EgmAAvT3zLndCpHrYR_LHJDgfDU6B0tV_1RClr7OFLzy4RnkLXlSdkJ_x');
 
                 L.control.layers({
-                    streets: cloudmade,
+                    streets: mapbox,
                     satellite: bing
                 }).addTo(this);
             },

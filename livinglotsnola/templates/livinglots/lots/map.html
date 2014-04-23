@@ -114,8 +114,7 @@
     data-l-loading-control="true"
     data-l-scroll-wheel-zoom="false"
 
-    data-l-apikey="{% inplace_setting PLACES_CLOUDMADE_KEY %}"
-    data-l-styleid="{% inplace_setting PLACES_CLOUDMADE_STYLE %}"
+    data-l-mapbox-id="{% inplace_setting PLACES_MAPBOX_ID %}"
     data-l-lot-centroids-url="{% url "lots:lot_geojson_centroid" %}"
     data-l-lot-polygons-url="{% url "lots:lot_geojson_polygon" %}"
     data-l-parcels-url="{% url "parcel_geojson" %}"

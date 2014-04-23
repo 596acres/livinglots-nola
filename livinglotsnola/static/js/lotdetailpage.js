@@ -16,9 +16,10 @@ define(
     ], function ($, Handlebars, L, mapstyles, StreetView) {
 
         function addBaseLayer(map) {
-            var baseLayer = L.tileLayer('http://{s}.tile.cloudmade.com/{key}/{styleId}/256/{z}/{x}/{y}.png', {
-                key: map.options.apikey,
-                styleId: map.options.styleid
+            L.tileLayer('https://{s}.tiles.mapbox.com/v3/{mapboxId}/{z}/{x}/{y}.png', {
+                attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, Imagery &copy; <a href="http://mapbox.com">Mapbox</a>',
+                maxZoom: 18,
+                mapboxId: map.options.mapboxId
             }).addTo(map);
         }
 
