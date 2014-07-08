@@ -67,4 +67,4 @@ git+git://github.com/596acres/django-livinglots-steward/@v0.2.0
 git+git://github.com/596acres/django-livinglots-usercontent/@0.1.1
 
 # NOLA
-git+git://github.com/596acres/noladata/@master
+git+git://github.com/596acres/noladata/@v0.6.5
