@@ -194,7 +194,13 @@
 
                         {% if lot.in_uncommitted_properties %}
                             <li>
-                                The lot is listed in the 
+                                {% if lot.uncommitted_property_updated %}
+                                    As of {{ lot.uncommitted_property_updated|date }},
+                                    the
+                                {% else %}
+                                    The
+                                {% endif %}
+                                lot is listed in the 
                                 <a href="http://www.noraworks.org/" target="_blank">New Orleans Redevelopment Authority</a>'s
                                 <a href="https://data.nola.gov/Administrative-Data/NORA-Uncommitted-Property-Inventory/5ktx-e9wc" target="_blank">Uncommitted Property Inventory</a>.
                             </li>

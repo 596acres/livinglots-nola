@@ -132,16 +132,27 @@ class LotMixin(models.Model):
 
     def _in_uncommitted_properties(self):
         # Trivial case--lot itself has associated ScatteredSite instances
-        if self.uncommitted_properties.count():
+        if self.uncommitted_properties.filter(status='current').exists():
             return True
 
         # Else, if we have a group, look at its lots for ScatteredSites
         if self.lotgroup:
-            if self.lotgroup.lot_set.exclude(uncommitted_properties=None).count():
+            lots = self.lotgroup.lot_set.exclude(uncommitted_properties=None)
+            if lots.exists():
                 return True
         return False
-
     in_uncommitted_properties = property(_in_uncommitted_properties)
+
+    def _uncommitted_property_updated(self):
+        """
+        Get most recently updated uncommitted property, return its updated
+        date.
+        """
+        uncommitted_properties = self.uncommitted_properties.filter(status='current')
+        if not uncommitted_properties.exists():
+            return None
+        return uncommitted_properties.order_by('-updated')[0].updated
+    uncommitted_property_updated = property(_uncommitted_property_updated)
 
     def _postal_code(self):
         try:
