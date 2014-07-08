@@ -2,7 +2,7 @@
 Fabric==1.6.1
 IMAPClient==0.10.1
 ModestMaps==1.4.1
-Pillow==1.7.8
+Pillow==2.5.0
 Pint==0.3.2
 argparse==1.2.1
 ipython==1.1.0
@@ -52,19 +52,19 @@ git+git://github.com/feincms/feincms-elephantblog/@465b30bf727bc456f44e7f64a0738
 git+git://github.com/ebrelsford/feincms-pagepermissions@master
 
 # Living Lots
-git+git://github.com/596acres/django-livinglots/@master
-git+git://github.com/596acres/django-livinglots-forms/@master
-git+git://github.com/596acres/django-livinglots-generictags/@master
-git+git://github.com/596acres/django-livinglots-genericviews/@master
-git+git://github.com/596acres/django-livinglots-groundtruth/@master
-git+git://github.com/596acres/django-livinglots-lots/@master
-git+git://github.com/596acres/django-livinglots-mailsender/@master
-git+git://github.com/596acres/django-livinglots-notify/@master
-git+git://github.com/596acres/django-livinglots-organize/@master
-git+git://github.com/596acres/django-livinglots-owners/@master
-git+git://github.com/596acres/django-livinglots-pathways/@master
-git+git://github.com/596acres/django-livinglots-steward/@master
-git+git://github.com/596acres/django-livinglots-usercontent/@master
+git+git://github.com/596acres/django-livinglots/@v0.2.3
+git+git://github.com/596acres/django-livinglots-forms/@v1.0
+git+git://github.com/596acres/django-livinglots-generictags/@v1.0.1
+git+git://github.com/596acres/django-livinglots-genericviews/@v1.1.1
+git+git://github.com/596acres/django-livinglots-groundtruth/@v0.2.0
+git+git://github.com/596acres/django-livinglots-lots/@v0.6.0
+git+git://github.com/596acres/django-livinglots-mailsender/@v0.1
+git+git://github.com/596acres/django-livinglots-notify/@v0.2.5
+git+git://github.com/596acres/django-livinglots-organize/@v0.3.1
+git+git://github.com/596acres/django-livinglots-owners/@v0.4.2
+git+git://github.com/596acres/django-livinglots-pathways/@v0.2.2
+git+git://github.com/596acres/django-livinglots-steward/@v0.2.0
+git+git://github.com/596acres/django-livinglots-usercontent/@0.1.1
 
 # NOLA
 git+git://github.com/596acres/noladata/@master
