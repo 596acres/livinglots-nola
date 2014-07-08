@@ -146,9 +146,18 @@ class NoraUncommittedPropertiesFinder(object):
                 return parcel
         return None
 
+    def hide_old_lots(self):
+        """Hide lots with UncommittedProperty that is not current."""
+        for old_property in UncommittedProperty.objects.filter(status='old'):
+            old_property.lot_set.update(owner=None)
+
     def find_lots(self):
         owner = self.get_owner()
-        for uncommitted_property in UncommittedProperty.objects.all():
+        for uncommitted_property in UncommittedProperty.objects.filter(status='current'):
+            # This property might already have a lot. If so, move along.
+            if uncommitted_property.lot_set.exists():
+                continue
+
             # Get parcel
             parcel = self.find_parcel(uncommitted_property)
             if not parcel:
@@ -182,8 +191,8 @@ class NoraUncommittedPropertiesFinder(object):
                 owner=owner,
                 added_reason="in NORA's uncommitted properties list",
             )
-            # TODO also add uncommitted_property here!
             lot.save()
+            lot.uncommitted_properties.add(uncommitted_property)
 
 
 class HabitatLotsAvailableForGardeningFinder(object):

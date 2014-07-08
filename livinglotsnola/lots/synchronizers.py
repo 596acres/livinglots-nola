@@ -1,6 +1,7 @@
 from external_data_sync import register, synchronizers
 
-from .finders import PrivateLotsWithBlightLiensFinder
+from .finders import (NoraUncommittedPropertiesFinder,
+                      PrivateLotsWithBlightLiensFinder)
 
 
 class LotsWithLiensSynchronizer(synchronizers.Synchronizer):
@@ -10,4 +11,13 @@ class LotsWithLiensSynchronizer(synchronizers.Synchronizer):
         finder.find_lots()
 
 
+class LotsWithUncommittedPropertySynchronizer(synchronizers.Synchronizer):
+
+    def sync(self, data_source):
+        finder = NoraUncommittedPropertiesFinder()
+        finder.hide_old_lots()
+        finder.find_lots()
+
+
 register(LotsWithLiensSynchronizer)
+register(LotsWithUncommittedPropertySynchronizer)
