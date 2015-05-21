@@ -124,7 +124,7 @@ class NoraUncommittedPropertiesFinder(object):
             uncommitted_property.property_address
         )
         if not parcels.count():
-            print 'Could not find parcels for %s' % (
+            print 'Could not find parcels for "%s"' % (
                 uncommitted_property.property_address
             )
 
@@ -173,6 +173,7 @@ class NoraUncommittedPropertiesFinder(object):
                 if existing_lots.count() == 1:
                     # Save uncommitted_property to lot
                     existing_lot = existing_lots[0]
+                    existing_lot.owner = owner
                     existing_lot.uncommitted_properties.add(uncommitted_property)
                     existing_lot.save()
                 print 'Lot already exists. Skipping.'
