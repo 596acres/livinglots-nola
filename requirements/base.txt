@@ -1,7 +1,7 @@
 # General requirements
 Fabric==1.6.1
-IMAPClient==0.10.1
-ModestMaps==1.4.1
+IMAPClient==0.10.2
+ModestMaps==1.4.6
 Pillow==2.5.0
 Pint==0.3.2
 argparse==1.2.1
@@ -31,13 +31,13 @@ git+git://github.com/jbalogh/django-cache-machine/@7c3d3abfc85fc26d0e522fd05e9a4
 git+git://github.com/ebrelsford/django-chosen/@master
 django-compressor==1.3
 django-contact-form-gv==0.4.1
-django-extensions==1.1.1
+django-extensions==1.5.5
 git+git://github.com/596acres/django-external-data-sync/@master
 django-filter==0.7
 git+git://github.com/funkybob/django-flatblocks/@5c921d9ab4b2b08ad6d1b5995bdf190b65dc9f79
 django-honeypot==0.3.0
 django-imagekit==3.0.4
-git+git://github.com/ebrelsford/django-inplace/@master
+git+git://github.com/ebrelsford/django-inplace/@97c191de942
 git+git://github.com/ebrelsford/django-inplace-activity-stream/@master
 django-jsonfield==0.9.12
 django-model-utils==1.4.0
@@ -64,7 +64,7 @@ git+git://github.com/596acres/django-livinglots-organize/@v0.3.1
 git+git://github.com/596acres/django-livinglots-owners/@v0.4.2
 git+git://github.com/596acres/django-livinglots-pathways/@v0.2.2
 git+git://github.com/596acres/django-livinglots-steward/@v0.2.0
-git+git://github.com/596acres/django-livinglots-usercontent/@0.1.1
+git+git://github.com/596acres/django-livinglots-usercontent/@v0.2.0
 
 # NOLA
 git+git://github.com/596acres/noladata/@v0.6.5
