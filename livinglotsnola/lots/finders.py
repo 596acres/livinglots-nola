@@ -156,6 +156,7 @@ class NoraUncommittedPropertiesFinder(object):
         for uncommitted_property in UncommittedProperty.objects.filter(status='current'):
             # This property might already have a lot. If so, move along.
             if uncommitted_property.lot_set.exists():
+                uncommitted_property.lot_set.update(owner=owner)
                 continue
 
             # Get parcel
