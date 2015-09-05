@@ -3,7 +3,7 @@ import contextlib
 from fabric.api import *
 
 
-env.hosts = ['ftn',]
+env.hosts = ['llnola',]
 env.use_ssh_config = True
 
 server_project_dirs = {
